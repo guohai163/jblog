@@ -7,10 +7,11 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
       url: jdbc:mysql://blog.db:3306/blog?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
-      username: root
-      password: WDMEWPOCF40ZqPm38BylKDyJG38O57gMucoJAKROQFV9IahSyFQ0iY7Ig7eM/y3bcJ7c1YYvorZeQB9RhPFHCQ==
-      filters: stat,wall,config
-      connection-properties: config.decrypt=true;config.decrypt.key=MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAIGd/rQnd6rx33TAHTOO9355JnBgGYVITFyPkI+064oJRFoqcP1kYuMT2ov8ZDN4p8CznvZdEItl0aZJmHlN0FkCAwEAAQ==
+      username: blog
+      password: S5dHFMor9XSs1o7MvAfXRzH3SbeTBJzNNv4YMkX9xa1BTe8blLMwCrIOfnQLbWUH9ni62ilrOzPN/kqnF5Lm/w==
+      filters: config
+      connection-properties: config.decrypt=true;config.decrypt.key=MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAIBPhQVdNkfef9JUWlDYkL1DMhlfEzOiYEMyLO8gIY1gqOtL4+sUk06679uu7wT4WfDMRvVX5hA330/nr2e5vm8CAwEAAQ==
+
       web-stat-filter:
         enabled: true
         url-pattern: "/*"
