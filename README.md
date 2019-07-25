@@ -9,3 +9,9 @@
 5. spring boot + mysql
 
 真的是在学什么语言就会用什么语言重写一遍。
+
+===
+
+欢迎订阅公众号：海哥聊技术
+
+![http://guohai.org/assets/wechat.jpg](http://guohai.org/assets/wechat.jpg)
