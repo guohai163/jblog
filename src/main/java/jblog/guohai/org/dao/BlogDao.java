@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.List;
+
 /**
  * 数据操作类
  */
@@ -21,7 +23,7 @@ public interface BlogDao {
             @Result(property="day", column="date_day"),
             @Result(property="date", column="post_date"),
             @Result(property="smallTitle", column="post_small_name"),
-            @Result(property="iMonth", column="date_imonth")
+            @Result(property="imonth", column="date_imonth")
     })
     public BlogContent getContentById(Integer code);
 
@@ -67,4 +69,20 @@ public interface BlogDao {
             "  post_status='publish'  ORDER BY code DESC limit 0,1")
     @ResultMap("content")
     public BlogContent getLastBlog(Integer code);
+
+    /**
+     * 获取首页数据
+     * @return
+     */
+    @Select("SELECT code,post_date,post_content,post_title" +
+            ",date_format(post_date,'%Y') as date_year" +
+            ",date_format(post_date,'%b') as date_month" +
+            ",date_format(post_date,'%e') as date_day" +
+            ",date_format(post_date,'%c') as date_imonth" +
+            ",post_small_name " +
+            "FROM gh_posts " +
+            "WHERE post_status='publish' order by post_date desc " +
+            "limit 0,10")
+    @ResultMap("content")
+    public List<BlogContent> getHomeList();
 }

@@ -3,6 +3,7 @@ package jblog.guohai.org.service;
 import jblog.guohai.org.model.BlogContent;
 
 import java.util.Date;
+import java.util.List;
 
 public interface BlogService {
     /**
@@ -33,4 +34,10 @@ public interface BlogService {
      * @return
      */
     BlogContent getLastBlog(Integer code);
+
+    /**
+     * 获得首页数据
+     * @return
+     */
+    List<BlogContent> getHomeList();
 }

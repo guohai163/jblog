@@ -50,7 +50,7 @@ public class BlogContent {
      */
     @Getter
     @Setter
-    private int iMonth;
+    private int imonth;
 
     @Getter
     @Setter

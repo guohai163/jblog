@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class BlogServiceImpl implements BlogService {
@@ -54,5 +55,15 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public BlogContent getLastBlog(Integer code) {
         return blogDao.getLastBlog(code);
+    }
+
+    /**
+     * 获得首页数据
+     *
+     * @return
+     */
+    @Override
+    public List<BlogContent> getHomeList() {
+        return blogDao.getHomeList();
     }
 }

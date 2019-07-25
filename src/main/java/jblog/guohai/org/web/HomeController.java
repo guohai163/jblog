@@ -9,6 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import java.util.Date;
+
+import java.util.List;
 
 @Controller
 public class HomeController {
@@ -18,7 +21,11 @@ public class HomeController {
 
     @RequestMapping(value = "/")
     public String home(Model model) {
-        BlogContent blogContent = blogService.getByID(1);
+        List<BlogContent> listContent = blogService.getHomeList();
+        model.addAttribute("list", listContent);
+        Date date = new Date();
+        model.addAttribute("curYear", date.getYear() + 1);
+
         return "home";
     }
 
@@ -45,12 +52,12 @@ public class HomeController {
         BlogContent connectLast = blogService.getLastBlog(blogContent.getCode());
         if( null != connectLast ) {
             model.addAttribute("contactLast",connectLast);
-            model.addAttribute("contactLastMonth", connectLast.getIMonth());
+            model.addAttribute("contactLastMonth", connectLast.getImonth());
         }
         BlogContent connectNext = blogService.getNextBlog(blogContent.getCode());
         if(connectNext != null) {
             model.addAttribute("contactNext", connectNext);
-            model.addAttribute("contactNextMonth", connectNext.getIMonth());
+            model.addAttribute("contactNextMonth", connectNext.getImonth());
         }
 
 
