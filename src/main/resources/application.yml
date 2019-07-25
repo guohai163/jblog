@@ -1,3 +1,7 @@
+server:
+  port: 8002
+  tomcat:
+    uri-encoding: UTF-8
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
