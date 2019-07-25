@@ -16,20 +16,20 @@ import java.sql.SQLException;
 @SpringBootTest
 public class JblogApplicationTests {
 
-	@Autowired
-	DataSource dataSource;
+//	@Autowired
+//	DataSource dataSource;
 
 	@Test
 	public void contextLoads() throws SQLException {
-		Connection connection = dataSource.getConnection();
-		PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM blog.gh_posts;");
-
-		ResultSet resultSet = preparedStatement.executeQuery();
-
-		while (resultSet.next()) {
-			String title = resultSet.getString("post_title");
-			System.out.println(title);
-		}
+//		Connection connection = dataSource.getConnection();
+//		PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM blog.gh_posts;");
+//
+//		ResultSet resultSet = preparedStatement.executeQuery();
+//
+//		while (resultSet.next()) {
+//			String title = resultSet.getString("post_title");
+//			System.out.println(title);
+//		}
 	}
 
 }
