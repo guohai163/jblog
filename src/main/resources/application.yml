@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    url: jdbc:mysql://172.17.0.3:3006/blog
+    username: root
+    password: Passw0rd
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+  activemq:
