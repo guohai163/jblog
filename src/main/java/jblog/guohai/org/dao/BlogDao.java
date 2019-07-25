@@ -6,8 +6,9 @@ import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 
-import java.util.Date;
-
+/**
+ * 数据操作类
+ */
 public interface BlogDao {
 
     @Select("SELECT * FROM  gh_posts WHERE code=#{code}")
@@ -24,10 +25,46 @@ public interface BlogDao {
     })
     public BlogContent getContentById(Integer code);
 
+    /**
+     * 活的指定日期指定标题的BLOG
+     * @param sDate 日期
+     * @param smallTitle 标题
+     * @return BLOG实体
+     */
     @Select("SELECT *,date_format(post_date,'%Y-%c-%e') " +
             "FROM blog.gh_posts " +
             "WHERE post_small_name = #{smallTitle} " +
             "AND date_format(post_date,'%Y-%c-%e') = #{sDate}")
     @ResultMap("content")
     public BlogContent getContentByYMDTitle(String sDate, String smallTitle);
+
+    /**
+     * 活的下一条BLOG
+     * @param code 当前BLOG编号
+     * @return 返回结果对象
+     */
+    @Select("SELECT code,post_date,post_content,post_title" +
+            ",date_format(post_date,'%Y') as date_year" +
+            " ,date_format(post_date,'%b') as date_month" +
+            ",date_format(post_date,'%e') as date_day" +
+            ",date_format(post_date,'%c') as date_imonth" +
+            ",post_small_name FROM gh_posts WHERE code > #{code} AND" +
+            "  post_status='publish'  ORDER BY code limit 0,1")
+    @ResultMap("content")
+    public BlogContent getNextBlog(Integer code);
+
+    /**
+     * 活的上一条BLOG
+     * @param code 当前BLOG编号
+     * @return 返回结果对象
+     */
+    @Select("SELECT code,post_date,post_content,post_title" +
+            ",date_format(post_date,'%Y') as date_year" +
+            " ,date_format(post_date,'%b') as date_month" +
+            ",date_format(post_date,'%e') as date_day" +
+            ",date_format(post_date,'%c') as date_imonth" +
+            ",post_small_name FROM gh_posts WHERE code < #{code} AND" +
+            "  post_status='publish'  ORDER BY code DESC limit 0,1")
+    @ResultMap("content")
+    public BlogContent getLastBlog(Integer code);
 }

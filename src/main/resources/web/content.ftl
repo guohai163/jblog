@@ -36,12 +36,17 @@ ${content.title}
 			</article>
 			<ul style="list-style:none;text-align:center;margin:20px;">
 				<li style="display:inline;">
-
+          <#if contactLast??>
+            <a href="/${contactLast.year?c}/${contactLastMonth}/${contactLast.day}/${contactLast.smallTitle}/" style="float:left;">← ${contactLast.title}</a>
+          </#if>
 				</li>
 				<li style="display:inline;">
-
+          <#if contactNext??>
+            <a href="/${contactNext.year?c}/${contactNextMonth}/${contactNext.day}/${contactNext.smallTitle}/" style="float:right;">${contactNext.title} →</a>
+          </#if>
 				</li>
 			</ul>
+			<br/>
 			<!-- commin -->
   <div id="disqus_thread"></div>
     <script type="text/javascript">
