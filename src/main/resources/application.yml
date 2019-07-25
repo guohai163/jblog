@@ -6,11 +6,11 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
-      url: jdbc:mysql://172.17.0.3:3306/blog?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
+      url: jdbc:mysql://blog.db:3306/blog?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
       username: root
-      password: XnRthUd5iPAKM70hgLlVA437Qtc05tN2NO7NGm3ZsFQzWIJGBR1mAB/2ON7s2xMVlmthbf8HQkajUP5ziC8YUA==
+      password: WDMEWPOCF40ZqPm38BylKDyJG38O57gMucoJAKROQFV9IahSyFQ0iY7Ig7eM/y3bcJ7c1YYvorZeQB9RhPFHCQ==
       filters: stat,wall,config
-      connection-properties: config.decrypt=true;config.decrypt.key=MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAJyn3W9t4wpqywCymcIKdwVqh4NtAOw5ySjojDYVbTJR0D3OUTBhRZLukxayt7icGS7T6/7kPUEGxq8ACWCRpwsCAwEAAQ==
+      connection-properties: config.decrypt=true;config.decrypt.key=MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAIGd/rQnd6rx33TAHTOO9355JnBgGYVITFyPkI+064oJRFoqcP1kYuMT2ov8ZDN4p8CznvZdEItl0aZJmHlN0FkCAwEAAQ==
       web-stat-filter:
         enabled: true
         url-pattern: "/*"
