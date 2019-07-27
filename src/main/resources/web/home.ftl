@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <title>海眼看天下 </title>
+    <title>海眼看天下</title>
     <link rel="stylesheet" type="text/css" href="/styles/style.css"/>
 
 </head>
