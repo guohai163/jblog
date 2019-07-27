@@ -29,7 +29,7 @@
                     <article>
 
                         <h1 class="entry-title">
-                            <a href="./${content.year?c}/${content.imonth}/${content.day}/${content.smallTitle}/">${content.title}</a>
+                            <a href="/${content.year?c}/${content.imonth}/${content.day}/${content.smallTitle}/">${content.title}</a>
 
                         </h1>
 
@@ -45,9 +45,14 @@
                 </div>
                 <ul style="list-style:none;text-align:center;margin-top:30px;">
                     <li style="display:inline;">
-
-                        <a href="/page/2/" style="float:left;">← 较旧的日志</a>
-
+                        <#if (maxPageNum > pageNum)>
+                            <a href="/page/${pageNum+1}/" style="float:left;">← 较旧的日志</a>
+                        </#if>
+                        <#if (pageNum > 2)>
+                            <a href="/page/${pageNum-1}/" style="float:right;">较新的日志 →</a>
+                        <#elseif pageNum ==2>
+                            <a href="/" style="float:right;">较新的日志 →</a>
+                        </#if>
                     </li>
 
                 </ul>
@@ -63,7 +68,7 @@
             <header class="site-header">
             <div class="pug">
                 <a href="/">
-                    <img src="http://guohai.org/images/beaver.png" alt="">
+                    <img style="width:220px;" src="https://guohai.org/assets/wechat.jpg" alt="">
                 </a>
             </div>
             <h1 class="site-title"><a href="/">海眼看世界</a></h1>

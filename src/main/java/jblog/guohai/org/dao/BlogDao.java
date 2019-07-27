@@ -85,4 +85,27 @@ public interface BlogDao {
             "limit 0,10")
     @ResultMap("content")
     public List<BlogContent> getHomeList();
+
+    /**
+     * 获得指定页面
+     * @param pageStart 起始记录条数
+     * @param pageSize 页大小
+     * @return 返回结果数据
+     */
+    @Select("SELECT code,post_date,post_content,post_title" +
+            ",date_format(post_date,'%Y') as date_year" +
+            ",date_format(post_date,'%b') as date_month" +
+            ",date_format(post_date,'%e') as date_day" +
+            ",date_format(post_date,'%c') as date_imonth" +
+            ",post_small_name FROM gh_posts WHERE  post_status='publish' " +
+            "order by  post_date desc , code desc limit #{pageStart},#{pageSize}")
+    @ResultMap("content")
+    public List<BlogContent> getByPage(Integer pageStart, Integer pageSize);
+
+    /**
+     * 返回总数量
+     * @return
+     */
+    @Select("SELECT count(*) FROM gh_posts WHERE  post_status='publish'")
+    public Integer getPostCount();
 }

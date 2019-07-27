@@ -66,4 +66,25 @@ public class BlogServiceImpl implements BlogService {
     public List<BlogContent> getHomeList() {
         return blogDao.getHomeList();
     }
+
+    /**
+     * 获得指定页号数据
+     *
+     * @param pageNumber
+     * @return
+     */
+    @Override
+    public List<BlogContent> getByPage(Integer pageNumber) {
+        return blogDao.getByPage((pageNumber-1)*10, 10);
+    }
+
+    /**
+     * 返回 总数量
+     *
+     * @return
+     */
+    @Override
+    public Integer getMaxPageNum() {
+        return blogDao.getPostCount()/10;
+    }
 }

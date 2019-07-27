@@ -75,7 +75,7 @@ ${content.title}
 <header class="site-header">
   <div class="pug">
     <a href="/">
-      <img src="http://guohai.org/images/beaver.png" alt="">
+      <img src="https://guohai.org/assets/wechat.jpg" alt=""/>
     </a>
   </div>
   <h1 class="site-title"><a href="/">海眼看世界</a></h1>

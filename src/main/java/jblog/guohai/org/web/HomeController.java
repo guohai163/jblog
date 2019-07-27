@@ -1,6 +1,7 @@
 package jblog.guohai.org.web;
 
 
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import jblog.guohai.org.model.BlogContent;
 import jblog.guohai.org.service.BlogService;
 import org.markdownj.MarkdownProcessor;
@@ -25,7 +26,8 @@ public class HomeController {
         model.addAttribute("list", listContent);
         Date date = new Date();
         model.addAttribute("curYear", date.getYear() + 1);
-
+        model.addAttribute("pageNum", 1);
+        model.addAttribute("maxPageNum", blogService.getMaxPageNum());
         return "home";
     }
 
@@ -62,6 +64,18 @@ public class HomeController {
 
 
         return "content";
+    }
+
+    @RequestMapping(value = "/page/{pageNum}/")
+    public  String getPageContent(Model model,@PathVariable("pageNum") int pageNum) {
+        List<BlogContent> listContent = blogService.getByPage(pageNum);
+        model.addAttribute("list", listContent);
+        Date date = new Date();
+        model.addAttribute("curYear", date.getYear()+1);
+
+        model.addAttribute("pageNum", pageNum);
+        model.addAttribute("maxPageNum", blogService.getMaxPageNum());
+        return "home";
     }
 
 }

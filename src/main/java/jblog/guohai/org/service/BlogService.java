@@ -40,4 +40,17 @@ public interface BlogService {
      * @return
      */
     List<BlogContent> getHomeList();
+
+    /**
+     * 获得指定页号数据
+     * @param pageNumber
+     * @return
+     */
+    List<BlogContent> getByPage(Integer pageNumber);
+
+    /**
+     * 返回 总数量
+     * @return
+     */
+    Integer getMaxPageNum();
 }
