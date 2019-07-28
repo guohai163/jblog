@@ -1,7 +1,5 @@
 package jblog.guohai.org.web;
 
-
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import jblog.guohai.org.model.BlogContent;
 import jblog.guohai.org.service.BlogService;
 import org.markdownj.MarkdownProcessor;
@@ -11,9 +9,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.Date;
-
 import java.util.List;
 
+/**
+ * 展示数据控制器
+ */
 @Controller
 public class HomeController {
 
