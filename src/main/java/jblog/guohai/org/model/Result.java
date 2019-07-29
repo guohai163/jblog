@@ -11,5 +11,5 @@ public class Result<T> {
 
     @Getter
     @Setter
-    private T date;
+    private T data;
 }

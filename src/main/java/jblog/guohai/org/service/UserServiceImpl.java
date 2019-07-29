@@ -38,20 +38,20 @@ public class UserServiceImpl implements UserService {
 
         Result<String> result = new Result<>();
         result.setState(false);
-        result.setDate("未知错误");
+        result.setData("未知错误");
         //获取用户实体
         UserModel userModel = userDao.getUserByName(user);
         if(null == userModel) {
-            result.setDate("请确认用户名密码正确");
+            result.setData("请确认用户名密码正确");
             return  result;
         }
         //检查密码
         if(!MD5.GetMD5Code(MD5.GetMD5Code(pass)+userModel.getUserKey()).equals(userModel.getUserPass())) {
-            result.setDate("请确认用户名密码正确");
+            result.setData("请确认用户名密码正确");
             return  result;
         }
         result.setState(true);
-        result.setDate(saveUserData(userModel));
+        result.setData(saveUserData(userModel));
         return result;
     }
 

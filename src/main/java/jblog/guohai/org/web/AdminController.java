@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
@@ -31,11 +32,12 @@ public class AdminController {
         Result<String> result = userService.checkUserPass(username,pass);
 
         if(result.isState()) {
-            //TODO: 要处理上一步返回的uuid存入cookies;
+            Cookie userCook = new Cookie("user",result.getData());
+            response.addCookie(userCook);
             response.sendRedirect("/admin/main");
         }
         else {
-            model.addAttribute("errorMsg",result.getDate());
+            model.addAttribute("errorMsg",result.getData());
         }
         return "admin/login";
     }
