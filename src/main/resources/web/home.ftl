@@ -6,7 +6,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <title>海眼看天下</title>
-    <link rel="stylesheet" type="text/css" href="/styles/style.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/style.css"/>
 
 </head>
 <body class="home blog group-blog">
@@ -16,7 +16,7 @@
         <div>
             <article role="article">
                 <div id="blog-archives">
-
+                    <#assign curYear = .now?string.yyyy?number>
                     <#list list as content>
                         <#if curYear!=content.year>
                             <h2>${content.year?c}</h2>

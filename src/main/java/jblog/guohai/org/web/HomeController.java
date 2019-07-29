@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -20,12 +19,15 @@ public class HomeController {
     @Autowired
     private BlogService blogService;
 
+    /**
+     * 获得BLOG首页
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/")
     public String home(Model model) {
         List<BlogContent> listContent = blogService.getHomeList();
         model.addAttribute("list", listContent);
-        Date date = new Date();
-        model.addAttribute("curYear", date.getYear() + 1);
         model.addAttribute("pageNum", 1);
         model.addAttribute("maxPageNum", blogService.getMaxPageNum());
         return "home";
@@ -66,13 +68,16 @@ public class HomeController {
         return "content";
     }
 
+    /**
+     * 获取指定页面内容
+     * @param model
+     * @param pageNum
+     * @return
+     */
     @RequestMapping(value = "/page/{pageNum}/")
     public  String getPageContent(Model model,@PathVariable("pageNum") int pageNum) {
         List<BlogContent> listContent = blogService.getByPage(pageNum);
         model.addAttribute("list", listContent);
-        Date date = new Date();
-        model.addAttribute("curYear", date.getYear()+1);
-
         model.addAttribute("pageNum", pageNum);
         model.addAttribute("maxPageNum", blogService.getMaxPageNum());
         return "home";

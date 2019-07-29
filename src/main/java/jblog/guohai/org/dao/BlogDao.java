@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Select;
 import java.util.List;
 
 /**
- * 数据操作类
+ * BLOG数据操作类
  */
 public interface BlogDao {
 

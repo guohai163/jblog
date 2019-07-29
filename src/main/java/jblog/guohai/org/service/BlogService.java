@@ -1,8 +1,6 @@
 package jblog.guohai.org.service;
 
 import jblog.guohai.org.model.BlogContent;
-
-import java.util.Date;
 import java.util.List;
 
 public interface BlogService {

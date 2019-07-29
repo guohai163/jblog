@@ -5,9 +5,9 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>${content.title}</title>
 	
-	<link rel="stylesheet" type="text/css" href="/styles/style.css"/>
+	<link rel="stylesheet" type="text/css" href="/css/style.css"/>
 	
-	<link rel="stylesheet" type="text/css" href="/styles/markdown.css"/>
+	<link rel="stylesheet" type="text/css" href="/css/markdown.css"/>
 </head>
 <body>
 <div id="main">
