@@ -71,4 +71,14 @@ public class UserServiceImpl implements UserService {
         userMap.put(user.getUserName(),uuid);
         return uuid;
     }
+
+    /**
+     * 通过uuid获取用户
+     *
+     * @param uuid
+     * @return
+     */
+    public static UserModel getUserByUUID(String uuid) {
+        return uuidMap.get(uuid);
+    }
 }

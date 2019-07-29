@@ -2,6 +2,7 @@ package jblog.guohai.org.service;
 
 
 import jblog.guohai.org.model.Result;
+import jblog.guohai.org.model.UserModel;
 
 public interface UserService {
 
@@ -12,5 +13,6 @@ public interface UserService {
      * @return 结果
      */
     Result<String> checkUserPass(String user, String pass);
+
 
 }

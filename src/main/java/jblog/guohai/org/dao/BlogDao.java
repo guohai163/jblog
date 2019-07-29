@@ -21,7 +21,7 @@ public interface BlogDao {
             @Result(property="year", column="date_year"),
             @Result(property="month", column="date_month"),
             @Result(property="day", column="date_day"),
-            @Result(property="data", column="post_date"),
+            @Result(property="date", column="post_date"),
             @Result(property="smallTitle", column="post_small_name"),
             @Result(property="imonth", column="date_imonth")
     })
