@@ -36,8 +36,8 @@
 
 body, html {
 	height: 100%;
-	text-align: left;
-	font-family: Raleway-Regular, sans-serif;
+  font-family: Raleway-Regular, sans-serif;
+  font-size: 14px;
 }
 
 /*---------------------------------------------*/
@@ -499,15 +499,59 @@ iframe {
   }
 }
 
+div {
+  display: block;
+}
 
 .admin-main {
     text-align: left;
+    display: block;
 }
 .admin-side {
     position: fixed;
     width: 220px;
+    background-color: #fafafa;
+    box-shadow: inset -2px 0 0 #e5e5e5;
+    padding: 10px;
 }
 .admin-body {
     width: 100%;
+    margin-left: 220px;
+}
 
+.admin-from {
+  background: #fafafa;
+  color: #2e2e2e;
+  border: 1px solid #e5e5e5;
+  margin: 20px;
+  padding: 10px;
+}
+
+.btn {
+  border-radius: 3px;
+  font-size: 14px;
+  font-weight: 400;
+  padding: 6px 10px;
+  background-color: #fff;
+  border-color: #e5e5e5;
+  color: #2e2e2e;
+  transition: background-color 100ms linear, border-color 100ms linear, color 100ms linear, box-shadow 100ms linear;
+  display: inline-block;
+  margin-bottom: 0;
+  font-weight: normal;
+  text-align: center;
+  vertical-align: middle;
+  touch-action: manipulation;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  padding: 6px 16px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  border-radius: 3px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }

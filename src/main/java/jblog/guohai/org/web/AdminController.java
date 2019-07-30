@@ -2,6 +2,7 @@ package jblog.guohai.org.web;
 
 import jblog.guohai.org.model.Result;
 import jblog.guohai.org.service.UserService;
+import org.markdownj.MarkdownProcessor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,8 @@ public class AdminController {
 
         if(result.isState()) {
             Cookie userCook = new Cookie("user",result.getData());
+            //登录状态过期时间20分钟
+            userCook.setMaxAge(1800);
             response.addCookie(userCook);
             response.sendRedirect("/admin/main");
         }
@@ -45,5 +48,13 @@ public class AdminController {
     @RequestMapping(value = "/main")
     public String adminMain(Model model) {
         return "admin/main";
+    }
+
+    @RequestMapping(value = "/preview")
+    public String adminPreview(Model model, String content) {
+
+        String htmlIntro = new MarkdownProcessor().markdown(content);
+        model.addAttribute("content", htmlIntro);
+        return "admin/preview";
     }
 }
