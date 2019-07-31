@@ -514,6 +514,9 @@ div {
     box-shadow: inset -2px 0 0 #e5e5e5;
     padding: 10px;
 }
+.admin-side li {
+  height: 30px;
+}
 .admin-body {
     width: 70%;
     margin-left: 220px;

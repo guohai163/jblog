@@ -1,4 +1,17 @@
-## jblog系统
+## 项目介绍
+项目名为jBlog也就是一个由java语言开发的BLOG系统，使用了SpringBoot框架进行开发。
+
+目前已经实现的功能：
+
+1. 前台blog展示，分页只有上一页下一页不提供具体页号。
+2. Blog内容取自Mysql数据库，目前无分类。
+3. 支持Markdown格式书写BLOG。使用了markdownj-core
+4. 支持后台登录，后台用户名密码存储在DB中。
+5. 登录后会生成一个UUID，存储于cookies中。UUID对应的服务器缓存在一个静态变量中。重启站点所有用户下线。
+6. 评论功能目前使用的第三方。需要翻墙
+
+
+## jblog背后的故事
 
 好古老的一个blog数据，始于2004年儿童节，这个blog是从我开始接触编程就一直在保留先后有多个版本。
 
@@ -8,7 +21,7 @@
 4. springmvc + mysql [2014年 .net没落了，准备学习Java，当时最火的框架就是SpringMVC。](http://jblog.guohai.org/2014/6/29/markdown_learm/)
 5. spring boot + mysql [2019年，这个BLOG已经停更5年了。这5年blog还在写，只是搬家到github上了。但想了想信年打算改版一次。纪念点什么]
 
-真的是在学什么语言就会用什么语言重写一遍的BLOG。
+
 
 ===
 

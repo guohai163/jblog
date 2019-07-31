@@ -1,6 +1,8 @@
 package jblog.guohai.org.service;
 
 import jblog.guohai.org.model.BlogContent;
+import jblog.guohai.org.model.Result;
+
 import java.util.List;
 
 public interface BlogService {
@@ -51,4 +53,11 @@ public interface BlogService {
      * @return
      */
     Integer getMaxPageNum();
+
+    /**
+     * 增加一篇BLOG
+     * @param blog BLOG实体
+     * @return 返回结果情况
+     */
+    Result<String> addPostBlog(BlogContent blog);
 }

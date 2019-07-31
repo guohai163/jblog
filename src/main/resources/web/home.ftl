@@ -16,7 +16,8 @@
         <div>
             <article role="article">
                 <div id="blog-archives">
-                    <#assign curYear = .now?string.yyyy?number>
+                    <#assign curYear = .now?string.yyyy?number+1>
+
                     <#list list as content>
                         <#if curYear!=content.year>
                             <h2>${content.year?c}</h2>

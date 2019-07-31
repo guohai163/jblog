@@ -2,6 +2,7 @@ package jblog.guohai.org.service;
 
 import jblog.guohai.org.dao.BlogDao;
 import jblog.guohai.org.model.BlogContent;
+import jblog.guohai.org.model.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -86,5 +87,26 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public Integer getMaxPageNum() {
         return blogDao.getPostCount()/10;
+    }
+
+    /**
+     * 增加一篇BLOG
+     *
+     * @param blog BLOG实体
+     * @return 返回结果情况
+     */
+    @Override
+    public Result<String> addPostBlog(BlogContent blog) {
+        Result<String> result = new Result<String>();
+        blogDao.addPostBlog(blog);
+        if(blog.getCode()>0) {
+            result.setState(true);
+            result.setData("Success:" + blog.getCode());
+        }
+        else {
+            result.setState(false);
+            result.setData("Error");
+        }
+        return result;
     }
 }

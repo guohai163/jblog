@@ -60,6 +60,9 @@ public class BlogContent {
     @Setter
     private int day;
 
+    /**
+     * 完整日期
+     */
     @Getter
     @Setter
     private Date date;
@@ -74,4 +77,23 @@ public class BlogContent {
     @Getter
     @Setter
     private String smallTitle;
+
+    /**
+     * 构造方法
+     * @param title 长标题
+     * @param intro 内容
+     * @param date 日期
+     * @param smallTitle 短标题
+     */
+    public BlogContent(String title, String intro, Date date, String smallTitle) {
+        this.title = title;
+        this.intro = intro;
+        this.date = date;
+        this.smallTitle = smallTitle;
+    }
+
+
+    public BlogContent() {
+
+    }
 }

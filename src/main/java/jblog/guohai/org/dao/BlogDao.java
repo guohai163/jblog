@@ -1,10 +1,8 @@
 package jblog.guohai.org.dao;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import jblog.guohai.org.model.BlogContent;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.ResultMap;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -108,4 +106,24 @@ public interface BlogDao {
      */
     @Select("SELECT count(*) FROM gh_posts WHERE  post_status='publish'")
     public Integer getPostCount();
+
+    /**
+     * 增加新的BLOG
+     * @param blog
+     * @return
+     */
+    @Insert("INSERT INTO `gh_posts`\n" +
+            "(`post_date`,\n" +
+            "`post_title`,\n" +
+            "`post_content`,\n" +
+            "`post_status`,\n" +
+            "`post_small_name`)\n" +
+            "VALUES\n" +
+            "(#{blog.date},\n" +
+            "#{blog.title},\n" +
+            "#{blog.intro},\n" +
+            "'publish',\n" +
+            "#{blog.smallTitle});\n")
+    @Options(useGeneratedKeys = true, keyProperty = "blog.code")
+    public Boolean addPostBlog(@Param("blog") BlogContent blog);
 }

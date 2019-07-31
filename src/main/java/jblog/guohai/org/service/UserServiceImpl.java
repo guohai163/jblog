@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public Result<String> checkUserPass(String user, String pass) {
 
-        Result<String> result = new Result<>();
+        Result<String> result = new Result<String>();
         result.setState(false);
         result.setData("未知错误");
         //获取用户实体
