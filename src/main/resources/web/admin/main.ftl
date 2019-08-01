@@ -5,81 +5,42 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="/css/jblog.css">
-    
+	<link rel="stylesheet" type="text/css" href="/css/jblog.css" />
+    <link rel="stylesheet" type="text/css" href="/css/jquery-ui.css" />
+    <link rel="stylesheet" type="text/css" href="/css/markdown.css" />
 </head>
 <body>
 <div class="admin-main">
     <#include "/inc/admin-left.ftl"/>
 
     <div class="admin-body">
-        <div class="admin-from">
-        <form id="blogform" class="post_blog">
-            <ul>
-                <li>标题:<input class="title" type="text" name="rich_title" /></li>
-                <li>SEO标题:<input class="title" type="text" name="small_title" /></li>
-                <li>内容:<textarea class="content" name="content" id="content"></textarea></li>
-                <li><a class="btn" onclick="post('/admin/preview',{content:$('#content').val()});">Preview</a></li>
-                <li>日期:<input class="title" type="text" name="content_date" id="datepicker"/></li>
-                <li><a class="btn" id="post_blog" >提交</a>
+        <div class="ul-head"><h2>创建新文章</h2></div>
+        <div class="editor-title"><input class="title input-block form-control" type="text" name="rich_title" /></div>
+        <div class="js-previewable-form">
+            <div class="comment-form-head tabnav"><nav class="tabnav-tabs">
+            <button type="button" class="js-write-tab selected">Write</button>
+            <button type="button" class="js-preview-tab">Preview</button>
+            </nav></div>
 
-                </li>
-
-            </ul>
-            </form>
+            <div class="write-contet">
+                <textarea class="from-content" name="content" id="content"></textarea>
+            </div>
+            <div class="preview-content"></div>
+            <div class="admin-div">
+                <span><input class="datepicker" type="text" name="content_date" value="${.now}"/></span>
+                <span><input type="text" name="small_title" /></span>
+            </div>
+            <div class="admin-div"><a class="btn" id="post_blog" >保存</a></div>
         </div>
+
+
     </div>
 
 
 </div>
 <#include "/inc/foot.ftl"/>
-<script>
+<script src="/js/jblog-admin.js"></script>
 
-$(function() {
-    var submit_blog = function() {
-        $.ajax({
-            type: "post",
-            url: "/admin/postblog",
-            async: false,
-            data: JSON.stringify({
-                title: $('input[name="rich_title"]').val(),
-                intro: $('textarea[name="content"]').val(),
-                date: $('input[name="content_date"]').val(),
-                smallTitle: $('input[name="small_title"]').val()
-            }),
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            cache: false,
-            success: function(data) {
-                console.log(data);
-                if(!data.state) {
-                    alert(data.data);
-                }
-                else {
-                    window.location.href='/admin/list';
-                }
-            }
-        });
-    }
-    $("#post_blog").bind("click",submit_blog);
-    $("#datepicker").datepicker({dateFormat: "yy-mm-dd" } );
-    $("#datepicker").focus(function(){document.activeElement.blur();});
-});
-
-function post(URL, PARAMS) { var temp_form = document.createElement("form");     
-    temp_form .action = URL;     
-    temp_form .target = "_blank";
-    temp_form .method = "post";     
-    temp_form .style.display = "none"; for (var x in PARAMS) { var opt = document.createElement("textarea");     
-                opt.name = x;     
-                opt.value = PARAMS[x];     
-                temp_form .appendChild(opt);     
-    }     
-    document.body.appendChild(temp_form);     
-    temp_form .submit();    
-}
-      
-</script>
 
 
 </body>

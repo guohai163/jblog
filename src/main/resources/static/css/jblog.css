@@ -22,9 +22,68 @@ div {
     display: block;
 }
 
+input {
+    width: 25%;
+    font-weight: 600!important;
+    height: 35px;
+}
 
 
 /**-----admin-------**/
+.admin-div {
+    min-height: 34px;
+    margin: 5px 0;
+}
+.preview-content {
+    min-height: 390px;
+}
+.from-content {
+    height: 390px;
+    max-height: 500px;
+    min-height: 100px;
+    padding: 8px;
+    resize: vertical;
+    width: 100%;
+}
+.js-previewable-form {
+    padding: 6px 8px;
+}
+.tabnav-tabs {
+    margin-bottom: -1px;
+}
+.comment-form-head, .tabnav{
+    background: #f6f8fa;
+    border-radius: 3px 3px 0 0;
+    padding: 6px 10px 0;
+    border: 1px solid #dfe2e5;
+}
+.tabnav {
+    margin-bottom: 15px;
+    margin-top: 0;
+}
+
+.input-block {
+    display: block;
+    width: 100%;
+    font-weight: 600!important;
+}
+
+.form-control, .form-select {
+    background-color: #fff;
+    background-position: right 8px center;
+    background-repeat: no-repeat;
+    border: 1px solid #d1d5da;
+    border-radius: 3px;
+    box-shadow: inset 0 1px 2px rgba(27,31,35,.075);
+    color: #24292e;
+    font-size: 16px;
+    line-height: 20px;
+    min-height: 34px;
+    outline: none;
+    padding: 6px 8px;
+    vertical-align: middle;
+    min-width: 740px;
+}
 .ul-head {
     border-bottom: 1px solid #e1e4e8;
     display: flex;
@@ -115,7 +174,7 @@ div {
     font-size: 14px;
     font-weight: 400;
     padding: 6px 10px;
-    background-color: #fff;
+    background-color: #2e2e2e;
     border-color: #e5e5e5;
     color: #2e2e2e;
     transition: background-color 100ms linear, border-color 100ms linear, color 100ms linear, box-shadow 100ms linear;

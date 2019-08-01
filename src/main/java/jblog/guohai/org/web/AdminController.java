@@ -63,12 +63,18 @@ public class AdminController {
         return "admin/main";
     }
 
-    @RequestMapping(value = "/preview")
+    @RequestMapping(value = "/preview", method = RequestMethod.GET)
     public String adminPreview(Model model, String content) {
 
         String htmlIntro = new MarkdownProcessor().markdown(content);
         model.addAttribute("content", htmlIntro);
         return "admin/preview";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/preview", method = RequestMethod.POST)
+    public Result<String> previewMarkdown(Model model,@RequestBody BlogContent blog) {
+        return new Result<>(true,new MarkdownProcessor().markdown(blog.getIntro()));
     }
 
     /**
