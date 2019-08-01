@@ -21,7 +21,8 @@ public interface BlogDao {
             @Result(property="day", column="date_day"),
             @Result(property="date", column="post_date"),
             @Result(property="smallTitle", column="post_small_name"),
-            @Result(property="imonth", column="date_imonth")
+            @Result(property="imonth", column="date_imonth"),
+            @Result(property = "state", column = "post_status")
     })
     public BlogContent getContentById(Integer code);
 
@@ -106,6 +107,12 @@ public interface BlogDao {
      */
     @Select("SELECT count(*) FROM gh_posts WHERE  post_status='publish'")
     public Integer getPostCount();
+
+    @Select("SELECT `code`,`post_date`,`post_title`,`post_content`,`post_status`," +
+            "`post_small_name`" +
+            "FROM `gh_posts` ORDER BY code DESC limit #{pageStart},#{pageSize};")
+    @ResultMap("content")
+    public List<BlogContent> getBackstageList(Integer pageStart, Integer pageSize);
 
     /**
      * 增加新的BLOG

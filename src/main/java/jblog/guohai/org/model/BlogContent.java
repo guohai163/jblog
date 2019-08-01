@@ -69,7 +69,7 @@ public class BlogContent {
 
     @Getter
     @Setter
-    private String term;
+    private String state;
 
     /**
      * 短标题，URL使用

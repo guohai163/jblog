@@ -2,6 +2,7 @@ package jblog.guohai.org.web;
 
 import jblog.guohai.org.model.BlogContent;
 import jblog.guohai.org.model.Result;
+import jblog.guohai.org.service.AdminService;
 import jblog.guohai.org.service.BlogService;
 import jblog.guohai.org.service.UserService;
 import org.markdownj.MarkdownProcessor;
@@ -18,6 +19,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 
 @Controller
@@ -31,6 +33,10 @@ public class AdminController {
 
     @Autowired
     private BlogService blogService;
+
+    @Autowired
+    private AdminService adminService;
+
     @Autowired
     private HttpServletResponse response;
 
@@ -71,7 +77,9 @@ public class AdminController {
      * @return
      */
     @RequestMapping(value = "/list")
-    public String adminList(Model model) {
+    public String adminList(Model model, @RequestParam(defaultValue = "1")Integer pageNum) {
+        List<BlogContent> list = adminService.getBackstageList(pageNum);
+        model.addAttribute("listContent", list);
         return "admin/list";
     }
 

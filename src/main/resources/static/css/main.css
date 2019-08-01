@@ -504,22 +504,34 @@ div {
 }
 
 .admin-main {
-    text-align: left;
-    display: block;
+    max-width: 1012px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex!important;
+    content: "";
 }
 .admin-side {
-    position: fixed;
-    width: 220px;
-    background-color: #fafafa;
-    box-shadow: inset -2px 0 0 #e5e5e5;
+
+    width: 25%;
     padding: 10px;
+    margin-top: 20px;
 }
-.admin-side li {
-  height: 30px;
+
+.admin-side nav {
+  background-color: #fff;
+  border: 1px solid #d1d5da;
+  border-radius: 3px;
+  list-style: none;
+}
+.menu-item {
+  border-bottom: 1px solid #e1e4e8;
+  display: block;
+  padding: 8px 10px;
+  position: relative;
+  text-decoration: none;
 }
 .admin-body {
-    width: 70%;
-    margin-left: 220px;
+    width: 75%;
 }
 
 .admin-from {
