@@ -27,8 +27,8 @@ public class JblogApplicationTests {
 //		ResultSet resultSet = preparedStatement.executeQuery();
 //
 //		while (resultSet.next()) {
-//			String title = resultSet.getString("post_title");
-//			System.out.println(title);
+//			String postTitle = resultSet.getString("post_title");
+//			System.out.println(postTitle);
 //		}
 	}
 

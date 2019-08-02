@@ -3,7 +3,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>${content.title}</title>
+	<title>${content.postTitle}</title>
 	
 	<link rel="stylesheet" type="text/css" href="/css/style.css"/>
 	
@@ -15,13 +15,10 @@
 		<div>
 			<article class="hentry " role="article">
 			  <header>
-    			<h1 class="entry-title">
-
-${content.title}
-</h1>
+    			<h1 class="entry-title">${content.postTitle}</h1>
       <p class="meta">
         
-			Written <time datetime="${content.title}" pubdate data-updated="true">${(content.date?string("yyyy-MM-dd"))!}</time>.
+			Written <time datetime="${content.postTitle}" pubdate data-updated="true">${(content.postDate?string("yyyy-MM-dd"))!}</time>.
         
 
 
@@ -30,19 +27,19 @@ ${content.title}
     
   </header>
 			<div class="entry-content">
-			${content.intro}
+			${content.postContent}
 			</div>
 			
 			</article>
 			<ul style="list-style:none;text-align:center;margin:20px;">
 				<li style="display:inline;">
           <#if contactLast??>
-            <a href="/${contactLast.year?c}/${contactLastMonth}/${contactLast.day}/${contactLast.smallTitle}/" style="float:left;">← ${contactLast.title}</a>
+            <a href="/${contactLast.postYear?c}/${contactLast.postMonth}/${contactLast.postDay}/${contactLast.postSmallTitle}/" style="float:left;">← ${contactLast.postTitle}</a>
           </#if>
 				</li>
 				<li style="display:inline;">
           <#if contactNext??>
-            <a href="/${contactNext.year?c}/${contactNextMonth}/${contactNext.day}/${contactNext.smallTitle}/" style="float:right;">${contactNext.title} →</a>
+            <a href="/${contactNext.postYear?c}/${contactNext.postMonth}/${contactNext.postDay}/${contactNext.postSmallTitle}/" style="float:right;">${contactNext.postTitle} →</a>
           </#if>
 				</li>
 			</ul>

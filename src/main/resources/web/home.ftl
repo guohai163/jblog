@@ -19,9 +19,9 @@
                     <#assign curYear = .now?string.yyyy?number+1>
 
                     <#list list as content>
-                        <#if curYear!=content.year>
-                            <h2>${content.year?c}</h2>
-                            <#assign curYear = content.year>
+                        <#if curYear!=content.postYear>
+                            <h2>${content.postYear?c}</h2>
+                            <#assign curYear = content.postYear>
                         </#if>
 
 
@@ -30,11 +30,11 @@
                     <article>
 
                         <h1 class="entry-title">
-                            <a href="/${content.year?c}/${content.imonth}/${content.day}/${content.smallTitle}/">${content.title}</a>
+                            <a href="/${content.postYear?c}/${content.postMonth}/${content.postDay}/${content.postSmallTitle}/">${content.postTitle}</a>
 
                         </h1>
 
-                        <time datetime="content.date" pubdate=""><span class="month">${content.month}</span> <span class="day">${content.day}</span> <span class="year">${content.year}</span></time>
+                        <time datetime="${content.postDate?string('yyyy-MM-dd')}" pubdate=""><span class="month">${content.postDate?string('MMM')}</span> <span class="day">${content.postDay}</span> <span class="year">${content.postYear}</span></time>
                         <footer>
 
 
@@ -94,7 +94,7 @@
 
 
 <footer class="blog-footer" role="contentinfo"><p>
-    © 2014 Guohai.
+    © 2019 jBLOG.
 
 
 </p>

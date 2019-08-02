@@ -15,81 +15,71 @@ public class BlogContent {
      */
     @Getter
     @Setter
-    private int code;
+    private int postCode;
 
     /**
      * 中文标题
      */
     @Getter
     @Setter
-    private String title;
+    private String postTitle;
 
     /**
      * 内容
      */
     @Getter
     @Setter
-    private String intro;
+    private String postContent;
 
     /**
      * 年
      */
     @Getter
     @Setter
-    private int year;
+    private int postYear;
 
-    /**
-     * 月
-     */
-    @Getter
-    @Setter
-    private String month;
 
     /**
      * int 月
      */
     @Getter
     @Setter
-    private int imonth;
+    private int postMonth;
 
     @Getter
     @Setter
-    private String sDate;
-
-    @Getter
-    @Setter
-    private int day;
+    private int postDay;
 
     /**
      * 完整日期
      */
     @Getter
     @Setter
-    private Date date;
-
-    @Getter
-    @Setter
-    private String state;
+    private Date postDate;
 
     /**
      * 短标题，URL使用
      */
     @Getter
     @Setter
-    private String smallTitle;
+    private String postSmallTitle;
+
+    @Getter
+    @Setter
+    private String postStatus;
 
     /**
      * 构造方法
-     * @param title 长标题
-     * @param intro 内容
-     * @param date 日期
-     * @param smallTitle 短标题
+     * @param postTitle 长标题
+     * @param postContent 内容
+     * @param postDate 日期
+     * @param postSmallTitle 短标题
      */
-    public BlogContent(String title, String intro, Date date, String smallTitle) {
-        this.title = title;
-        this.intro = intro;
-        this.date = date;
-        this.smallTitle = smallTitle;
+    public BlogContent(String postTitle, String postContent, Date postDate, String postSmallTitle) {
+        this.postTitle = postTitle;
+        this.postContent = postContent;
+        this.postDate = postDate;
+        this.postSmallTitle = postSmallTitle;
     }
 
 

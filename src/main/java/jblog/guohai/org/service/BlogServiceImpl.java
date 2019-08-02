@@ -98,9 +98,9 @@ public class BlogServiceImpl implements BlogService {
     public Result<String> addPostBlog(BlogContent blog) {
         Result<String> result = new Result<String>();
         blogDao.addPostBlog(blog);
-        if(blog.getCode()>0) {
+        if(blog.getPostCode()>0) {
             result.setState(true);
-            result.setData("Success:" + blog.getCode());
+            result.setData("Success:" + blog.getPostCode());
         }
         else {
             result.setState(false);

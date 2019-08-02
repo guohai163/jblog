@@ -17,8 +17,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 
@@ -63,18 +61,11 @@ public class AdminController {
         return "admin/main";
     }
 
-    @RequestMapping(value = "/preview", method = RequestMethod.GET)
-    public String adminPreview(Model model, String content) {
-
-        String htmlIntro = new MarkdownProcessor().markdown(content);
-        model.addAttribute("content", htmlIntro);
-        return "admin/preview";
-    }
 
     @ResponseBody
     @RequestMapping(value = "/preview", method = RequestMethod.POST)
     public Result<String> previewMarkdown(Model model,@RequestBody BlogContent blog) {
-        return new Result<>(true,new MarkdownProcessor().markdown(blog.getIntro()));
+        return new Result<>(true,new MarkdownProcessor().markdown(blog.getPostContent()));
     }
 
     /**

@@ -42,26 +42,24 @@ public class HomeController {
      * @param smallTitle
      * @return
      */
-    @RequestMapping(value="/{year}/{month}/{day}/{smallTitle}")
+    @RequestMapping(value="/{year}/{month}/{day}/{postSmallTitle}")
     public String content(Model model,@PathVariable("year") int year,@PathVariable("month") int month,
-                          @PathVariable("day") int day,@PathVariable("smallTitle") String smallTitle) {
+                          @PathVariable("day") int day,@PathVariable("postSmallTitle") String smallTitle) {
 
         String sDate = year+"-"+month+"-"+day;
         BlogContent blogContent = blogService.getByYMDTitle(sDate, smallTitle);
-        String htmlIntro = new MarkdownProcessor().markdown(blogContent.getIntro());
-        blogContent.setIntro(htmlIntro);
+        String htmlIntro = new MarkdownProcessor().markdown(blogContent.getPostContent());
+        blogContent.setPostContent(htmlIntro);
         model.addAttribute("content", blogContent);
 
         //分别向前台绑定上一条和下一条
-        BlogContent connectLast = blogService.getLastBlog(blogContent.getCode());
+        BlogContent connectLast = blogService.getLastBlog(blogContent.getPostCode());
         if( null != connectLast ) {
             model.addAttribute("contactLast",connectLast);
-            model.addAttribute("contactLastMonth", connectLast.getImonth());
         }
-        BlogContent connectNext = blogService.getNextBlog(blogContent.getCode());
+        BlogContent connectNext = blogService.getNextBlog(blogContent.getPostCode());
         if(connectNext != null) {
             model.addAttribute("contactNext", connectNext);
-            model.addAttribute("contactNextMonth", connectNext.getImonth());
         }
 
 
