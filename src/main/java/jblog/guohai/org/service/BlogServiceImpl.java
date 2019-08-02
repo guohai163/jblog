@@ -87,7 +87,8 @@ public class BlogServiceImpl implements BlogService {
      */
     @Override
     public Integer getMaxPageNum() {
-        return blogDao.getPostCount() % 10 == 0 ? blogDao.getPostCount() / 10 : blogDao.getPostCount() / 10 + 1;
+        int postCount = blogDao.getPostCount();
+        return postCount % 10 == 0 ? postCount / 10 : postCount / 10 + 1;
     }
 
     /**
