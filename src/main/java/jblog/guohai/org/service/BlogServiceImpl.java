@@ -16,6 +16,7 @@ public class BlogServiceImpl implements BlogService {
 
     /**
      * 获得指定ID的
+     *
      * @param code
      * @return
      */
@@ -26,13 +27,14 @@ public class BlogServiceImpl implements BlogService {
 
     /**
      * 活的指定日期的
+     *
      * @param sDate
      * @param smallTitle
      * @return
      */
     @Override
-    public  BlogContent getByYMDTitle(String sDate, String smallTitle) {
-        return blogDao.getContentByYMDTitle(sDate,smallTitle);
+    public BlogContent getByYMDTitle(String sDate, String smallTitle) {
+        return blogDao.getContentByYMDTitle(sDate, smallTitle);
     }
 
     /**
@@ -75,7 +77,7 @@ public class BlogServiceImpl implements BlogService {
      */
     @Override
     public List<BlogContent> getByPage(Integer pageNumber) {
-        return blogDao.getByPage((pageNumber-1)*10, 10);
+        return blogDao.getByPage((pageNumber - 1) * 10, 10);
     }
 
     /**
@@ -85,7 +87,8 @@ public class BlogServiceImpl implements BlogService {
      */
     @Override
     public Integer getMaxPageNum() {
-        return blogDao.getPostCount()/10;
+        int postCount = blogDao.getPostCount();
+        return postCount % 10 == 0 ? postCount / 10 : postCount / 10 + 1;
     }
 
     /**
@@ -98,11 +101,10 @@ public class BlogServiceImpl implements BlogService {
     public Result<String> addPostBlog(BlogContent blog) {
         Result<String> result = new Result<String>();
         blogDao.addPostBlog(blog);
-        if(blog.getPostCode()>0) {
+        if (blog.getPostCode() > 0) {
             result.setState(true);
             result.setData("Success:" + blog.getPostCode());
-        }
-        else {
+        } else {
             result.setState(false);
             result.setData("Error");
         }

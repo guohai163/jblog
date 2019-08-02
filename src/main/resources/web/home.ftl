@@ -49,9 +49,9 @@
                         <#if (maxPageNum > pageNum)>
                             <a href="/page/${pageNum+1}/" style="float:left;">← 较旧的日志</a>
                         </#if>
-                        <#if (pageNum > 2)>
+                        <#if (pageNum > 1)>
                             <a href="/page/${pageNum-1}/" style="float:right;">较新的日志 →</a>
-                        <#elseif pageNum ==2>
+                        <#elseif pageNum ==1>
                             <a href="/" style="float:right;">较新的日志 →</a>
                         </#if>
                     </li>

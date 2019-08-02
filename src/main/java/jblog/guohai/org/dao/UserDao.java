@@ -1,6 +1,7 @@
 package jblog.guohai.org.dao;
 
 import jblog.guohai.org.model.UserModel;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 /**
@@ -9,5 +10,5 @@ import org.apache.ibatis.annotations.Select;
 public interface UserDao {
 
     @Select("SELECT * FROM jblog_user WHERE user_name=#{userName};")
-    public UserModel getUserByName(String userName);
+    public UserModel getUserByName(@Param("userName") String userName);
 }
