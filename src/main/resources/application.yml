@@ -6,7 +6,7 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
-      url: jdbc:mysql://blog.db:3306/blog?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
+      url: jdbc:mysql://blog.db:3306/jblog?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
       username: blog
       password: S5dHFMor9XSs1o7MvAfXRzH3SbeTBJzNNv4YMkX9xa1BTe8blLMwCrIOfnQLbWUH9ni62ilrOzPN/kqnF5Lm/w==
       filters: config
