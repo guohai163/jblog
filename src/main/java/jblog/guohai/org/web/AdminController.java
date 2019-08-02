@@ -40,18 +40,17 @@ public class AdminController {
 
     @RequestMapping(value = "/")
     public String login(Model model, String username, String pass) throws IOException {
-        logger.debug(username+pass);
-        Result<String> result = userService.checkUserPass(username,pass);
+        logger.debug(username + pass);
+        Result<String> result = userService.checkUserPass(username, pass);
 
-        if(result.isState()) {
-            Cookie userCook = new Cookie("user",result.getData());
+        if (result.isState()) {
+            Cookie userCook = new Cookie("user", result.getData());
             //登录状态过期时间20分钟
             userCook.setMaxAge(1800);
             response.addCookie(userCook);
             response.sendRedirect("/admin/main");
-        }
-        else {
-            model.addAttribute("errorMsg",result.getData());
+        } else {
+            model.addAttribute("errorMsg", result.getData());
         }
         return "admin/login";
     }
@@ -64,17 +63,18 @@ public class AdminController {
 
     @ResponseBody
     @RequestMapping(value = "/preview", method = RequestMethod.POST)
-    public Result<String> previewMarkdown(Model model,@RequestBody BlogContent blog) {
-        return new Result<>(true,new MarkdownProcessor().markdown(blog.getPostContent()));
+    public Result<String> previewMarkdown(Model model, @RequestBody BlogContent blog) {
+        return new Result<>(true, new MarkdownProcessor().markdown(blog.getPostContent()));
     }
 
     /**
      * 后台列表
+     *
      * @param model
      * @return
      */
     @RequestMapping(value = "/list")
-    public String adminList(Model model, @RequestParam(defaultValue = "1")Integer pageNum) {
+    public String adminList(Model model, @RequestParam(defaultValue = "1") Integer pageNum) {
         List<BlogContent> list = adminService.getBackstageList(pageNum);
         model.addAttribute("listContent", list);
         return "admin/list";
@@ -89,9 +89,8 @@ public class AdminController {
         try {
             result = blogService.addPostBlog(blog);
             return result;
-        }
-        catch (Exception ex) {
-            return new Result<>(false,"excepiton");
+        } catch (Exception ex) {
+            return new Result<>(false, "excepiton");
         }
 
     }

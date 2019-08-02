@@ -70,9 +70,10 @@ public class BlogContent {
 
     /**
      * 构造方法
-     * @param postTitle 长标题
-     * @param postContent 内容
-     * @param postDate 日期
+     *
+     * @param postTitle      长标题
+     * @param postContent    内容
+     * @param postDate       日期
      * @param postSmallTitle 短标题
      */
     public BlogContent(String postTitle, String postContent, Date postDate, String postSmallTitle) {

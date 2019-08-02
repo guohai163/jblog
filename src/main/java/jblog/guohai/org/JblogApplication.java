@@ -8,8 +8,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @MapperScan("jblog.guohai.org.dao")
 public class JblogApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(JblogApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(JblogApplication.class, args);
+    }
 
 }

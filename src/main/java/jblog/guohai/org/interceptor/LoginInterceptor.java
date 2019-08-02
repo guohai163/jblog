@@ -15,22 +15,22 @@ public class LoginInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request,
                              HttpServletResponse response, Object handler) throws IOException {
         String uuid = null;
-        if(null == request.getCookies()) {
+        if (null == request.getCookies()) {
             response.sendRedirect("/admin/");
             return false;
         }
-        for(Cookie cookie:request.getCookies()) {
-            if(cookie.getName().equals("user")) {
+        for (Cookie cookie : request.getCookies()) {
+            if (cookie.getName().equals("user")) {
                 uuid = cookie.getValue();
                 break;
             }
         }
-        if(null == uuid){
+        if (null == uuid) {
             response.sendRedirect("/admin/");
             return false;
         }
         UserModel user = UserServiceImpl.getUserByUUID(uuid);
-        if(null == user) {
+        if (null == user) {
             response.sendRedirect("/admin/");
             return false;
         }
