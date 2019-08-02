@@ -59,12 +59,36 @@
             <artifactId>druid-spring-boot-starter</artifactId>
             <version>1.1.18</version>
         </dependency>
+        <!--markdown to html-->
+        <!--<dependency>-->
+            <!--<groupId>com.vladsch.flexmark</groupId>-->
+            <!--<artifactId>flexmark-all</artifactId>-->
+            <!--<version>0.50.24</version>-->
+        <!--</dependency>-->
 
         <dependency>
-            <groupId>org.markdownj</groupId>
-            <artifactId>markdownj-core</artifactId>
-            <version>0.4</version>
+            <groupId>com.vladsch.flexmark</groupId>
+            <artifactId>flexmark</artifactId>
+            <version>0.50.24</version>
         </dependency>
+        <dependency>
+            <groupId>com.vladsch.flexmark</groupId>
+            <artifactId>flexmark-util</artifactId>
+            <version>0.50.24</version>
+        </dependency>
+        <!--表格渲染插件-->
+        <dependency>
+            <groupId>com.vladsch.flexmark</groupId>
+            <artifactId>flexmark-ext-tables</artifactId>
+            <version>0.50.24</version>
+        </dependency>
+
+        <!--markdown to html end-->
+        <!--<dependency>-->
+            <!--<groupId>org.markdownj</groupId>-->
+            <!--<artifactId>markdownj-core</artifactId>-->
+            <!--<version>0.4</version>-->
+        <!--</dependency>-->
     </dependencies>
 
     <build>
