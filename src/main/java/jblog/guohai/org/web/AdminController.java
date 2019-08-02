@@ -38,6 +38,14 @@ public class AdminController {
     @Autowired
     private HttpServletResponse response;
 
+    /**
+     * 登录方法
+     * @param model
+     * @param username
+     * @param pass
+     * @return 返回模板名
+     * @throws IOException
+     */
     @RequestMapping(value = "/")
     public String login(Model model, String username, String pass) throws IOException {
         logger.debug(username+pass);
@@ -61,7 +69,12 @@ public class AdminController {
         return "admin/main";
     }
 
-
+    /**
+     * 预览MD文档接口
+     * @param model
+     * @param blog
+     * @return 返回包含HTML的实体
+     */
     @ResponseBody
     @RequestMapping(value = "/preview", method = RequestMethod.POST)
     public Result<String> previewMarkdown(Model model,@RequestBody BlogContent blog) {
@@ -81,6 +94,12 @@ public class AdminController {
     }
 
 
+    /**
+     * 新增BLOG接口，仅接收POST请求
+     * @param blog
+     * @return
+     * @throws ParseException
+     */
     @ResponseBody
     @RequestMapping(value = "/postblog", method = RequestMethod.POST)
     public Result<String> postBlog(@RequestBody BlogContent blog) throws ParseException {
