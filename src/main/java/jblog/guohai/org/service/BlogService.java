@@ -35,11 +35,6 @@ public interface BlogService {
      */
     BlogContent getLastBlog(Integer code);
 
-    /**
-     * 获得首页数据
-     * @return
-     */
-    List<BlogContent> getHomeList();
 
     /**
      * 获得指定页号数据
