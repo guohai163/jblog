@@ -3,7 +3,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>${content.postTitle}</title>
+	<title>${blog_name} - ${content.postTitle}</title>
 	
 	<link rel="stylesheet" type="text/css" href="/css/style.css"/>
 	
@@ -64,42 +64,15 @@
     
     
 		</div>
-		<aside class="sidebar">
-&nbsp; 
-&nbsp;  &nbsp;
 
-
-<header class="site-header">
-  <div class="pug">
-    <a href="/">
-      <img src="https://guohai.org/assets/wechat.jpg" alt=""/>
-    </a>
-  </div>
-  <h1 class="site-title"><a href="/">海眼看世界</a></h1>
-  <p class="site-intro">
-    A blog by <a href="/about/">Guohai</a>.
-  </p>
-
-  <p class="site-intro">
-    Follow <a href="http://twitter.com/freeguo">@freeguo</a> on Twitter.
-  </p>
-
- 
-  
-</header>
-
-
-
-&nbsp; 
-</aside>
 	
 
 
-
+    <#include "/inc/blog-side.ftl" />
 </div>
 </div>
 <footer class="blog-footer" role="contentinfo"><p>
-  © 2014 Guohai.
+  © 2019 jBlog.
 
 
 </p>
