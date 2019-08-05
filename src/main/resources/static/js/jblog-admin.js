@@ -54,4 +54,22 @@ $(function() {
     $("#post_blog").bind("click",submit_blog);
     $(".datepicker").datepicker({dateFormat: "yy-mm-dd" } );
     $(".datepicker").focus(function(){document.activeElement.blur();});
+
+    $(".li-btn").click(function() {
+        console.log($(this).attr("id"))
+        $.ajax({
+            type: "post",
+            url: "/admin/delblog",
+            async: false,
+            data: JSON.stringify({
+                postCode: $(this).attr("id")
+            }),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            cache: false,
+            success: function(data) {
+                console.log(data);
+            }
+        });
+    });
 });

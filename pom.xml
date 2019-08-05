@@ -60,11 +60,6 @@
             <version>1.1.18</version>
         </dependency>
         <!--markdown to html-->
-        <!--<dependency>-->
-            <!--<groupId>com.vladsch.flexmark</groupId>-->
-            <!--<artifactId>flexmark-all</artifactId>-->
-            <!--<version>0.50.24</version>-->
-        <!--</dependency>-->
 
         <dependency>
             <groupId>com.vladsch.flexmark</groupId>

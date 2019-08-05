@@ -10,5 +10,5 @@ import org.apache.ibatis.annotations.Select;
 public interface UserDao {
 
     @Select("SELECT * FROM jblog_user WHERE user_name=#{userName};")
-    public UserModel getUserByName(@Param("userName") String userName);
+    UserModel getUserByName(@Param("userName") String userName);
 }

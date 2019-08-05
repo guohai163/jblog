@@ -114,4 +114,15 @@ public class AdminController {
 
     }
 
+    /**
+     * 删除一篇文章
+     * @param blog
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/delblog")
+    public  Result<String> delBlog(@RequestBody BlogContent blog) {
+        return adminService.delPostBlog(blog.getPostCode());
+    }
+
 }

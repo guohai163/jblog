@@ -2,6 +2,7 @@ package jblog.guohai.org.service;
 
 import jblog.guohai.org.dao.BlogDao;
 import jblog.guohai.org.model.BlogContent;
+import jblog.guohai.org.model.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,5 +25,23 @@ public class AdminServiceImpl implements AdminService {
     public List<BlogContent> getBackstageList(Integer pageNumber) {
 
         return blogDao.getBackstageList((pageNumber-1)*adminPageSize, adminPageSize);
+    }
+
+    /**
+     * 删除指定编号的BLOG
+     *
+     * @param postCode blog编号
+     * @return 结果
+     */
+    @Override
+    public Result<String> delPostBlog(Integer postCode) {
+        if( blogDao.getContentById(postCode) == null ) {
+            return new Result<>(false,"没有此编号文章");
+        }
+        if( blogDao.delPostBlog(postCode) ) {
+            return new Result<>(true,"删除成功");
+        } else {
+            return new Result<>(false,"删除失败");
+        }
     }
 }

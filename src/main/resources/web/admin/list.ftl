@@ -20,7 +20,7 @@
                 <#if content.postTitle?length gt 21>${content.postTitle?substring(0,20)}...
                 <#else>${content.postTitle}</#if>
                 <span class="float-right">
-                <#if content.postStatus == "publish"><a class="li-btn">hide</a><#else><a class="li-btn">show</a></#if>
+                <a class="li-btn" id="${content.postCode}">del</a>
                 <a class="li-btn">edit</a></span>
                 <time class="float-right" datetime="${content.postDate?string('yyyy-MM-dd')}">${content.postDate?string('yyyy-MM-dd')}</time>
                 

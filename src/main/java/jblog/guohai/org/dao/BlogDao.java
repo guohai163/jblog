@@ -10,8 +10,8 @@ import java.util.List;
  */
 public interface BlogDao {
 
-    @Select("SELECT * FROM  jblog_posts WHERE postCode=#{postCode}")
-    public BlogContent getContentById(@Param("postCode") Integer code);
+    @Select("SELECT * FROM  jblog_posts WHERE post_code=#{postCode}")
+    BlogContent getContentById(@Param("postCode") Integer postCode);
 
     /**
      * 活的指定日期指定标题的BLOG
@@ -24,7 +24,7 @@ public interface BlogDao {
             "FROM jblog_posts " +
             "WHERE post_small_title = #{smallTitle} " +
             "AND date_format(post_date,'%Y-%c-%e') = #{sDate}")
-    public BlogContent getContentByYMDTitle(@Param("sDate") String sDate, @Param("smallTitle") String smallTitle);
+    BlogContent getContentByYMDTitle(@Param("sDate") String sDate, @Param("smallTitle") String smallTitle);
 
     /**
      * 活的下一条BLOG
@@ -38,7 +38,7 @@ public interface BlogDao {
             ",date_format(post_date,'%e') as post_day" +
             " FROM jblog_posts WHERE post_code > #{postCode} AND" +
             "  post_status='publish'  ORDER BY post_date limit 0,1")
-    public BlogContent getNextBlog(@Param("postCode") Integer code);
+    BlogContent getNextBlog(@Param("postCode") Integer code);
 
     /**
      * 活的上一条BLOG
@@ -52,7 +52,7 @@ public interface BlogDao {
             ",date_format(post_date,'%e') as post_day" +
             " FROM jblog_posts WHERE post_code < #{postCode} AND" +
             "  post_status='publish'  ORDER BY post_date DESC limit 0,1")
-    public BlogContent getLastBlog(@Param("postCode") Integer code);
+    BlogContent getLastBlog(@Param("postCode") Integer code);
 
 
     /**
@@ -68,7 +68,7 @@ public interface BlogDao {
             ",date_format(post_date,'%e') as post_day" +
             " FROM jblog_posts WHERE  post_status='publish' " +
             "order by  post_date desc , post_code desc limit #{pageStart},#{pageSize}")
-    public List<BlogContent> getByPage(@Param("pageStart") Integer pageStart, @Param("pageSize") Integer pageSize);
+    List<BlogContent> getByPage(@Param("pageStart") Integer pageStart, @Param("pageSize") Integer pageSize);
 
     /**
      * 返回总数量
@@ -76,11 +76,11 @@ public interface BlogDao {
      * @return
      */
     @Select("SELECT count(*) FROM jblog_posts WHERE  post_status='publish'")
-    public Integer getPostCount();
+    Integer getPostCount();
 
     @Select("SELECT *" +
             "FROM `jblog_posts` ORDER BY post_code DESC limit #{pageStart},#{pageSize};")
-    public List<BlogContent> getBackstageList(@Param("pageStart") Integer pageStart, @Param("pageSize") Integer pageSize);
+    List<BlogContent> getBackstageList(@Param("pageStart") Integer pageStart, @Param("pageSize") Integer pageSize);
 
     /**
      * 增加新的BLOG
@@ -101,5 +101,8 @@ public interface BlogDao {
             "'publish',\n" +
             "#{blog.postSmallTitle});\n")
     @Options(useGeneratedKeys = true, keyProperty = "blog.postCode")
-    public Boolean addPostBlog(@Param("blog") BlogContent blog);
+    Boolean addPostBlog(@Param("blog") BlogContent blog);
+
+    @Delete("DELETE FROM `jblog_posts` WHERE post_code=#{postCode}")
+    Boolean delPostBlog(@Param("postCode") Integer postCode);
 }
