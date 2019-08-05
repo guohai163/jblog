@@ -19,7 +19,7 @@ public class MD5 {
     }
 
     private static String byteToString(byte[] bByte) {
-        StringBuffer sBuffer = new StringBuffer();
+        StringBuilder sBuffer = new StringBuilder();
         for (int i = 0; i < bByte.length; i++) {
             sBuffer.append(byteToArrayString(bByte[i]));
         }
@@ -27,15 +27,13 @@ public class MD5 {
     }
 
     public static String GetMD5Code(String strObj) {
-        String resultString = null;
         try {
-            resultString = new String(strObj);
             MessageDigest md = MessageDigest.getInstance("MD5");
             // md.digest() 该函数返回值为存放哈希值结果的byte数组
-            resultString = byteToString(md.digest(strObj.getBytes()));
+            strObj = byteToString(md.digest(strObj.getBytes()));
         } catch (NoSuchAlgorithmException ex) {
             ex.printStackTrace();
         }
-        return resultString;
+        return strObj;
     }
 }

@@ -44,10 +44,19 @@ public class FreemarkerConfig {
     @Value("${my-data.blog-twitter}")
     private String blogTwitter;
 
+    /**
+     * 博客二维码
+     */
+    @Setter
+    @Getter
+    @Value("${my-data.blog-qrcode}")
+    private String blogQRCode;
+
     @PostConstruct
     public void setSharedVariable() throws TemplateModelException {
         configuration.setSharedVariable("blog_name",blogName);
         configuration.setSharedVariable("blog_author", blogAuthor);
         configuration.setSharedVariable("blog_twitter", blogTwitter);
+        configuration.setSharedVariable("blog_qrcode", blogQRCode);
     }
 }

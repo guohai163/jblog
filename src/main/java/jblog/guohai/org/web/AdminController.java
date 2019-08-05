@@ -5,7 +5,7 @@ import jblog.guohai.org.model.Result;
 import jblog.guohai.org.service.AdminService;
 import jblog.guohai.org.service.BlogService;
 import jblog.guohai.org.service.UserService;
-import org.markdownj.MarkdownProcessor;
+import jblog.guohai.org.util.MarkdownToHtml;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,7 +77,7 @@ public class AdminController {
     @ResponseBody
     @RequestMapping(value = "/preview", method = RequestMethod.POST)
     public Result<String> previewMarkdown(Model model, @RequestBody BlogContent blog) {
-        return new Result<>(true, new MarkdownProcessor().markdown(blog.getPostContent()));
+        return new Result<>(true, MarkdownToHtml.convert(blog.getPostContent()));
     }
 
     /**

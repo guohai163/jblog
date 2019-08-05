@@ -2,7 +2,7 @@
 <header class="site-header">
   <div class="pug">
     <a href="/">
-      <img src="https://guohai.org/assets/wechat.jpg" alt=""/>
+      <img src="${blog_qrcode}" alt=""/>
     </a>
   </div>
   <h1 class="site-title"><a href="/">${blog_name}</a></h1>
