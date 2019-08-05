@@ -20,4 +20,10 @@ public interface AdminService {
      * @return 结果
      */
     Result<String> delPostBlog(Integer postCode);
+
+    /**
+     * 后台用的获取最大页数
+     * @return
+     */
+    Integer getBackstageMaxPageNum();
 }

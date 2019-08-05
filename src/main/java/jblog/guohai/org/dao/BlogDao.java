@@ -78,6 +78,19 @@ public interface BlogDao {
     @Select("SELECT count(*) FROM jblog_posts WHERE  post_status='publish'")
     Integer getPostCount();
 
+    /**
+     * 获得所有类型的总数量
+     * @return
+     */
+    @Select("SELECT count(*) FROM jblog_posts")
+    Integer getBackstagePostCount();
+
+    /**
+     * 获得不区分类型的列表
+     * @param pageStart
+     * @param pageSize
+     * @return
+     */
     @Select("SELECT *" +
             "FROM `jblog_posts` ORDER BY post_code DESC limit #{pageStart},#{pageSize};")
     List<BlogContent> getBackstageList(@Param("pageStart") Integer pageStart, @Param("pageSize") Integer pageSize);

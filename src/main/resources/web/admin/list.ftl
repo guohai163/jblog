@@ -5,7 +5,8 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="/css/jblog.css">
+	<link rel="stylesheet" type="text/css" href="/css/jblog.css" />
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
 </head>
 <body>
 <div class="admin-main">
@@ -29,8 +30,8 @@
         </ul>
 
         <div>
-        <span>上一页</span>
-        <span class="float-right">下一页</span>
+        <span><#if (maxPageNum > pageNum)><a href="/admin/list?page=${pageNum+1}">上一页</a></#if></span>
+        <span class="float-right"><#if (pageNum > 1)><a href="/admin/list?page=${pageNum-1}">下一页</a></#if></span>
         </div>
 
     </div>

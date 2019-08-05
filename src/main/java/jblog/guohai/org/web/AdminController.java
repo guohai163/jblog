@@ -87,9 +87,12 @@ public class AdminController {
      * @return
      */
     @RequestMapping(value = "/list")
-    public String adminList(Model model, @RequestParam(defaultValue = "1") Integer pageNum) {
-        List<BlogContent> list = adminService.getBackstageList(pageNum);
+    public String adminList(Model model, @RequestParam(defaultValue = "1") Integer page) {
+        List<BlogContent> list = adminService.getBackstageList(page);
         model.addAttribute("listContent", list);
+        model.addAttribute("pageNum", page);
+
+        model.addAttribute("maxPageNum", adminService.getBackstageMaxPageNum());
         return "admin/list";
     }
 

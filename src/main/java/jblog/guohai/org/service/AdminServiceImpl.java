@@ -14,7 +14,11 @@ public class AdminServiceImpl implements AdminService {
     @Autowired
     BlogDao blogDao;
 
+    /**
+     * 后台用的页大小
+     */
     private final Integer adminPageSize = 20;
+
     /**
      * 获得管理后台的BLOG列表
      *
@@ -43,5 +47,17 @@ public class AdminServiceImpl implements AdminService {
         } else {
             return new Result<>(false,"删除失败");
         }
+    }
+
+    /**
+     * 后台用的获取最大页数
+     *
+     * @return
+     */
+    @Override
+    public Integer getBackstageMaxPageNum() {
+
+        int postCount = blogDao.getBackstagePostCount();
+        return postCount % adminPageSize == 0 ? postCount / adminPageSize : postCount / adminPageSize + 1;
     }
 }

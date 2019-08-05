@@ -57,19 +57,37 @@ $(function() {
 
     $(".li-btn").click(function() {
         console.log($(this).attr("id"))
-        $.ajax({
-            type: "post",
-            url: "/admin/delblog",
-            async: false,
-            data: JSON.stringify({
-                postCode: $(this).attr("id")
-            }),
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            cache: false,
-            success: function(data) {
-                console.log(data);
+        $.confirm({
+            title: "确认",
+            content: "确认是否删除编号为"+$(this).attr("id")+"的文章",
+            type: "green",
+            buttons: {
+                ok: {
+                    text: "确认",
+                    btnClass: "btn-primary",
+                    action: function() {
+                        $.ajax({
+                            type: "post",
+                            url: "/admin/delblog",
+                            async: false,
+                            data: JSON.stringify({
+                                postCode: $(this).attr("id")
+                            }),
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            cache: false,
+                            success: function(data) {
+                                console.log(data);
+                            }
+                        });
+                    }
+                },
+                cancel: {
+                    text: "取消"
+                }
             }
         });
+
+
     });
 });

@@ -15,6 +15,11 @@ public class BlogServiceImpl implements BlogService {
     private BlogDao blogDao;
 
     /**
+     * 前台用的页大小
+     */
+    private final Integer pageSize = 10;
+
+    /**
      * 获得指定ID的
      *
      * @param code
@@ -68,7 +73,7 @@ public class BlogServiceImpl implements BlogService {
      */
     @Override
     public List<BlogContent> getByPage(Integer pageNumber) {
-        return blogDao.getByPage((pageNumber - 1) * 10, 10);
+        return blogDao.getByPage((pageNumber - 1) * pageSize, pageSize);
     }
 
     /**
@@ -79,7 +84,7 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public Integer getMaxPageNum() {
         int postCount = blogDao.getPostCount();
-        return postCount % 10 == 0 ? postCount / 10 : postCount / 10 + 1;
+        return postCount % pageSize == 0 ? postCount / pageSize : postCount / pageSize + 1;
     }
 
     /**
