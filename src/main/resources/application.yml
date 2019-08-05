@@ -24,3 +24,10 @@ spring:
 mybatis:
   configuration:
     map-underscore-to-camel-case: true
+my-data:
+  #blog名称
+  blog-name: 海眼看世界
+  #blog作者
+  blog-author: H!Guo
+  #twitter账号
+  blog-twitter: freeguo

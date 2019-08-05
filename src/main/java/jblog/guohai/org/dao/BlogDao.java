@@ -54,19 +54,6 @@ public interface BlogDao {
             "  post_status='publish'  ORDER BY post_date DESC limit 0,1")
     public BlogContent getLastBlog(@Param("postCode") Integer code);
 
-    /**
-     * 获取首页数据
-     *
-     * @return
-     */
-    @Select("SELECT *" +
-            ",date_format(post_date,'%Y') as post_year" +
-            ",date_format(post_date,'%c') as post_month" +
-            ",date_format(post_date,'%e') as post_day" +
-            " FROM jblog_posts " +
-            "WHERE post_status='publish' order by post_date desc " +
-            "limit 0,10")
-    public List<BlogContent> getHomeList();
 
     /**
      * 获得指定页面

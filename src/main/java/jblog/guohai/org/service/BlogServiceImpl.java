@@ -59,15 +59,6 @@ public class BlogServiceImpl implements BlogService {
         return blogDao.getLastBlog(code);
     }
 
-    /**
-     * 获得首页数据
-     *
-     * @return
-     */
-    @Override
-    public List<BlogContent> getHomeList() {
-        return blogDao.getHomeList();
-    }
 
     /**
      * 获得指定页号数据

@@ -36,7 +36,7 @@ public class HomeController {
      */
     @RequestMapping(value = "/")
     public String home(Model model) {
-        List<BlogContent> listContent = blogService.getHomeList();
+        List<BlogContent> listContent = blogService.getByPage(1);
         model.addAttribute("list", listContent);
         model.addAttribute("pageNum", 1);
         model.addAttribute("maxPageNum", blogService.getMaxPageNum());

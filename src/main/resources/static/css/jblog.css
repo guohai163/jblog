@@ -30,6 +30,52 @@ input {
 
 
 /**-----admin-------**/
+.input100 {
+
+  color: #555555;
+  line-height: 1.2;
+  font-size: 18px;
+
+  display: block;
+  width: 100%;
+  background: transparent;
+  height: 55px;
+  padding: 0 20px 0 20px;
+}
+.wrap-input100 {
+    width: 100%;
+    background-color:#fff;
+    border: 1px solid #e6e6e6;
+    border-radius: 2px;
+    margin-bottom: 36px;
+}
+.txt1 {
+    font-size: 13px;
+    text-transform: uppercase;
+    padding-bottom: 20px;
+}
+.login100-form-title {
+    font-size: 30px;
+    color: #555;
+    width: 100%;
+    display: block;
+    padding-bottom: 32px;
+    text-align: left;
+}
+.limiter {
+    width: 100%;
+    align-item: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 15px;
+}
+.admin-login {
+    position: relative;
+    width: 560px;
+    background-color: #ebebeb;
+    padding: 55px;
+}
 .admin-div {
     min-height: 34px;
     margin: 5px 0;
@@ -174,7 +220,7 @@ input {
     font-size: 14px;
     font-weight: 400;
     padding: 6px 10px;
-    background-color: #2e2e2e;
+    background-color: #DCDCDC;
     border-color: #e5e5e5;
     color: #2e2e2e;
     transition: background-color 100ms linear, border-color 100ms linear, color 100ms linear, box-shadow 100ms linear;

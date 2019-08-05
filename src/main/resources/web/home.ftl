@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <title>海眼看天下</title>
+    <title>${blog_name}</title>
     <link rel="stylesheet" type="text/css" href="/css/style.css"/>
 
 </head>
@@ -52,7 +52,9 @@
                         <#if (pageNum > 1)>
                             <a href="/page/${pageNum-1}/" style="float:right;">较新的日志 →</a>
                         <#elseif pageNum ==1>
-                            <a href="/" style="float:right;">较新的日志 →</a>
+                            <#if (maxPageNum > 1) >
+                                <a href="/" style="float:right;">较新的日志 →</a>
+                            </#if>
                         </#if>
                     </li>
 
@@ -63,38 +65,13 @@
 
 
 
-        <aside class="sidebar">
-            &nbsp;
-            &nbsp;  &nbsp;
-            <header class="site-header">
-            <div class="pug">
-                <a href="/">
-                    <img style="width:220px;" src="https://guohai.org/assets/wechat.jpg" alt="">
-                </a>
-            </div>
-            <h1 class="site-title"><a href="/">海眼看世界</a></h1>
-            <p class="site-intro">
-                A blog by <a href="/about/">Guohai</a>.
-            </p>
-
-            <p class="site-intro">
-                Follow <a href="http://twitter.com/freeguo">@freeguo</a> on Twitter.
-            </p>
-
-
-
-            </header>
-
-
-
-            &nbsp;
-        </aside>
+<#include "/inc/blog-side.ftl" />
     </div>
 </div>
 
 
 <footer class="blog-footer" role="contentinfo"><p>
-    © 2019 jBLOG.
+    © 2019 jBlog.
 
 
 </p>
