@@ -31,3 +31,5 @@ my-data:
   blog-author: H!Guo
   #twitter账号
   blog-twitter: freeguo
+  #blog二维码
+  blog-qrcode: https://guohai.org/assets/wechat.jpg
