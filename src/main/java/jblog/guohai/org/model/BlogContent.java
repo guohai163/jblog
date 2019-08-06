@@ -1,5 +1,6 @@
 package jblog.guohai.org.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -55,6 +56,7 @@ public class BlogContent {
      */
     @Getter
     @Setter
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm", timezone = "GMT+8")
     private Date postDate;
 
     /**

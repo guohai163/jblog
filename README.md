@@ -10,6 +10,11 @@
 5. 登录后会生成一个UUID，存储于cookies中。UUID对应的服务器缓存在一个静态变量中。重启站点所有用户下线。
 6. 评论功能目前使用的第三方。需要翻墙
 
+## Wiki索引
+
+* [安装说明](/guohai163/jblog/wiki/How-To-Install)
+* [如何开发](/guohai163/jblog/wiki/How-To-Develop)
+
 
 ## jblog背后的故事
 
@@ -23,7 +28,7 @@
 
 
 
-===
+==
 
 欢迎订阅公众号：海哥聊技术
 

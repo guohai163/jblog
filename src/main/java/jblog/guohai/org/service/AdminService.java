@@ -26,4 +26,11 @@ public interface AdminService {
      * @return
      */
     Integer getBackstageMaxPageNum();
+
+    /**
+     * 按指定编号修改文章
+     * @param blog BLOG实体
+     * @return
+     */
+    Result<String> updatePostBlog(BlogContent blog);
 }

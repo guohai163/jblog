@@ -116,6 +116,20 @@ public interface BlogDao {
     @Options(useGeneratedKeys = true, keyProperty = "blog.postCode")
     Boolean addPostBlog(@Param("blog") BlogContent blog);
 
+    /**
+     * 删除一篇BLOG
+     * @param postCode
+     * @return
+     */
     @Delete("DELETE FROM `jblog_posts` WHERE post_code=#{postCode}")
     Boolean delPostBlog(@Param("postCode") Integer postCode);
+
+    /**
+     * 编辑一篇BLOG
+     * @param blog
+     * @return
+     */
+    @Update("UPDATE `jblog_posts` SET post_content=#{blog.postContent},post_title=#{blog.postTitle}," +
+            "post_small_title=#{blog.postSmallTitle},post_date=#{blog.postDate} WHERE post_code=#{blog.postCode}")
+    Boolean updatePostBlog(@Param("blog") BlogContent blog);
 }

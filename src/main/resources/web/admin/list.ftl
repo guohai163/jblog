@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="/css/jblog.css" />
-	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+	<link rel="stylesheet" href="/css/jquery-confirm.min.css">
 </head>
 <body>
 <div class="admin-main">
@@ -21,8 +21,8 @@
                 <#if content.postTitle?length gt 21>${content.postTitle?substring(0,20)}...
                 <#else>${content.postTitle}</#if>
                 <span class="float-right">
-                <a class="li-btn" id="${content.postCode}">del</a>
-                <a class="li-btn">edit</a></span>
+                <a class="li-btn li-btn-del" id="${content.postCode}">del</a>
+                <a class="li-btn" href="/admin/main?postCode=${content.postCode}">edit</a></span>
                 <time class="float-right" datetime="${content.postDate?string('yyyy-MM-dd')}">${content.postDate?string('yyyy-MM-dd')}</time>
                 
                 </li>

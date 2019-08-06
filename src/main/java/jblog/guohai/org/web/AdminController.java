@@ -64,7 +64,12 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/main")
-    public String adminMain(Model model) {
+    public String adminMain(Model model, Integer postCode) {
+        System.out.println(postCode);
+        if( null != postCode) {
+            BlogContent blog = blogService.getByID(postCode);
+            model.addAttribute("blog",blog);
+        }
         return "admin/main";
     }
 
@@ -98,7 +103,7 @@ public class AdminController {
 
 
     /**
-     * 新增BLOG接口，仅接收POST请求
+     * 新增或修改BLOG接口，仅接收POST请求
      * @param blog
      * @return
      * @throws ParseException
@@ -109,7 +114,11 @@ public class AdminController {
 
         Result<String> result;
         try {
-            result = blogService.addPostBlog(blog);
+            if( blog.getPostCode() == 0 ) {
+                result = blogService.addPostBlog(blog);
+            }else{
+                result = adminService.updatePostBlog(blog);
+            }
             return result;
         } catch (Exception ex) {
             return new Result<>(false, "excepiton");

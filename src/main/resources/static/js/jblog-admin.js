@@ -5,6 +5,7 @@ $(function() {
             url: "/admin/postblog",
             async: false,
             data: JSON.stringify({
+                postCode: $('input[name="post_code"]').val(),
                 postTitle: $('input[name="rich_title"]').val(),
                 postContent: $('textarea[name="content"]').val(),
                 postDate: $('input[name="content_date"]').val(),
@@ -52,11 +53,11 @@ $(function() {
     $(".js-write-tab").bind("click",btn_wrtie);
     $(".js-preview-tab").bind("click",btn_preview);
     $("#post_blog").bind("click",submit_blog);
-    $(".datepicker").datepicker({dateFormat: "yy-mm-dd" } );
-    $(".datepicker").focus(function(){document.activeElement.blur();});
+    jQuery(".datepicker").datetimepicker({format:'Y-m-d H:i'});
 
-    $(".li-btn").click(function() {
-        console.log($(this).attr("id"))
+    $(".li-btn-del").click(function() {
+        var postCode = $(this).attr("id");
+        console.log(postCode)
         $.confirm({
             title: "确认",
             content: "确认是否删除编号为"+$(this).attr("id")+"的文章",
@@ -71,7 +72,7 @@ $(function() {
                             url: "/admin/delblog",
                             async: false,
                             data: JSON.stringify({
-                                postCode: $(this).attr("id")
+                                postCode: postCode
                             }),
                             contentType: "application/json; charset=utf-8",
                             dataType: "json",

@@ -60,4 +60,22 @@ public class AdminServiceImpl implements AdminService {
         int postCount = blogDao.getBackstagePostCount();
         return postCount % adminPageSize == 0 ? postCount / adminPageSize : postCount / adminPageSize + 1;
     }
+
+    /**
+     * 按指定编号修改文章
+     *
+     * @param blog BLOG实体
+     * @return
+     */
+    @Override
+    public Result<String> updatePostBlog(BlogContent blog) {
+        if( blogDao.getContentById(blog.getPostCode()) == null ) {
+            return new Result<>(false,"没有此编号文章");
+        }
+        if( blogDao.updatePostBlog(blog) ) {
+            return new Result<>(true,"修改成功");
+        } else {
+            return new Result<>(false,"未知错误");
+        }
+    }
 }
