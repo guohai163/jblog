@@ -12,8 +12,8 @@
 
 ## Wiki索引
 
-* [安装说明](/guohai163/jblog/wiki/How-To-Install)
-* [如何开发](/guohai163/jblog/wiki/How-To-Develop)
+* [安装说明](https://github.com/guohai163/jblog/wiki/How-To-Install)
+* [如何开发](https://github.com/guohai163/jblog/wiki/How-To-Develop)
 
 
 ## jblog背后的故事

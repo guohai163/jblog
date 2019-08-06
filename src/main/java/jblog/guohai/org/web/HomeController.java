@@ -1,12 +1,5 @@
 package jblog.guohai.org.web;
 
-import com.vladsch.flexmark.ext.tables.TablesExtension;
-import com.vladsch.flexmark.html.HtmlRenderer;
-import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.parser.ParserEmulationProfile;
-import com.vladsch.flexmark.util.ast.Node;
-import com.vladsch.flexmark.util.builder.Extension;
-import com.vladsch.flexmark.util.data.MutableDataSet;
 import jblog.guohai.org.model.BlogContent;
 import jblog.guohai.org.service.BlogService;
 import jblog.guohai.org.util.MarkdownToHtml;
@@ -16,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.Arrays;
 import java.util.List;
 
 /**

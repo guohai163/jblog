@@ -2,7 +2,6 @@ package jblog.guohai.org.service;
 
 
 import jblog.guohai.org.model.Result;
-import jblog.guohai.org.model.UserModel;
 
 public interface UserService {
 

@@ -95,7 +95,7 @@ public class BlogServiceImpl implements BlogService {
      */
     @Override
     public Result<String> addPostBlog(BlogContent blog) {
-        Result<String> result = new Result<String>();
+        Result<String> result = new Result<>();
         blogDao.addPostBlog(blog);
         if (blog.getPostCode() > 0) {
             result.setState(true);
