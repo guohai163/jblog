@@ -37,7 +37,7 @@
 					</div>
 
 					<div class="container-login100-form-btn">
-						<button class="btn">
+						<button class="jblog-a-btn">
 							Login
 						</button>
 					</div>

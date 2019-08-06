@@ -7,6 +7,8 @@ import jblog.guohai.org.util.MD5;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -37,7 +39,7 @@ public class UserServiceImpl implements UserService {
     public Result<String> checkUserPass(String user, String pass) {
 
         Result<String> result = new Result<>();
-        result.setState(false);
+        result.setStatus(false);
         result.setData("未知错误");
         //获取用户实体
         UserModel userModel = userDao.getUserByName(user);
@@ -50,7 +52,7 @@ public class UserServiceImpl implements UserService {
             result.setData("请确认用户名密码正确");
             return result;
         }
-        result.setState(true);
+        result.setStatus(true);
         result.setData(saveUserData(userModel));
         return result;
     }
@@ -81,5 +83,31 @@ public class UserServiceImpl implements UserService {
      */
     public static UserModel getUserByUUID(String uuid) {
         return uuidMap.get(uuid);
+    }
+
+    /**
+     * 通过COOKIE获得用户实体
+     * @param request
+     * @return
+     */
+    public static UserModel getUserByCookie(HttpServletRequest request) {
+        String uuid = null;
+        if (null == request.getCookies()) {
+            return null;
+        }
+        for (Cookie cookie : request.getCookies()) {
+            if (cookie.getName().equals("user")) {
+                uuid = cookie.getValue();
+                break;
+            }
+        }
+        if (null == uuid) {
+            return null;
+        }
+        UserModel user = UserServiceImpl.getUserByUUID(uuid);
+        if (null == user) {
+            return null;
+        }
+        return  user;
     }
 }

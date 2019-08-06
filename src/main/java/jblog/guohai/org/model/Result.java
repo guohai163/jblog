@@ -7,7 +7,7 @@ public class Result<T> {
 
     @Getter
     @Setter
-    private boolean state;
+    private boolean status;
 
     @Getter
     @Setter
@@ -16,12 +16,12 @@ public class Result<T> {
     /**
      *
      */
-    public Result(boolean state, T data) {
-        this.state = state;
+    public Result(boolean status, T data) {
+        this.status = status;
         this.data = data;
     }
 
     public Result() {
-        this.state = false;
+        this.status = false;
     }
 }

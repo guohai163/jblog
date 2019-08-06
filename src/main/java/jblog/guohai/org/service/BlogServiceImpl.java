@@ -98,10 +98,10 @@ public class BlogServiceImpl implements BlogService {
         Result<String> result = new Result<>();
         blogDao.addPostBlog(blog);
         if (blog.getPostCode() > 0) {
-            result.setState(true);
+            result.setStatus(true);
             result.setData("Success:" + blog.getPostCode());
         } else {
-            result.setState(false);
+            result.setStatus(false);
             result.setData("Error");
         }
         return result;

@@ -26,6 +26,7 @@ input {
     width: 25%;
     font-weight: 600!important;
     height: 35px;
+    margin: 5px;
 }
 
 
@@ -215,7 +216,8 @@ input {
     padding: 10px;
   }
   
-  .btn {
+  .jblog-a-btn {
+    margin: 5px;
     border-radius: 3px;
     font-size: 14px;
     font-weight: 400;

@@ -36,7 +36,7 @@
                 <span><input class="datepicker" type="text" name="content_date" value="<#if blog??>${blog.postDate?string('yyyy-MM-dd HH:mm')}<#else>${.now?string('yyyy-MM-dd HH:mm')}</#if>"/></span>
                 <span><input type="text" name="small_title" <#if blog??>value="${blog.postSmallTitle?replace('-',' ')}"</#if> /></span>
             </div>
-            <div class="admin-div"><a class="btn" id="post_blog" >保存</a></div>
+            <div class="admin-div"><a class="jblog-a-btn" id="post_blog" >保存</a></div>
         </div>
 
 
