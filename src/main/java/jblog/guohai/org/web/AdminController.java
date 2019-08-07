@@ -45,28 +45,28 @@ public class AdminController {
     private HttpServletRequest request;
 
     /**
-     * 登录方法
-     * @param model
-     * @param username
-     * @param pass
+     * 登录
+     * @param model 参数
      * @return 返回模板名
-     * @throws IOException
      */
     @RequestMapping(value = "/")
-    public String login(Model model, String username, String pass) throws IOException {
-        logger.debug(username + pass);
-        Result<String> result = userService.checkUserPass(username, pass);
+    public String login(Model model) {
+        return "admin/login";
+    }
 
+    @ResponseBody
+    @RequestMapping(value = "/login")
+    public Result<String> adminLogin(Model model,@RequestBody UserModel user) {
+        Result<String> result = userService.checkUserPass(user.getUserName(), user.getUserPass());
         if (result.isStatus()) {
             Cookie userCook = new Cookie("user", result.getData());
             //登录状态过期时间20分钟
             userCook.setMaxAge(1800);
             response.addCookie(userCook);
-            response.sendRedirect("/admin/main");
-        } else {
-            model.addAttribute("errorMsg", result.getData());
+            return new Result<String>(true, "登录成功");
+        }else{
+            return new Result<String>(false, result.getData());
         }
-        return "admin/login";
     }
 
     @RequestMapping(value = "/main")

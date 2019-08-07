@@ -6,6 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="/css/jblog.css">
+	<link rel="stylesheet" type="text/css" href="/css/jquery-confirm.min.css"/>
 </head>
 <body>
 	
@@ -17,29 +18,18 @@
 						Account Login
 					</span>
 
-					<span class="txt1 p-b-11">
-						Username
-					</span>
-					<div class="wrap-input100 validate-input m-b-36" data-validate = "Username is required">
-						<input class="input100" type="text" name="username" >
-						<span class="focus-input100"></span>
-					</div>
-					
-					<span class="txt1 p-b-11">
-						Password
-					</span>
-					<div class="wrap-input100 validate-input m-b-12" data-validate = "Password is required">
-						<span class="btn-show-pass">
-							<i class="fa fa-eye"></i>
-						</span>
-						<input class="input100" type="password" name="pass" >
-						<span class="focus-input100"></span>
-					</div>
+                    <div class="inputbox">
+                        <label>Username</label>
+                        <input type="text" name="username"/>
+                    </div>
+                    <div class="inputbox">
+                        <label>Password</label>
+                        <input type="password" name="pass"/>
+                    </div>
+
 
 					<div class="container-login100-form-btn">
-						<button class="jblog-a-btn">
-							Login
-						</button>
+					    <a class="jblog-a-btn" id="post-login">Login</a>
 					</div>
 
 				</form>

@@ -31,6 +31,26 @@ input {
 
 
 /**-----admin-------**/
+.inputbox {
+    background: #FFF;
+    border: solid 2px #FFF;
+    border-radius: 5px;
+    box-shadow: 0px 2px 2px rgba(0,0,0,0.2),
+        inset 0px 2px 4px rgba(0,0,0,0.15);
+    margin: 5px auto 5px auto;
+    padding: 8px;
+    width: 100%;
+}
+.inputbox label {
+    font-weight: bold;
+    display: inline-block;
+    text-shadow: 1px 1px 1px #F3F4F6;
+}
+.inputbox input {
+    border: none;
+    width: 70%;
+    font-size: 16px;
+}
 .input100 {
 
   color: #555555;
