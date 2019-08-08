@@ -2,10 +2,12 @@ package jblog.guohai.org.service;
 
 import jblog.guohai.org.dao.BlogDao;
 import jblog.guohai.org.model.BlogContent;
+import jblog.guohai.org.model.ClassType;
 import jblog.guohai.org.model.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -105,5 +107,56 @@ public class BlogServiceImpl implements BlogService {
             result.setData("Error");
         }
         return result;
+    }
+
+    /**
+     * 添加博客分类映射
+     *
+     * @param postCode  博客编号
+     * @param classCode 分类编号
+     * @return
+     */
+    public Result<String> addUpdateBlogClass(Integer postCode, Integer classCode) {
+        if (blogDao.getBlogClassCount(postCode) > 0) {
+            blogDao.updateBlogClassMap(postCode, classCode);
+            return new Result<>(true, "设置成功");
+        }
+
+        blogDao.addBlogClassMap(postCode, classCode);
+        return new Result<>(true, "设置成功");
+    }
+
+    /**
+     * 获取文章分类列表
+     *
+     * @return
+     */
+    @Override
+    public List<ClassType> getClassList() {
+        List<ClassType> list = blogDao.getClassList();
+        return list == null ? new ArrayList<>() : list;
+    }
+
+    /**
+     * 获取
+     *
+     * @param classCode 分类编号
+     * @param pageNum 分页页码
+     * @return
+     */
+    @Override
+    public List<BlogContent> getPageByClassCode(Integer classCode, int pageNum) {
+        return blogDao.getPageByClassCode(classCode, (pageNum - 1) * pageSize, pageSize);
+    }
+
+    /**
+     * 返回 总数量
+     *
+     * @return
+     */
+    @Override
+    public Integer getMaxClassPageNum(Integer classCode) {
+        int postCount = blogDao.getPostCountByClassCode(classCode);
+        return postCount % pageSize == 0 ? postCount / pageSize : postCount / pageSize + 1;
     }
 }

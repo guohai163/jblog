@@ -106,12 +106,36 @@ $(function() {
 
         });
     }
+
+    var class_type_change = function () {
+        var classCode = $(this).find("option:selected").val();
+        var postCode = $(this).find("option:selected").attr("post_code");
+        $.ajax({
+            type: "post",
+            url: "/admin/blog/class",
+            async: false,
+            data: {
+                classCode:classCode,
+                postCode:postCode
+            },
+            cache: false,
+            success: function(data) {
+                console.log(data);
+            },
+            error:function (e) {
+                console.log(e);
+                alert("更新异常！")
+            }
+        });
+    }
+
     $("#update_pass").bind("click",btn_update_password);
     $(".preview-content").hide();
     $(".js-write-tab").bind("click",btn_wrtie);
     $(".js-preview-tab").bind("click",btn_preview);
     $("#post_blog").bind("click",submit_blog);
     $(".li-btn-del").bind("click", btn_delete_blog);
+    $(".classify-type").bind("change", class_type_change);
     jQuery(".datepicker").datetimepicker({format:'Y-m-d H:i'});
 
     $(".li-btn-del").click(function() {

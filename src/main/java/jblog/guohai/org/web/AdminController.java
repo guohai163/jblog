@@ -1,6 +1,7 @@
 package jblog.guohai.org.web;
 
 import jblog.guohai.org.model.BlogContent;
+import jblog.guohai.org.model.ClassType;
 import jblog.guohai.org.model.Result;
 import jblog.guohai.org.model.UserModel;
 import jblog.guohai.org.service.AdminService;
@@ -46,6 +47,7 @@ public class AdminController {
 
     /**
      * 登录方法
+     *
      * @param model
      * @param username
      * @param pass
@@ -72,15 +74,16 @@ public class AdminController {
     @RequestMapping(value = "/main")
     public String adminMain(Model model, Integer postCode) {
         System.out.println(postCode);
-        if( null != postCode) {
+        if (null != postCode) {
             BlogContent blog = blogService.getByID(postCode);
-            model.addAttribute("blog",blog);
+            model.addAttribute("blog", blog);
         }
         return "admin/main";
     }
 
     /**
      * 预览MD文档接口
+     *
      * @param model
      * @param blog
      * @return 返回包含HTML的实体
@@ -104,12 +107,16 @@ public class AdminController {
         model.addAttribute("pageNum", page);
 
         model.addAttribute("maxPageNum", adminService.getBackstageMaxPageNum());
+        // 获取文章分类列表
+        List<ClassType> classTypeList = blogService.getClassList();
+        model.addAttribute("classTypeList", classTypeList);
         return "admin/list";
     }
 
 
     /**
      * 新增或修改BLOG接口，仅接收POST请求
+     *
      * @param blog
      * @return
      * @throws ParseException
@@ -120,9 +127,9 @@ public class AdminController {
 
         Result<String> result;
         try {
-            if( blog.getPostCode() == 0 ) {
+            if (blog.getPostCode() == 0) {
                 result = blogService.addPostBlog(blog);
-            }else{
+            } else {
                 result = adminService.updatePostBlog(blog);
             }
             return result;
@@ -134,12 +141,13 @@ public class AdminController {
 
     /**
      * 删除一篇文章
+     *
      * @param blog
      * @return
      */
     @ResponseBody
     @RequestMapping(value = "/delblog")
-    public  Result<String> delBlog(@RequestBody BlogContent blog) {
+    public Result<String> delBlog(@RequestBody BlogContent blog) {
         return adminService.delPostBlog(blog.getPostCode());
     }
 
@@ -153,6 +161,7 @@ public class AdminController {
 
     /**
      * 安全管理页面
+     *
      * @param model
      * @return
      */
@@ -161,4 +170,15 @@ public class AdminController {
         return "admin/security";
     }
 
+    /**
+     * 设置博客分类
+     * @param postCode
+     * @param classCode
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/blog/class", method = RequestMethod.POST)
+    public Result<String> setBlogClass(@RequestParam("postCode") Integer postCode, @RequestParam("classCode") Integer classCode) {
+        return blogService.addUpdateBlogClass(postCode, classCode);
+    }
 }

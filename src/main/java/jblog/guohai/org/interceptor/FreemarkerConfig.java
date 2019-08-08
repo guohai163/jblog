@@ -1,6 +1,8 @@
 package jblog.guohai.org.interceptor;
 
 import freemarker.template.TemplateModelException;
+import jblog.guohai.org.model.ClassType;
+import jblog.guohai.org.service.BlogService;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.PostConstruct;
+import java.util.List;
 
 /**
  * 模板引擎配置类
@@ -20,6 +23,8 @@ public class FreemarkerConfig {
     @Autowired
     private freemarker.template.Configuration configuration;
 
+    @Autowired
+    private BlogService blogService;
     /**
      * BLOG名称
      */
@@ -54,9 +59,10 @@ public class FreemarkerConfig {
 
     @PostConstruct
     public void setSharedVariable() throws TemplateModelException {
-        configuration.setSharedVariable("blog_name",blogName);
+        configuration.setSharedVariable("blog_name", blogName);
         configuration.setSharedVariable("blog_author", blogAuthor);
         configuration.setSharedVariable("blog_twitter", blogTwitter);
         configuration.setSharedVariable("blog_qrcode", blogQRCode);
+        configuration.setSharedVariable("blog_classes", blogService.getClassList());
     }
 }

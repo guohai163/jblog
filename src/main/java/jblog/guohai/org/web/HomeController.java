@@ -83,4 +83,20 @@ public class HomeController {
         return "home";
     }
 
+    /**
+     * 根据分类获取博客列表
+     *
+     * @param model
+     * @param pageNum
+     * @return
+     */
+    @RequestMapping(value = "/page/class/{classCode}/{pageNum}")
+    public String getPageContentByClass(Model model, @PathVariable("classCode") int classCode, @PathVariable("pageNum") int pageNum) {
+        List<BlogContent> listContent = blogService.getPageByClassCode(classCode, pageNum);
+        model.addAttribute("list", listContent);
+        model.addAttribute("classCode", classCode);
+        model.addAttribute("pageNum", pageNum);
+        model.addAttribute("maxPageNum", blogService.getMaxClassPageNum(classCode));
+        return "home_class";
+    }
 }
