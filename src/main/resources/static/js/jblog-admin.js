@@ -86,7 +86,15 @@ $(function () {
     }
     var btn_update_password = function () {
         console.log("in btm update")
-        //TODO:重构POST方法，进行封装；检查两次输入的密码是否一致。
+    //TODO:重构POST方法，进行封装；检查两次输入的密码是否一致。
+        var newpass = $('input[name="new_pass"]').val();
+        if (newpass != $('input[name="config_new_pass"]').val()) {
+            $.alert({
+                content: "请确保两次输入的密码一致"
+            });
+            return false;
+        }
+
         $.ajax({
             type: "post",
             url: "/admin/updatepass",
@@ -279,9 +287,26 @@ $(function () {
             success: callback
         });
     }
+    //后台登录按钮
     var btn_login = function() {
+
+        var username = $('input[name="username"]').val();
+        if(username=="") {
+            $.alert({
+                title: "错误",
+                content: "用户名不可为空"
+            });
+            return false;
+        }
+        var password = $('input[name="pass"]').val();
+        if(""==password) {
+            $.alert({
+                content: "密码为空"
+            });
+            return false;
+        }
         $.ajaxPost("/admin/login", JSON.stringify({
-            userName: $('input[name="username"]').val(),
+            userName: username,
             userPass: $('input[name="pass"]').val()
         }),function(data){
             console.log(data);

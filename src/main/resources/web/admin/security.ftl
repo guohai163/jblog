@@ -14,8 +14,8 @@
     <#include "/inc/admin-left.ftl"/>
     <div class="admin-body">
         <div class="ul-head"><h2>管理账户</h2></div>
-        <div><input type="password" name="new_pass" /></div>
-        <div><input type="password" name="config_new_pass" /></div>
+        <div class="inputbox"><label>密码</label><input type="password" name="new_pass" /></div>
+        <div class="inputbox"><label>确认</label><input type="password" name="config_new_pass" /></div>
         <div><a class="jblog-a-btn" id="update_pass" >更新密码</a></div>
     </div>
 </div>

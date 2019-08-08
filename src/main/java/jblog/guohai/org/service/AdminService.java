@@ -42,4 +42,11 @@ public interface AdminService {
      * @return
      */
     Result<String> setUserPass(UserModel user);
+
+    /**
+     * 增加一篇BLOG
+     * @param blog BLOG实体
+     * @return 返回结果情况
+     */
+    Result<String> addPostBlog(BlogContent blog);
 }

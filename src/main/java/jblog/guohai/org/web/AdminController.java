@@ -1,7 +1,6 @@
 package jblog.guohai.org.web;
 
 import jblog.guohai.org.model.BlogContent;
-import jblog.guohai.org.model.ClassType;
 import jblog.guohai.org.model.Result;
 import jblog.guohai.org.model.UserModel;
 import jblog.guohai.org.service.AdminService;
@@ -14,7 +13,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
@@ -127,9 +125,9 @@ public class AdminController {
 
         Result<String> result;
         try {
-            if (blog.getPostCode() == 0) {
-                result = blogService.addPostBlog(blog);
-            } else {
+            if( blog.getPostCode() == 0 ) {
+                result = adminService.addPostBlog(blog);
+            }else{
                 result = adminService.updatePostBlog(blog);
             }
             return result;

@@ -1,4 +1,8 @@
 ## 项目介绍
+![code size](https://img.shields.io/github/languages/code-size/guohai163/jblog.svg?style=flat-square&color=6699FF)
+![rv](https://img.shields.io/github/release/guohai163/jblog.svg?style=flat-square&color=CC6666)
+![rd](https://img.shields.io/github/release-date/guohai163/jblog.svg?style=flat-square&color=99CCFF)
+
 项目名为jBlog也就是一个由java语言开发的BLOG系统，使用了SpringBoot框架进行开发。
 
 目前已经实现的功能：

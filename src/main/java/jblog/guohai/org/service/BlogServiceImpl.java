@@ -1,6 +1,7 @@
 package jblog.guohai.org.service;
 
 import jblog.guohai.org.dao.BlogDao;
+import jblog.guohai.org.dao.HotkeyDao;
 import jblog.guohai.org.model.BlogContent;
 import jblog.guohai.org.model.ClassType;
 import jblog.guohai.org.model.Result;
@@ -16,6 +17,7 @@ public class BlogServiceImpl implements BlogService {
 
     @Autowired
     private BlogDao blogDao;
+
 
     /**
      * 前台用的页大小
@@ -90,25 +92,6 @@ public class BlogServiceImpl implements BlogService {
         return postCount % pageSize == 0 ? postCount / pageSize : postCount / pageSize + 1;
     }
 
-    /**
-     * 增加一篇BLOG
-     *
-     * @param blog BLOG实体
-     * @return 返回结果情况
-     */
-    @Override
-    public Result<String> addPostBlog(BlogContent blog) {
-        Result<String> result = new Result<>();
-        blogDao.addPostBlog(blog);
-        if (blog.getPostCode() > 0) {
-            result.setStatus(true);
-            result.setData("Success:" + blog.getPostCode());
-        } else {
-            result.setStatus(false);
-            result.setData("Error");
-        }
-        return result;
-    }
 
     /**
      * 添加博客分类映射
