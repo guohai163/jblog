@@ -101,7 +101,7 @@ $(function () {
                 console.log(data)
                 $.alert({
                     title: data.status,
-                    content: data.data,
+                    content: data.data
                 });
             }
 
@@ -266,14 +266,46 @@ $(function () {
         $('.li-class-btn-edit').bind("click", btn_class_edit);
     }
 
-    $("#update_pass").bind("click", btn_update_password);
+    //定义通过方法，POST提交数据
+    $.ajaxPost = function(url, data, callback) {
+        $.ajax({
+            type: "post",
+            url: url,
+            async: false,
+            data: data,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            cache: false,
+            success: callback
+        });
+    }
+    var btn_login = function() {
+        $.ajaxPost("/admin/login", JSON.stringify({
+            userName: $('input[name="username"]').val(),
+            userPass: $('input[name="pass"]').val()
+        }),function(data){
+            console.log(data);
+            if(data.status) {
+                window.location.href='/admin/list';
+            }else{
+                $.alert({
+                    title: data.status,
+                    content: data.data
+                });
+            }
+        });
+    }
+
+    $("#post-login").bind("click",btn_login);
+    $("#update_pass").bind("click",btn_update_password);
     $(".preview-content").hide();
-    $(".js-write-tab").bind("click", btn_wrtie);
-    $(".js-preview-tab").bind("click", btn_preview);
-    $("#post_blog").bind("click", submit_blog);
+    $(".js-write-tab").bind("click",btn_wrtie);
+    $(".js-preview-tab").bind("click",btn_preview);
+    $("#post_blog").bind("click",submit_blog);
     $(".li-btn-del").bind("click", btn_delete_blog);
+    jQuery(".datepicker").datetimepicker({format:'Y-m-d H:i'});
+
     $(".classify-type").bind("change", class_type_change);
-    jQuery(".datepicker").datetimepicker({format: 'Y-m-d H:i'});
     $('.li-class-btn-del').bind("click", btn_class_delete);
     $('.li-class-btn-edit').bind("click", btn_class_edit);
     $('.li-class-btn-add-li').bind("click", btn_class_add_li);

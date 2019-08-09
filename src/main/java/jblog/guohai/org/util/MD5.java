@@ -20,8 +20,8 @@ public class MD5 {
 
     private static String byteToString(byte[] bByte) {
         StringBuilder sBuffer = new StringBuilder();
-        for (int i = 0; i < bByte.length; i++) {
-            sBuffer.append(byteToArrayString(bByte[i]));
+        for (byte b:bByte) {
+            sBuffer.append(byteToArrayString(b));
         }
         return sBuffer.toString();
     }
