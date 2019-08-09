@@ -1,6 +1,8 @@
 package jblog.guohai.org.web;
 
+import org.springframework.util.StringUtils;
 import jblog.guohai.org.model.BlogContent;
+import jblog.guohai.org.model.ClassType;
 import jblog.guohai.org.model.Result;
 import jblog.guohai.org.model.UserModel;
 import jblog.guohai.org.service.AdminService;
@@ -237,4 +239,11 @@ public class AdminController {
         }
         return blogService.addClass(className);
     }
+
+
+    @RequestMapping(value = "/hotkey")
+    public String adminHotkey(Model model) {
+        return "admin/hotkey";
+    }
+
 }

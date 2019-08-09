@@ -1,0 +1,131 @@
+body {
+    font-size: 13px;
+    margin: 0px;
+    overflow: hidden;
+}
+div {
+    display: block;
+}
+a {
+    display: block;
+    text-decoration: none;
+}
+ul {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-top: 0;
+}
+header {
+    position: relative;
+    background-color: #25313e;
+    min-height: 50px;
+}
+/* 大框架 */
+.jbox {
+    display: table;
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+.nav {
+    padding-left: 0;
+    margin-bottom: 0;
+}
+.slimScrolldiv li>a{
+    border-top:1px solid transparent;
+    border-color: rgba(255,255,255,0.05);
+    padding: 11px 15px;
+    font-size: 14px;
+    display: block;
+    cursor: pointer;
+    color: #adbece;
+}
+.slimScrolldiv li {
+    line-height: 1.5;
+    display: block;
+}
+.slimScrolldiv li>a>i {
+    width: 44px;
+    line-height: 44px;
+    float: left;
+    margin: -12px -15px;
+    margin-right: 10px;
+    border-right: 1px solid rgba(255,255,255,0.05);
+    text-align: center;
+    position: relative;
+}
+
+.slimScrolldiv {
+    position: relative;
+    width: auto;
+    height: 100%;
+    list-style: none;
+}
+.right-section {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    display: table-cell;
+}
+.left-aside{
+    background-color: #41586e;
+    height: 100%;
+    color: #9db1c5;
+    width: 220px;
+    display: table-cell;
+    vertical-align: top;
+}
+.main-down {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+    height: 100%;
+}
+.navbar-header {
+    width:220px;
+    float: left;
+    color: #9db1c5;
+    text-align: center;
+    font-size: 25px;
+}
+
+.main-section {
+    width: 100%;
+    height: 100%;
+    border-spacing: 0;
+    position: relative;
+}
+/* 右侧 */
+.pannel {
+    border-radius: 2px;
+    border-color: #bce8f1;
+    margin-bottom: 20px;
+    background-color: #fff;
+    border: 1px solid transparent;
+}
+.panel-heading {
+    background-color: #d9edf7;
+}
+.padder {
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-top: 2%;
+}
+.admin-ul {
+    padding-left: 0;
+    list-style: none;
+}
+
+.admin-li {
+    padding: 10px;
+    border-bottom: 1px solid #e1e4e8;
+    line-height: 23px;
+}
+.ul-head {
+    border-bottom: 1px solid #e1e4e8;
+    display: flex;
+    flex-flow: row wrap;
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+}
