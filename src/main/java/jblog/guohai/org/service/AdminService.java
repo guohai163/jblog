@@ -1,6 +1,7 @@
 package jblog.guohai.org.service;
 
 import jblog.guohai.org.model.BlogContent;
+import jblog.guohai.org.model.ClassType;
 import jblog.guohai.org.model.Result;
 import jblog.guohai.org.model.UserModel;
 

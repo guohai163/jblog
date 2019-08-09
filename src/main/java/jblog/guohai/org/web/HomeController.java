@@ -32,6 +32,7 @@ public class HomeController {
         model.addAttribute("list", listContent);
         model.addAttribute("pageNum", 1);
         model.addAttribute("maxPageNum", blogService.getMaxPageNum());
+        model.addAttribute("blog_classes", blogService.getClassOfBlogCountList());
         return "home";
     }
 
@@ -63,7 +64,7 @@ public class HomeController {
         if (connectNext != null) {
             model.addAttribute("contactNext", connectNext);
         }
-
+        model.addAttribute("blog_classes", blogService.getClassOfBlogCountList());
         return "content";
     }
 
@@ -80,7 +81,25 @@ public class HomeController {
         model.addAttribute("list", listContent);
         model.addAttribute("pageNum", pageNum);
         model.addAttribute("maxPageNum", blogService.getMaxPageNum());
+        model.addAttribute("blog_classes", blogService.getClassOfBlogCountList());
         return "home";
     }
 
+    /**
+     * 根据分类获取博客列表
+     *
+     * @param model
+     * @param pageNum
+     * @return
+     */
+    @RequestMapping(value = "/page/class/{classCode}/{pageNum}")
+    public String getPageContentByClass(Model model, @PathVariable("classCode") int classCode, @PathVariable("pageNum") int pageNum) {
+        List<BlogContent> listContent = blogService.getPageByClassCode(classCode, pageNum);
+        model.addAttribute("list", listContent);
+        model.addAttribute("classCode", classCode);
+        model.addAttribute("pageNum", pageNum);
+        model.addAttribute("maxPageNum", blogService.getMaxClassPageNum(classCode));
+        model.addAttribute("blog_classes", blogService.getClassOfBlogCountList());
+        return "home_class";
+    }
 }

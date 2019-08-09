@@ -20,11 +20,20 @@
                 <#if content.postStatus == "publish">🔵<#else>🔴</#if>
                 <#if content.postTitle?length gt 21>${content.postTitle?substring(0,20)}...
                 <#else>${content.postTitle}</#if>
+                <span>
+                    <select class="classify-type">
+                        <#if content.classCode == 0><option value="0" selected>文章归类...</option></#if>
+                        <#list classTypeList as classItem>
+                            <option value="${classItem.classCode}" post_code="${content.postCode}" <#if classItem.classCode==content.classCode> selected</#if> >${classItem.className}</option>
+                        </#list>
+                    </select>
+                </span>
                 <span class="float-right">
-                <a class="li-btn li-btn-del" id="${content.postCode}">del</a>
-                <a class="li-btn" href="/admin/main?postCode=${content.postCode}">edit</a></span>
+                    <a class="li-btn li-btn-del" id="${content.postCode}">del</a>
+                    <a class="li-btn" href="/admin/main?postCode=${content.postCode}">edit</a>
+                </span>
                 <time class="float-right" datetime="${content.postDate?string('yyyy-MM-dd')}">${content.postDate?string('yyyy-MM-dd')}</time>
-                
+
                 </li>
             </#list>
         </ul>

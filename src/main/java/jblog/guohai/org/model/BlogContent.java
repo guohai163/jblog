@@ -71,6 +71,13 @@ public class BlogContent {
     private String postStatus;
 
     /**
+     * 分类编号
+     */
+    @Getter
+    @Setter
+    private Integer classCode;
+
+    /**
      * 构造方法
      *
      * @param postTitle      长标题

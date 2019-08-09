@@ -1,6 +1,7 @@
 package jblog.guohai.org.dao;
 
 import jblog.guohai.org.model.BlogContent;
+import jblog.guohai.org.model.ClassType;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -71,6 +72,39 @@ public interface BlogDao {
     List<BlogContent> getByPage(@Param("pageStart") Integer pageStart, @Param("pageSize") Integer pageSize);
 
     /**
+     * 根据分类获取 博客列表分页
+     *
+     * @param classCode
+     * @param pageStart
+     * @param pageSize
+     * @return
+     */
+    @Select("select posts.*\n" +
+            "   ,date_format(posts.post_date,'%Y') as post_year\n" +
+            "   ,date_format(posts.post_date,'%c') as post_month\n" +
+            "   ,date_format(posts.post_date,'%e') as post_day\n" +
+            "from \n" +
+            "   (select post_code from jblog_class_map where class_code=#{classCode}) as map \n" +
+            "left join jblog_posts as posts \n" +
+            "on map.post_code = posts.post_code\n" +
+            "where posts.post_status='publish'\n" +
+            "order by posts.post_date desc , posts.post_code desc limit #{pageStart},#{pageSize}")
+    List<BlogContent> getPageByClassCode(@Param("classCode") Integer classCode, @Param("pageStart") Integer pageStart, @Param("pageSize") Integer pageSize);
+
+    /**
+     * 根据分类获取 返回总数量
+     *
+     * @return
+     */
+    @Select("select count(*)" +
+            "from \n" +
+            "   (select post_code from jblog_class_map where class_code=#{classCode}) as map \n" +
+            "left join jblog_posts as posts \n" +
+            "on map.post_code = posts.post_code\n" +
+            "where posts.post_status='publish'")
+    Integer getPostCountByClassCode(@Param("classCode") int classCode);
+
+    /**
      * 返回总数量
      *
      * @return
@@ -80,6 +114,7 @@ public interface BlogDao {
 
     /**
      * 获得所有类型的总数量
+     *
      * @return
      */
     @Select("SELECT count(*) FROM jblog_posts")
@@ -87,12 +122,15 @@ public interface BlogDao {
 
     /**
      * 获得不区分类型的列表
+     *
      * @param pageStart
      * @param pageSize
      * @return
      */
-    @Select("SELECT *" +
-            "FROM `jblog_posts` ORDER BY post_code DESC limit #{pageStart},#{pageSize};")
+    @Select("SELECT posts.*,IFNULL(map.class_code,0) as class_code " +
+            "FROM `jblog_posts` as posts " +
+            "left join jblog_class_map as map on posts.post_code = map.post_code " +
+            "ORDER BY post_code DESC limit #{pageStart},#{pageSize};")
     List<BlogContent> getBackstageList(@Param("pageStart") Integer pageStart, @Param("pageSize") Integer pageSize);
 
     /**
@@ -118,6 +156,7 @@ public interface BlogDao {
 
     /**
      * 删除一篇BLOG
+     *
      * @param postCode
      * @return
      */
@@ -126,10 +165,104 @@ public interface BlogDao {
 
     /**
      * 编辑一篇BLOG
+     *
      * @param blog
      * @return
      */
     @Update("UPDATE `jblog_posts` SET post_content=#{blog.postContent},post_title=#{blog.postTitle}," +
             "post_small_title=#{blog.postSmallTitle},post_date=#{blog.postDate} WHERE post_code=#{blog.postCode}")
     Boolean updatePostBlog(@Param("blog") BlogContent blog);
+
+    /**
+     * 获取分类列表
+     *
+     * @return
+     */
+    @Select("select class_code,class_name from jblog_class")
+    List<ClassType> getClassList();
+
+    /**
+     * 获取分类列表(含文章数)
+     *
+     * @return
+     */
+    @Select("select blog_map.class_code,class_name,blog_count from \n" +
+            "\t(select class_code,count(post_code) as blog_count from jblog_class_map group by class_code)as blog_map\n" +
+            "left join jblog_class on jblog_class.class_code = blog_map.class_code")
+    List<ClassType> getClassOfBlogCountList();
+
+    /**
+     * 添加博客分类
+     *
+     * @param classType 分类
+     * @return
+     */
+    @Insert("insert into jblog_class(class_name) values(#{classType.className})")
+    @Options(useGeneratedKeys = true, keyProperty = "classType.classCode", keyColumn = "class_code")
+    Boolean addClass(@Param("classType") ClassType classType);
+
+    /**
+     * 根据分类名判断分类是否存在
+     * @param className 分类名称
+     * @return
+     */
+    @Select("select count(1) from jblog_class where class_name=#{className}")
+    int getClassCountByClassName(@Param("className") String className);
+
+    /**
+     * 更新博客分类
+     *
+     * @param classCode 分类编号
+     * @param className 分类名称
+     * @return
+     */
+    @Update("update jblog_class set class_name=#{className} where class_code=#{classCode}")
+    Boolean updateClass(@Param("classCode") Integer classCode, @Param("className") String className);
+
+    /**
+     * 查看分类映射是否提交
+     *
+     * @param postCode 博客编号
+     * @return
+     */
+    @Select("select count(1) from jblog_class_map where post_code=#{postCode}")
+    int getBlogClassCount(@Param("postCode") Integer postCode);
+
+    /**
+     * 添加博客分类映射
+     *
+     * @param postCode  博客编号
+     * @param classCode 分类编号
+     * @return
+     */
+    @Insert("insert into jblog_class_map(post_code,class_code)values(#{postCode},#{classCode})")
+    Boolean addBlogClassMap(@Param("postCode") Integer postCode, @Param("classCode") Integer classCode);
+
+    /**
+     * 更新博客分类
+     *
+     * @param postCode  博客编号
+     * @param classCode 分类编号
+     * @return
+     */
+    @Update("update jblog_class_map set class_code=#{classCode} where post_code=#{postCode}")
+    Boolean updateBlogClassMap(@Param("postCode") Integer postCode, @Param("classCode") Integer classCode);
+
+    /**
+     * 删除博客分类
+     *
+     * @param classCode 分类编号
+     * @return
+     */
+    @Delete("delete from jblog_class where class_code=#{classCode}")
+    Boolean delClass(@Param("classCode") int classCode);
+
+    /**
+     * 删除所有与指定分类相关的博客
+     *
+     * @param classCode 分类编号
+     * @return
+     */
+    @Delete("delete from jblog_class_map where class_code=#{classCode}")
+    Boolean delClassMap(@Param("classCode") int classCode);
 }

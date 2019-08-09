@@ -1,6 +1,7 @@
 package jblog.guohai.org.service;
 
 import jblog.guohai.org.model.BlogContent;
+import jblog.guohai.org.model.ClassType;
 import jblog.guohai.org.model.Result;
 
 import java.util.List;
@@ -55,4 +56,65 @@ public interface BlogService {
      * @return 返回结果情况
      */
     Result<String> addPostBlog(BlogContent blog);
+
+    /**
+     * 添加博客分类映射
+     *
+     * @param postCode  博客编号
+     * @param classCode 分类编号
+     * @return
+     */
+    Result<String> addUpdateBlogClass(Integer postCode, Integer classCode);
+
+    /**
+     * 获取分类列表
+     * @return
+     */
+    List<ClassType> getClassList();
+
+    /**
+     * 获取分类列表(含文章数)
+     *
+     * @return
+     */
+    List<ClassType> getClassOfBlogCountList();
+
+    /**
+     * 获取
+     *
+     * @param classCode 分类编号
+     * @param pageNum 分页页码
+     * @return
+     */
+    List<BlogContent> getPageByClassCode(Integer classCode, int pageNum);
+
+    /**
+     * 返回 总数量
+     *
+     * @return
+     */
+    Integer getMaxClassPageNum(Integer classCode);
+
+    /**
+     * 编辑分类名称
+     *
+     * @param classCode 分类编号
+     * @param className 分类名称
+     * @return
+     */
+    Result<String> updateClassName(Integer classCode, String className);
+
+    /**
+     * 删除分类
+     * @param classCode 分类编号
+     * @return
+     */
+    Result<String> delClass(Integer classCode);
+
+    /**
+     * 添加分类
+     * @param className 分类名称
+     * @return
+     */
+    Result<String> addClass(String className);
 }

@@ -65,7 +65,7 @@
     
 		</div>
 
-	
+
 
 
     <#include "/inc/blog-side.ftl" />

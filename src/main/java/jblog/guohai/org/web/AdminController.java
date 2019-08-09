@@ -1,6 +1,7 @@
 package jblog.guohai.org.web;
 
 import jblog.guohai.org.model.BlogContent;
+import jblog.guohai.org.model.ClassType;
 import jblog.guohai.org.model.Result;
 import jblog.guohai.org.model.UserModel;
 import jblog.guohai.org.service.AdminService;
@@ -13,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
@@ -72,15 +74,16 @@ public class AdminController {
     @RequestMapping(value = "/main")
     public String adminMain(Model model, Integer postCode) {
         System.out.println(postCode);
-        if( null != postCode) {
+        if (null != postCode) {
             BlogContent blog = blogService.getByID(postCode);
-            model.addAttribute("blog",blog);
+            model.addAttribute("blog", blog);
         }
         return "admin/main";
     }
 
     /**
      * 预览MD文档接口
+     *
      * @param model
      * @param blog
      * @return 返回包含HTML的实体
@@ -104,12 +107,16 @@ public class AdminController {
         model.addAttribute("pageNum", page);
 
         model.addAttribute("maxPageNum", adminService.getBackstageMaxPageNum());
+        // 获取文章分类列表
+        List<ClassType> classTypeList = blogService.getClassList();
+        model.addAttribute("classTypeList", classTypeList);
         return "admin/list";
     }
 
 
     /**
      * 新增或修改BLOG接口，仅接收POST请求
+     *
      * @param blog
      * @return
      * @throws ParseException
@@ -120,9 +127,9 @@ public class AdminController {
 
         Result<String> result;
         try {
-            if( blog.getPostCode() == 0 ) {
+            if (blog.getPostCode() == 0) {
                 result = blogService.addPostBlog(blog);
-            }else{
+            } else {
                 result = adminService.updatePostBlog(blog);
             }
             return result;
@@ -134,12 +141,13 @@ public class AdminController {
 
     /**
      * 删除一篇文章
+     *
      * @param blog
      * @return
      */
     @ResponseBody
     @RequestMapping(value = "/delblog")
-    public  Result<String> delBlog(@RequestBody BlogContent blog) {
+    public Result<String> delBlog(@RequestBody BlogContent blog) {
         return adminService.delPostBlog(blog.getPostCode());
     }
 
@@ -153,6 +161,7 @@ public class AdminController {
 
     /**
      * 安全管理页面
+     *
      * @param model
      * @return
      */
@@ -161,4 +170,73 @@ public class AdminController {
         return "admin/security";
     }
 
+    /**
+     * 分类管理页面
+     *
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/class")
+    public String adminClass(Model model) {
+        // 获取文章分类列表
+        List<ClassType> classTypeList = blogService.getClassList();
+        model.addAttribute("classTypeList", classTypeList);
+        return "admin/class";
+    }
+
+    /**
+     * 设置博客分类
+     *
+     * @param postCode  博客编号
+     * @param classCode 分类编号
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/blog/class", method = RequestMethod.POST)
+    public Result<String> setBlogClass(@RequestParam("postCode") Integer postCode, @RequestParam("classCode") Integer classCode) {
+        return blogService.addUpdateBlogClass(postCode, classCode);
+    }
+
+    /**
+     * 删除博客分类
+     *
+     * @param classCode 分类编号
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/blog/class/del", method = RequestMethod.POST)
+    public Result<String> delBlogClass(@RequestParam("classCode") Integer classCode) {
+        return blogService.delClass(classCode);
+    }
+
+    /**
+     * 编辑博客分类
+     *
+     * @param classCode 分类编号
+     * @param className 分类名称
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/blog/class/edit", method = RequestMethod.POST)
+    public Result<String> editBlogClass(@RequestParam("classCode") Integer classCode, @RequestParam("className") String className) {
+        if (StringUtils.isEmpty(className) || className.length() > 100) {
+            return new Result<>(false, "分类名称不可为空或超过100字符");
+        }
+        return blogService.updateClassName(classCode, className);
+    }
+
+    /**
+     * 添加博客分类
+     *
+     * @param className 分类名称
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/blog/class/add", method = RequestMethod.POST)
+    public Result<String> editBlogClass(@RequestParam("className") String className) {
+        if (StringUtils.isEmpty(className) || className.length() > 100) {
+            return new Result<>(false, "分类名称不可为空或超过100字符");
+        }
+        return blogService.addClass(className);
+    }
 }
