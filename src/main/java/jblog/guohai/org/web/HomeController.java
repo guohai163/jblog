@@ -64,7 +64,7 @@ public class HomeController {
         if (connectNext != null) {
             model.addAttribute("contactNext", connectNext);
         }
-
+        model.addAttribute("blog_classes", blogService.getClassOfBlogCountList());
         return "content";
     }
 
@@ -81,6 +81,7 @@ public class HomeController {
         model.addAttribute("list", listContent);
         model.addAttribute("pageNum", pageNum);
         model.addAttribute("maxPageNum", blogService.getMaxPageNum());
+        model.addAttribute("blog_classes", blogService.getClassOfBlogCountList());
         return "home";
     }
 
