@@ -40,4 +40,4 @@
 </div>
 <#include "/inc/foot.ftl"/>
 </body>
-</html
+</html>
