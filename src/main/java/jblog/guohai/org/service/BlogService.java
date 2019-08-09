@@ -73,6 +73,13 @@ public interface BlogService {
     List<ClassType> getClassList();
 
     /**
+     * 获取分类列表(含文章数)
+     *
+     * @return
+     */
+    List<ClassType> getClassOfBlogCountList();
+
+    /**
      * 获取
      *
      * @param classCode 分类编号
@@ -87,4 +94,27 @@ public interface BlogService {
      * @return
      */
     Integer getMaxClassPageNum(Integer classCode);
+
+    /**
+     * 编辑分类名称
+     *
+     * @param classCode 分类编号
+     * @param className 分类名称
+     * @return
+     */
+    Result<String> updateClassName(Integer classCode, String className);
+
+    /**
+     * 删除分类
+     * @param classCode 分类编号
+     * @return
+     */
+    Result<String> delClass(Integer classCode);
+
+    /**
+     * 添加分类
+     * @param className 分类名称
+     * @return
+     */
+    Result<String> addClass(String className);
 }

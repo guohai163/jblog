@@ -23,8 +23,6 @@ public class FreemarkerConfig {
     @Autowired
     private freemarker.template.Configuration configuration;
 
-    @Autowired
-    private BlogService blogService;
     /**
      * BLOG名称
      */
@@ -63,6 +61,5 @@ public class FreemarkerConfig {
         configuration.setSharedVariable("blog_author", blogAuthor);
         configuration.setSharedVariable("blog_twitter", blogTwitter);
         configuration.setSharedVariable("blog_qrcode", blogQRCode);
-        configuration.setSharedVariable("blog_classes", blogService.getClassList());
     }
 }

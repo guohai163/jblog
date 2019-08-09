@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
@@ -171,14 +172,72 @@ public class AdminController {
     }
 
     /**
+     * 分类管理页面
+     *
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/class")
+    public String adminClass(Model model) {
+        // 获取文章分类列表
+        List<ClassType> classTypeList = blogService.getClassList();
+        model.addAttribute("classTypeList", classTypeList);
+        return "admin/class";
+    }
+
+    /**
      * 设置博客分类
-     * @param postCode
-     * @param classCode
+     *
+     * @param postCode  博客编号
+     * @param classCode 分类编号
      * @return
      */
     @ResponseBody
     @RequestMapping(value = "/blog/class", method = RequestMethod.POST)
     public Result<String> setBlogClass(@RequestParam("postCode") Integer postCode, @RequestParam("classCode") Integer classCode) {
         return blogService.addUpdateBlogClass(postCode, classCode);
+    }
+
+    /**
+     * 删除博客分类
+     *
+     * @param classCode 分类编号
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/blog/class/del", method = RequestMethod.POST)
+    public Result<String> delBlogClass(@RequestParam("classCode") Integer classCode) {
+        return blogService.delClass(classCode);
+    }
+
+    /**
+     * 编辑博客分类
+     *
+     * @param classCode 分类编号
+     * @param className 分类名称
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/blog/class/edit", method = RequestMethod.POST)
+    public Result<String> editBlogClass(@RequestParam("classCode") Integer classCode, @RequestParam("className") String className) {
+        if (StringUtils.isEmpty(className) || className.length() > 100) {
+            return new Result<>(false, "分类名称不可为空或超过100字符");
+        }
+        return blogService.updateClassName(classCode, className);
+    }
+
+    /**
+     * 添加博客分类
+     *
+     * @param className 分类名称
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/blog/class/add", method = RequestMethod.POST)
+    public Result<String> editBlogClass(@RequestParam("className") String className) {
+        if (StringUtils.isEmpty(className) || className.length() > 100) {
+            return new Result<>(false, "分类名称不可为空或超过100字符");
+        }
+        return blogService.addClass(className);
     }
 }

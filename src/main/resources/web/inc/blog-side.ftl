@@ -22,7 +22,7 @@
                 <li>
                     <ul>
                     <#list blog_classes as classItem>
-                        <li><a href="/page/class/${classItem.classCode}/1">${classItem.className}</a></li>
+                        <li><a href="/page/class/${classItem.classCode}/1">${classItem.className}(${classItem.blogCount})</a></li>
                     </#list>
                     </ul>
                 </li>

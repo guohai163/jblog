@@ -6,6 +6,7 @@ import jblog.guohai.org.model.ClassType;
 import jblog.guohai.org.model.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -138,10 +139,21 @@ public class BlogServiceImpl implements BlogService {
     }
 
     /**
+     * 获取分类列表(含文章数)
+     *
+     * @return
+     */
+    @Override
+    public List<ClassType> getClassOfBlogCountList() {
+        List<ClassType> list = blogDao.getClassOfBlogCountList();
+        return list == null ? new ArrayList<>() : list;
+    }
+
+    /**
      * 获取
      *
      * @param classCode 分类编号
-     * @param pageNum 分页页码
+     * @param pageNum   分页页码
      * @return
      */
     @Override
@@ -158,5 +170,51 @@ public class BlogServiceImpl implements BlogService {
     public Integer getMaxClassPageNum(Integer classCode) {
         int postCount = blogDao.getPostCountByClassCode(classCode);
         return postCount % pageSize == 0 ? postCount / pageSize : postCount / pageSize + 1;
+    }
+
+    /**
+     * 编辑分类名称
+     *
+     * @param classCode 分类编号
+     * @param className 分类名称
+     * @return
+     */
+    @Override
+    public Result<String> updateClassName(Integer classCode, String className) {
+        blogDao.updateClass(classCode, className);
+        return new Result<>(true, "更新成功");
+    }
+
+    /**
+     * 删除分类
+     *
+     * @param classCode 分类编号
+     * @return
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public Result<String> delClass(Integer classCode) {
+        //删除分类
+        blogDao.delClass(classCode);
+        //删除关联的分类映射
+        blogDao.delClassMap(classCode);
+        return new Result<>(true, "删除成功");
+    }
+
+    /**
+     * 添加分类
+     *
+     * @param className 分类名称
+     * @return
+     */
+    @Override
+    public Result<String> addClass(String className) {
+        if (blogDao.getClassCountByClassName(className) > 0) {
+            return new Result<>(false, "分类已存在");
+        }
+        ClassType classType = new ClassType();
+        classType.setClassName(className);
+        blogDao.addClass(classType);
+        return new Result<>(true, classType.getClassCode() + "");
     }
 }

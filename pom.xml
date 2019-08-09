@@ -77,13 +77,6 @@
             <artifactId>flexmark-ext-tables</artifactId>
             <version>0.50.24</version>
         </dependency>
-
-        <!--markdown to html end-->
-        <!--<dependency>-->
-            <!--<groupId>org.markdownj</groupId>-->
-            <!--<artifactId>markdownj-core</artifactId>-->
-            <!--<version>0.4</version>-->
-        <!--</dependency>-->
     </dependencies>
 
     <build>

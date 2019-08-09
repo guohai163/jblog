@@ -194,12 +194,30 @@ public interface BlogDao {
     /**
      * 添加博客分类
      *
+     * @param classType 分类
+     * @return
+     */
+    @Insert("insert into jblog_class(class_name) values(#{classType.className})")
+    @Options(useGeneratedKeys = true, keyProperty = "classType.classCode", keyColumn = "class_code")
+    Boolean addClass(@Param("classType") ClassType classType);
+
+    /**
+     * 根据分类名判断分类是否存在
      * @param className 分类名称
      * @return
      */
-    @Insert("insert into jblog_class(class_name) values(#{className})")
-    @Options(useGeneratedKeys = true, keyProperty = "className.classCode", keyColumn = "class_code")
-    Boolean addClass(@Param("className") ClassType className);
+    @Select("select count(1) from jblog_class where class_name=#{className}")
+    int getClassCountByClassName(@Param("className") String className);
+
+    /**
+     * 更新博客分类
+     *
+     * @param classCode 分类编号
+     * @param className 分类名称
+     * @return
+     */
+    @Update("update jblog_class set class_name=#{className} where class_code=#{classCode}")
+    Boolean updateClass(@Param("classCode") Integer classCode, @Param("className") String className);
 
     /**
      * 查看分类映射是否提交
@@ -247,14 +265,4 @@ public interface BlogDao {
      */
     @Delete("delete from jblog_class_map where class_code=#{classCode}")
     Boolean delClassMap(@Param("classCode") int classCode);
-
-    /**
-     * 删除置顶的博客分类
-     *
-     * @param classCode 分类编号
-     * @param postCode  博客编号
-     * @return
-     */
-    @Delete("delete from jblog_class_map where class_code=#{classCode} and post_code=#{postCode}")
-    Boolean delPostClassMap(@Param("classCode") int classCode, @Param("postCode") int postCode);
 }

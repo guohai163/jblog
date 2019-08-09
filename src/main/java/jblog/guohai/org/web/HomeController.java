@@ -32,6 +32,7 @@ public class HomeController {
         model.addAttribute("list", listContent);
         model.addAttribute("pageNum", 1);
         model.addAttribute("maxPageNum", blogService.getMaxPageNum());
+        model.addAttribute("blog_classes", blogService.getClassOfBlogCountList());
         return "home";
     }
 
@@ -97,6 +98,7 @@ public class HomeController {
         model.addAttribute("classCode", classCode);
         model.addAttribute("pageNum", pageNum);
         model.addAttribute("maxPageNum", blogService.getMaxClassPageNum(classCode));
+        model.addAttribute("blog_classes", blogService.getClassOfBlogCountList());
         return "home_class";
     }
 }
