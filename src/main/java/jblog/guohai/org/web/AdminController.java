@@ -243,6 +243,7 @@ public class AdminController {
 
     @RequestMapping(value = "/hotkey")
     public String adminHotkey(Model model) {
+        model.addAttribute("hotkey_list", blogService.getHotkeyList());
         return "admin/hotkey";
     }
 

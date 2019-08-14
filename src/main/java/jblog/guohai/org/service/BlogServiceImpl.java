@@ -4,6 +4,7 @@ import jblog.guohai.org.dao.BlogDao;
 import jblog.guohai.org.dao.HotkeyDao;
 import jblog.guohai.org.model.BlogContent;
 import jblog.guohai.org.model.ClassType;
+import jblog.guohai.org.model.Hotkey;
 import jblog.guohai.org.model.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,8 @@ public class BlogServiceImpl implements BlogService {
     @Autowired
     private BlogDao blogDao;
 
+    @Autowired
+    private HotkeyDao hotkeyDao;
 
     /**
      * 前台用的页大小
@@ -199,5 +202,15 @@ public class BlogServiceImpl implements BlogService {
         classType.setClassName(className);
         blogDao.addClass(classType);
         return new Result<>(true, classType.getClassCode() + "");
+    }
+
+    /**
+     * 获取热词列表
+     *
+     * @return
+     */
+    @Override
+    public List<Hotkey> getHotkeyList() {
+        return hotkeyDao.getHotkeyTop100();
     }
 }

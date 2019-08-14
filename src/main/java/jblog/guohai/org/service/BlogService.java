@@ -2,6 +2,7 @@ package jblog.guohai.org.service;
 
 import jblog.guohai.org.model.BlogContent;
 import jblog.guohai.org.model.ClassType;
+import jblog.guohai.org.model.Hotkey;
 import jblog.guohai.org.model.Result;
 
 import java.util.List;
@@ -110,4 +111,10 @@ public interface BlogService {
      * @return
      */
     Result<String> addClass(String className);
+
+    /**
+     * 获取热词列表
+     * @return
+     */
+    List<Hotkey> getHotkeyList();
 }

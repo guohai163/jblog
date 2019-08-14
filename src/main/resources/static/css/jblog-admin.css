@@ -21,6 +21,20 @@ header {
     background-color: #25313e;
     min-height: 50px;
 }
+strong {
+    font-weight: bold;
+}
+table {
+    max-width: 100%;
+    background-color: transparent;
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+th {
+    text-align: left;
+    display: table-cell;
+    font-weight: bold;
+}
 /* 大框架 */
 .jbox {
     display: table;
@@ -62,12 +76,6 @@ header {
     height: 100%;
     list-style: none;
 }
-.right-section {
-    height: 100%;
-    width: 100%;
-    position: relative;
-    display: table-cell;
-}
 .left-aside{
     background-color: #41586e;
     height: 100%;
@@ -105,7 +113,16 @@ header {
     border: 1px solid transparent;
 }
 .panel-heading {
-    background-color: #d9edf7;
+    border-bottom: 1px solid #cfcfcf;
+    border-color: #e4e4e4;
+    background-color: #fff;
+    color: #717171;
+    min-height: 50px;
+    padding: 0 15px;
+}
+.panel-heading p {
+    margin-top: 15px;
+    display: inline-block;
 }
 .padder {
     padding-left: 15px;
@@ -128,4 +145,46 @@ header {
     flex-flow: row wrap;
     margin-bottom: 5px;
     padding-bottom: 5px;
+}
+.right-content {
+    padding: 0 !important;
+    vertical-align: top;
+    height: 100%;
+    float: none;
+}
+.scrollable {
+    padding: 15px;
+}
+
+.panel {
+    border-radius: 2px;
+    background-color: #fff;
+    border: 1px solid transparent;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.05);
+}
+.panel-default {
+    border-color: #e8e8e8;
+}
+.table-responseive {
+    margin-bottom: 0;
+    border: 0;
+}
+.table-striped>thead th {
+    background: #f5f5f5;
+    border-right: 1px solid #f1f1f1;
+    border-bottom: 1px solid #ebebeb;
+
+}
+.table {
+    width: 100%;
+    font-size: 13px;
+    font-family: sans-serif;
+
+}
+
+.table th {
+    padding: 6px 15px;
+}
+.table td {
+    padding: 6px 15px;
 }

@@ -49,4 +49,6 @@ public interface AdminService {
      * @return 返回结果情况
      */
     Result<String> addPostBlog(BlogContent blog);
+
+
 }
