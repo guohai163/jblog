@@ -166,4 +166,31 @@ public class AdminServiceImpl implements AdminService {
         }
         return result;
     }
+
+    /**
+     * 更新热词
+     *
+     * @return
+     */
+    @Override
+    public Result<String> renewHotkey() {
+        String[] hotkeys = blogDao.getAllSmallTitle();
+        if(hotkeys!=null && hotkeys.length>0) {
+            hotkeyDao.truncateHotkey();
+        }else{
+            return new Result<>(true,"目前没有可用热词");
+        }
+        for(String hot : hotkeys) {
+            String[] hotkey = hot.split("-");
+            for(String key:hotkey) {
+                if(null == hotkeyDao.getHotkeybyKey(key)) {
+                    //当不存在时增加
+                    hotkeyDao.addHotkey(new Hotkey(key, 0));
+                }else{
+                    hotkeyDao.setHotkeyCountAdd1(new Hotkey(key,0));
+                }
+            }
+        }
+        return new Result<>(true,"成功");
+    }
 }

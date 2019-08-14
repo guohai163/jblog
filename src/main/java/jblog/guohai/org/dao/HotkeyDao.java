@@ -2,10 +2,7 @@ package jblog.guohai.org.dao;
 
 import com.sun.org.apache.xpath.internal.operations.Bool;
 import jblog.guohai.org.model.Hotkey;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -43,4 +40,11 @@ public interface HotkeyDao {
      */
     @Select("SELECT * FROM jblog_hotkey ORDER BY hotkey_count DESC LIMIT 100;")
     List<Hotkey> getHotkeyTop100();
+
+    /**
+     * 清表
+     * @return
+     */
+    @Update("TRUNCATE TABLE jblog_hotkey")
+    Boolean truncateHotkey();
 }

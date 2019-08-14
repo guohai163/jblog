@@ -265,4 +265,11 @@ public interface BlogDao {
      */
     @Delete("delete from jblog_class_map where class_code=#{classCode}")
     Boolean delClassMap(@Param("classCode") int classCode);
+
+    /**
+     * 取出所有短标题
+     * @return
+     */
+    @Select("SELECT post_small_title FROM jblog_posts;")
+    String[] getAllSmallTitle();
 }

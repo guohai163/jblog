@@ -247,4 +247,10 @@ public class AdminController {
         return "admin/hotkey";
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/hotkey/renew",method = RequestMethod.POST)
+    public Result<String> renewHotkey(){
+        return adminService.renewHotkey();
+    }
+
 }

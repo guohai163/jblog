@@ -50,5 +50,9 @@ public interface AdminService {
      */
     Result<String> addPostBlog(BlogContent blog);
 
-
+    /**
+     * 更新热词
+     * @return
+     */
+    Result<String> renewHotkey();
 }

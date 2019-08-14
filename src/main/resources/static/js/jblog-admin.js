@@ -320,7 +320,12 @@ $(function () {
             }
         });
     }
-
+    var btn_renew_hotkey = function() {
+        $.ajaxPost("/admin/hotkey/renew",function(data){
+            console.log(data);
+        })
+    }
+    $("#renew_hotkey").bind("click", btn_renew_hotkey);
     $("#post-login").bind("click",btn_login);
     $("#update_pass").bind("click",btn_update_password);
     $(".preview-content").hide();
