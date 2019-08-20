@@ -339,4 +339,9 @@ $(function () {
     $('.li-class-btn-del').bind("click", btn_class_delete);
     $('.li-class-btn-edit').bind("click", btn_class_edit);
     $('.li-class-btn-add-li').bind("click", btn_class_add_li);
+
+    $(window).on("load resize", function(){
+        var h = window.innerHeight-180;
+        $(".scrollable").css("height",h);
+    });
 });
