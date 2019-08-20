@@ -9,6 +9,7 @@
         <div class="navbar-header">jBlog</div>
     </header>
     <section class="main-down">
+        <#assign ftlname = .current_template_name>
         <#include "/inc/admin-left.ftl" />
         <!--右侧区域-->
         <section class="right-content">

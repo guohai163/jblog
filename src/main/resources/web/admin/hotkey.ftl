@@ -8,13 +8,13 @@
         <div class="navbar-header">jBlog</div>
     </header>
     <section class="main-down">
+        <#assign ftlname = .current_template_name>
         <#include "/inc/admin-left.ftl" />
         <!--右侧区域-->
         <section class="right-content">
             <section class="vbox">
                 <header class="panel-heading">
                     <p><strong>热词列表</strong></p>
-${.current_template_name}
                     <button class="btn-default" type="button" id="renew_hotkey">重新计算热词</button>
                 </header>
                 <!--表格主体-->

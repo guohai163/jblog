@@ -262,14 +262,14 @@ $(function () {
             return;
         }
         li_add_flag = true;
-        $('.li-class-show').append('<li class="admin-li">\n' +
+        $('.table-class').append('<tr><td>\n' +
             '                        <input type="text" id="class_0"\n' +
-            '                               style="width: 160px;height: 30px;border-radius:8px"/>\n' +
-            '                        <span class="float-right">\n' +
+            '                               style="width: 160px;height: 30px;border-radius:8px"/></td>\n' +
+            '                        <td>\n' +
             '                            <a class="li-btn li-class-btn-del">del</a>\n' +
             '                            <a class="li-btn li-class-btn-edit">save</a>\n' +
-            '                        </span>\n' +
-            '                    </li>');
+            '                        </td>\n' +
+            '                    </tr>');
         $('.li-class-btn-del').bind("click", btn_class_delete);
         $('.li-class-btn-edit').bind("click", btn_class_edit);
     }

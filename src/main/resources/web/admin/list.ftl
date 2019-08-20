@@ -9,13 +9,13 @@
         <div class="navbar-header">jBlog</div>
     </header>
     <section class="main-down">
+        <#assign ftlname = .current_template_name>
         <#include "/inc/admin-left.ftl" />
         <!--右侧区域-->
         <section class="right-content">
             <section class="vbox">
                 <header class="panel-heading">
                     <p><strong>BLOG列表</strong></p>
-${.current_template_name}
                 </header>
                 <!--表格主体-->
                 <section class="scrollable padder">
@@ -27,14 +27,13 @@ ${.current_template_name}
                                 <thead><tr><th>标题</th><th>分类</th><th>时间</th><th>操作</th></tr></thead>
                                 <tbody>
                                     <#list listContent as content>
-                                    <tr><td><#if content.postTitle?length gt 21>${content.postTitle?substring(0,20)}...
-                <#else>${content.postTitle}</#if></td>
+                                    <tr><td><#if content.postTitle?length gt 21>${content.postTitle?substring(0,20)}...<#else>${content.postTitle}</#if></td>
                                     <td><select class="classify-type">
-                        <#if content.classCode == 0><option value="0" selected>文章归类...</option></#if>
-                        <#list classTypeList as classItem>
-                            <option value="${classItem.classCode}" post_code="${content.postCode}" <#if classItem.classCode == content.classCode> selected</#if> >${classItem.className}</option>
-                        </#list>
-                    </select></td>
+                                        <#if content.classCode == 0><option value="0" selected>文章归类...</option></#if>
+                                        <#list classTypeList as classItem>
+                                            <option value="${classItem.classCode}" post_code="${content.postCode}" <#if classItem.classCode == content.classCode> selected</#if> >${classItem.className}</option>
+                                        </#list>
+                                    </select></td>
                                     <td><time class="float-right" datetime="${content.postDate?string('yyyy-MM-dd')}">${content.postDate?string('yyyy-MM-dd')}</time></td>
 
                                     <td><a class="li-btn li-btn-del" id="${content.postCode}">del</a><a class="li-btn" href="/admin/main?postCode=${content.postCode}">edit</a></td>

@@ -1,24 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-	<title>${blog_name}</title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="/css/jblog.css">
-	<link rel="stylesheet" type="text/css" href="/css/jquery-confirm.min.css">
+	<#include "/inc/admin-head.ftl" />
 </head>
 <body>
-<div class="admin-main">
+    <section class="main-section">
+    <header>
+        <div class="navbar-header">jBlog</div>
+    </header>
+    <section class="main-down">
+        <#assign ftlname = .current_template_name>
+        <#include "/inc/admin-left.ftl" />
+        <!--右侧区域-->
+        <section class="right-content">
+            <section class="vbox">
+                
+                <!--表格主体-->
+                <section class="scrollable padder">
+                    <div class="m-b-md">
+                    </div>
+                    <section class="panel panel-default panel-succes">
+                        <header class="panel-heading">
+                            <p><strong>管理账户
+                            </strong></p>       
+                        </header>
+                        <p></p>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">密码</label>
+                            <div class="col-sm-7"><input type="text" name="new_pass" class="form-control"/></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">确认密码</label>
+                            <div class="col-sm-7"><input type="text" name="config_new_pass" class="form-control"/></div>
+                        </div>
 
-    <#include "/inc/admin-left.ftl"/>
-    <div class="admin-body">
-        <div class="ul-head"><h2>管理账户</h2></div>
-        <div class="inputbox"><label>密码</label><input type="password" name="new_pass" /></div>
-        <div class="inputbox"><label>确认</label><input type="password" name="config_new_pass" /></div>
-        <div><a class="jblog-a-btn" id="update_pass" >更新密码</a></div>
-    </div>
-</div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-info js_start" id="update_pass">更新密码</button>
+                        </div>
+                    </section>
+                </section>
+            </section>        
+        </section>
+    </section>
+    </section>
 <#include "/inc/foot.ftl"/>
 </body>
 </html
