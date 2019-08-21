@@ -1,5 +1,6 @@
 package jblog.guohai.org.web;
 
+import freemarker.template.TemplateModelException;
 import org.springframework.util.StringUtils;
 import jblog.guohai.org.model.BlogContent;
 import jblog.guohai.org.model.ClassType;
@@ -46,6 +47,8 @@ public class AdminController {
     @Autowired
     private HttpServletRequest request;
 
+    @Autowired
+    private freemarker.template.Configuration configuration;
     /**
      * 登录
      * @param model 参数
@@ -58,17 +61,48 @@ public class AdminController {
 
     @ResponseBody
     @RequestMapping(value = "/login")
-    public Result<String> adminLogin(Model model,@RequestBody UserModel user) {
+    public Result<String> adminLogin(Model model,@RequestBody UserModel user) throws TemplateModelException {
         Result<String> result = userService.checkUserPass(user.getUserName(), user.getUserPass());
         if (result.isStatus()) {
             Cookie userCook = new Cookie("user", result.getData());
             //登录状态过期时间20分钟
             userCook.setMaxAge(1800);
             response.addCookie(userCook);
+            configuration.setSharedVariable("user_name", user.getUserName());
             return new Result<String>(true, "登录成功");
         }else{
             return new Result<String>(false, result.getData());
         }
+    }
+
+    /**
+     *
+     * 注销方法，删除COOKIES，删除MAP内对应成员
+     * @param model
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/logout")
+    public  Result<String> adminLogout(Model model) {
+        String uuid = null;
+        if (null == request.getCookies()) {
+
+            return new Result<>(false,"没有找到cookie");
+        }
+        for (Cookie cookie : request.getCookies()) {
+            if (cookie.getName().equals("user")) {
+                uuid = cookie.getValue();
+                cookie.setValue(null);
+                cookie.setMaxAge(0);
+                response.addCookie(cookie);
+                break;
+            }
+        }
+        if (null == uuid) {
+
+            return new Result<>(false,"uuid为空");
+        }
+        return userService.logoutUser(uuid);
     }
 
     @RequestMapping(value = "/main")

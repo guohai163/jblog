@@ -4,9 +4,7 @@
 </head>
 <body>
     <section class="main-section">
-    <header>
-        <div class="navbar-header">jBlog</div>
-    </header>
+    <#include "/inc/admin-header.ftl" />
     <section class="main-down">
         <#assign ftlname = .current_template_name>
         <#include "/inc/admin-left.ftl" />

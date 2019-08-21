@@ -13,5 +13,10 @@ public interface UserService {
      */
     Result<String> checkUserPass(String user, String pass);
 
-
+    /**
+     * 通过COOKIES注销用户
+     * @param userCook
+     * @return
+     */
+    Result<String> logoutUser(String userCook);
 }

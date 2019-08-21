@@ -58,6 +58,22 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
+     * 通过COOKIES注销用户
+     *
+     * @param userCook
+     * @return
+     */
+    @Override
+    public Result<String> logoutUser(String userCook) {
+        UserModel user = uuidMap.get(userCook);
+        if (null != user) {
+            userMap.remove(user.getUserName());
+            uuidMap.remove(userCook);
+        }
+        return new Result<>(true,"删除成功");
+    }
+
+    /**
      * 存储用户数据
      *
      * @param user

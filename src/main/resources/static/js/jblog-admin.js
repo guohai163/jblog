@@ -325,6 +325,25 @@ $(function () {
             console.log(data);
         })
     }
+    // 顶部导航右侧弹出
+    var btn_pop_usermenu = function() {
+        $(".dropdown").toggleClass('open');
+    }
+    // 注销操作
+    var btn_logout = function() {
+        $.ajaxPost("/admin/logout",null,function(data){
+            if(data.status) {
+                window.location.href='/admin/';
+            }else{
+                $.alert({
+                    title: data.status,
+                    content: data.data
+                });
+            }
+        })
+    }
+    $("#logout").bind("click", btn_logout);
+    $(".dropdown-toggle").bind("click", btn_pop_usermenu);
     $("#renew_hotkey").bind("click", btn_renew_hotkey);
     $("#post-login").bind("click",btn_login);
     $("#update_pass").bind("click",btn_update_password);
