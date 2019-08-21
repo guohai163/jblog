@@ -36,11 +36,34 @@
                             <button type="submit" class="btn btn-info js_start" id="update_pass">更新密码</button>
                         </div>
                     </section>
+                    <div class="m-b-md">
+                    </div>
+                    <section class="panel panel-default panel-succes">
+                        <header class="panel-heading">
+                                                <p><strong>修改头像
+                                                </strong></p>
+                        </header>
+                        <p></p>
+                        <div class="form-group">
+                            <ul id="filelist"></ul>
+                        </div>
+                        <div class="modal-footer">
+                            <a id="browse" class="btn btn-info js_start" href="javascript:;">浏览文件</a>
+                            <button type="submit" class="btn btn-info js_start" id="start-upload">上传头像</button>
+                        </div>
+                    </section>
+                </section>
+
+                <p></P>
+                <section class="scrollable padder">
+
                 </section>
             </section>        
         </section>
     </section>
     </section>
 <#include "/inc/foot.ftl"/>
+<script type="text/javascript" src="/js/plupload.full.min.js"></script>
+<script type="text/javascript" src="/js/upload.js"></script>
 </body>
 </html

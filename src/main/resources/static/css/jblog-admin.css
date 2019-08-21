@@ -417,3 +417,6 @@ textarea.form-control {
 .open>.dropdown-menu {
     display: block;
 }
+.m-b-md {
+    height: 20px;
+}
