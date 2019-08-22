@@ -28,11 +28,17 @@ logging:
   level:
     jblog.guohai.org.dao: debug
 my-data:
-  #blog名称
-  blog-name: 海眼看世界
-  #blog作者
-  blog-author: H!Guo
-  #twitter账号
-  blog-twitter: freeguo
-  #blog二维码
-  blog-qrcode: https://guohai.org/assets/wechat.jpg
+  config:
+    #blog名称
+    blog-name: 海眼看世界
+    #blog作者
+    blog-author: H!Guo
+    #twitter账号
+    blog-twitter: freeguo
+    #blog二维码
+    blog-qrcode: https://guohai.org/assets/wechat.jpg
+  aliyunoss:
+    accessid: <yourAccessKeyId>
+    accesskey: <yourAccessKeySecret>
+    endpoint: oss-cn-beijing.aliyuncs.com
+    bucket: guohaiblog
