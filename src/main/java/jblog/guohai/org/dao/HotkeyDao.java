@@ -1,6 +1,5 @@
 package jblog.guohai.org.dao;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import jblog.guohai.org.model.Hotkey;
 import org.apache.ibatis.annotations.*;
 

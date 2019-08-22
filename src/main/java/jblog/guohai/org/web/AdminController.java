@@ -290,11 +290,19 @@ public class AdminController {
         return adminService.renewHotkey();
     }
 
+    /**
+     *
+     * 获得阿里云OSS服务签名
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = "/alioss")
     public AliyunOssSignature getOSSPolicy() {
         response.setHeader("Access-Control-Allow-Origin", "*");
         response.setHeader("Access-Control-Allow-Methods", "GET, POST");
-        return signature.AliOssSignature("avata").getData();
+        UserModel user = UserServiceImpl.getUserByCookie(request);
+        AliyunOssSignature aliSign = signature.AliOssSignature("avata",String.valueOf(user.getUserCode())).getData();
+        aliSign.setUser(String.valueOf(user.getUserCode()));
+        return aliSign;
     }
 }

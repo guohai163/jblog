@@ -37,7 +37,7 @@ public class Signature {
      * @param category 业务类别
      * @return
      */
-    public Result<AliyunOssSignature> AliOssSignature(String category){
+    public Result<AliyunOssSignature> AliOssSignature(String category, String user){
         OSSClient client = new OSSClient(endpoint,accessid,accesskey);
         try {
             long expireTime = 30;
@@ -55,11 +55,11 @@ public class Signature {
             JSONObject jasonCallback = new JSONObject();
             jasonCallback.put("callbackUrl", "http://jblog.guohai.org/upload/alicallback/"+category+"/");
             jasonCallback.put("callbackBody",
-                    "filename=${object}&size=${size}&mimeType=${mimeType}&height=${imageInfo.height}&width=${imageInfo.width}");
+                    "user="+user+"&filename=${object}&size=${size}&mimeType=${mimeType}&height=${imageInfo.height}&width=${imageInfo.width}");
             jasonCallback.put("callbackBodyType", "application/x-www-form-urlencoded");
             String base64CallbackBody = BinaryUtil.toBase64String(jasonCallback.toString().getBytes());
             AliyunOssSignature aliSign = new AliyunOssSignature(accessid,encodedPolicy,postSignature,
-                    category,"https://"+bucket+"."+endpoint,String.valueOf(expireEndTime/1000),base64CallbackBody);
+                    category,"https://"+bucket+"."+endpoint,String.valueOf(expireEndTime/1000),base64CallbackBody,"0");
             return new Result<>(true,aliSign);
         } catch (UnsupportedEncodingException | JSONException e) {
             e.printStackTrace();

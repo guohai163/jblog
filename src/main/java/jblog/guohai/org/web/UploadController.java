@@ -18,7 +18,7 @@ public class UploadController {
     @RequestMapping(value = "/alicallback/{category}")
     public String aliCallback(@PathVariable("category") String category) {
         System.out.println(category);
-        System.out.println(request.getRequestURI());
+        System.out.println(request.getQueryString());
         return "{\"Status\":\"OK\"}";
     }
 }

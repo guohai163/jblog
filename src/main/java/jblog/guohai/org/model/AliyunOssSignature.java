@@ -22,4 +22,6 @@ public class AliyunOssSignature {
     private String expire;
 
     private String callback;
+
+    private String user;
 }

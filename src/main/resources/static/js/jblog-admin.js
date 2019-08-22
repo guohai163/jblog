@@ -86,7 +86,7 @@ $(function () {
     }
     var btn_update_password = function () {
         console.log("in btm update")
-    //TODO:重构POST方法，进行封装；检查两次输入的密码是否一致。
+        //TODO:重构POST方法，进行封装；检查两次输入的密码是否一致。
         var newpass = $('input[name="new_pass"]').val();
         if (newpass != $('input[name="config_new_pass"]').val()) {
             $.alert({
@@ -141,7 +141,7 @@ $(function () {
     // 分类删除
     var btn_class_delete = function () {
         var classCode = $(this).attr("class_code");
-        if (typeof(classCode) === "undefined") {
+        if (typeof (classCode) === "undefined") {
             $('#class_0').parent().remove();
             li_add_flag = false;
             return;
@@ -182,7 +182,7 @@ $(function () {
         var editFlag = $(this).text();
         var classCode = $(this).attr("class_code");
         var that = this;
-        if (typeof(classCode) === "undefined") {
+        if (typeof (classCode) === "undefined") {
             //分类添加
             var className = $('#class_0').val();
             $.ajax({
@@ -195,12 +195,12 @@ $(function () {
                 cache: false,
                 success: function (data) {
                     console.log(data);
-                    if(data.status===false){
+                    if (data.status === false) {
                         $.alert(data.data);
                         return;
                     }
-                    $('#class_0').attr('id','input_class_' + data.data);
-                    $('#input_class_' + data.data).nextAll("span").children("a").attr("class_code",data.data);
+                    $('#class_0').attr('id', 'input_class_' + data.data);
+                    $('#input_class_' + data.data).nextAll("span").children("a").attr("class_code", data.data);
                     li_add_flag = false;
                     $(that).text('edit');
                     $('#input_class_' + data.data).attr("readonly", "readonly");
@@ -235,7 +235,7 @@ $(function () {
                                 },
                                 cache: false,
                                 success: function (data) {
-                                    if(data.status===true) {
+                                    if (data.status === true) {
                                         console.log(data);
                                         $(that).text('edit');
                                         $('#input_class_' + classCode).attr("readonly", "readonly");
@@ -275,11 +275,11 @@ $(function () {
     }
 
     //定义通过方法，POST提交数据
-    $.ajaxPost = function(url, data, callback) {
+    $.ajaxPost = function (url, data, callback,async = true) {
         $.ajax({
             type: "post",
             url: url,
-            async: false,
+            async: async,
             data: data,
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -288,10 +288,10 @@ $(function () {
         });
     }
     //后台登录按钮
-    var btn_login = function() {
+    var btn_login = function () {
 
         var username = $('input[name="username"]').val();
-        if(username=="") {
+        if (username == "") {
             $.alert({
                 title: "错误",
                 content: "用户名不可为空"
@@ -299,7 +299,7 @@ $(function () {
             return false;
         }
         var password = $('input[name="pass"]').val();
-        if(""==password) {
+        if ("" == password) {
             $.alert({
                 content: "密码为空"
             });
@@ -308,11 +308,11 @@ $(function () {
         $.ajaxPost("/admin/login", JSON.stringify({
             userName: username,
             userPass: $('input[name="pass"]').val()
-        }),function(data){
+        }), function (data) {
             console.log(data);
-            if(data.status) {
-                window.location.href='/admin/list';
-            }else{
+            if (data.status) {
+                window.location.href = '/admin/list';
+            } else {
                 $.alert({
                     title: data.status,
                     content: data.data
@@ -320,21 +320,21 @@ $(function () {
             }
         });
     }
-    var btn_renew_hotkey = function() {
-        $.ajaxPost("/admin/hotkey/renew",function(data){
+    var btn_renew_hotkey = function () {
+        $.ajaxPost("/admin/hotkey/renew", function (data) {
             console.log(data);
         })
     }
     // 顶部导航右侧弹出
-    var btn_pop_usermenu = function() {
+    var btn_pop_usermenu = function () {
         $(".dropdown").toggleClass('open');
     }
     // 注销操作
-    var btn_logout = function() {
-        $.ajaxPost("/admin/logout",null,function(data){
-            if(data.status) {
-                window.location.href='/admin/';
-            }else{
+    var btn_logout = function () {
+        $.ajaxPost("/admin/logout", null, function (data) {
+            if (data.status) {
+                window.location.href = '/admin/';
+            } else {
                 $.alert({
                     title: data.status,
                     content: data.data
@@ -345,22 +345,22 @@ $(function () {
     $("#logout").bind("click", btn_logout);
     $(".dropdown-toggle").bind("click", btn_pop_usermenu);
     $("#renew_hotkey").bind("click", btn_renew_hotkey);
-    $("#post-login").bind("click",btn_login);
-    $("#update_pass").bind("click",btn_update_password);
+    $("#post-login").bind("click", btn_login);
+    $("#update_pass").bind("click", btn_update_password);
     $(".preview-content").hide();
-    $(".js-write-tab").bind("click",btn_wrtie);
-    $(".js-preview-tab").bind("click",btn_preview);
-    $("#post_blog").bind("click",submit_blog);
+    $(".js-write-tab").bind("click", btn_wrtie);
+    $(".js-preview-tab").bind("click", btn_preview);
+    $("#post_blog").bind("click", submit_blog);
     $(".li-btn-del").bind("click", btn_delete_blog);
-    jQuery(".datepicker").datetimepicker({format:'Y-m-d H:i'});
+    jQuery(".datepicker").datetimepicker({ format: 'Y-m-d H:i' });
 
     $(".classify-type").bind("change", class_type_change);
     $('.li-class-btn-del').bind("click", btn_class_delete);
     $('.li-class-btn-edit').bind("click", btn_class_edit);
     $('.li-class-btn-add-li').bind("click", btn_class_add_li);
 
-    $(window).on("load resize", function(){
-        var h = window.innerHeight-180;
-        $(".scrollable").css("height",h);
+    $(window).on("load resize", function () {
+        var h = window.innerHeight - 180;
+        $(".scrollable").css("height", h);
     });
 });
