@@ -28,7 +28,7 @@ public class FreemarkerConfig {
      */
     @Setter
     @Getter
-    @Value("${my-data.blog-name}")
+    @Value("${my-data.config.blog-name}")
     private String blogName;
 
     /**
@@ -36,7 +36,7 @@ public class FreemarkerConfig {
      */
     @Setter
     @Getter
-    @Value("${my-data.blog-author}")
+    @Value("${my-data.config.blog-author}")
     private String blogAuthor;
 
     /**
@@ -44,7 +44,7 @@ public class FreemarkerConfig {
      */
     @Setter
     @Getter
-    @Value("${my-data.blog-twitter}")
+    @Value("${my-data.config.blog-twitter}")
     private String blogTwitter;
 
     /**
@@ -52,7 +52,7 @@ public class FreemarkerConfig {
      */
     @Setter
     @Getter
-    @Value("${my-data.blog-qrcode}")
+    @Value("${my-data.config.blog-qrcode}")
     private String blogQRCode;
 
     @PostConstruct

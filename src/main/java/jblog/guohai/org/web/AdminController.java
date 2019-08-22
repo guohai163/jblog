@@ -1,11 +1,10 @@
 package jblog.guohai.org.web;
 
+
 import freemarker.template.TemplateModelException;
+import jblog.guohai.org.model.*;
+import jblog.guohai.org.util.Signature;
 import org.springframework.util.StringUtils;
-import jblog.guohai.org.model.BlogContent;
-import jblog.guohai.org.model.ClassType;
-import jblog.guohai.org.model.Result;
-import jblog.guohai.org.model.UserModel;
 import jblog.guohai.org.service.AdminService;
 import jblog.guohai.org.service.BlogService;
 import jblog.guohai.org.service.UserService;
@@ -21,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+
 import java.text.ParseException;
 import java.util.List;
 
@@ -49,6 +48,10 @@ public class AdminController {
 
     @Autowired
     private freemarker.template.Configuration configuration;
+
+    @Autowired
+    Signature signature;
+
     /**
      * 登录
      * @param model 参数
@@ -287,4 +290,11 @@ public class AdminController {
         return adminService.renewHotkey();
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/alioss")
+    public AliyunOssSignature getOSSPolicy() {
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Access-Control-Allow-Methods", "GET, POST");
+        return signature.AliOssSignature("avata").getData();
+    }
 }
