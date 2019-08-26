@@ -35,7 +35,7 @@ pipeline {
                 //计算拷贝到服务器上的文件 MD5，确保与本地一致。避免因传输产生的错误。
                 sh "ssh -i ${guohai_org_key} ${TAG_SERVER} md5sum ${TAG_PATH}/${JOB_BASE_NAME}.jar"
                 //使用脚本重启spring boot
-                sh "ssh -i ${guohai_org_key} ${TAG_SERVER} ${TAG_SCRIPT} restart ${TAG_PATH}/${JOB_BASE_NAME}.jar"
+                sh "ssh -i ${guohai_org_key} ${TAG_SERVER} ${TAG_SCRIPT} restart ${TAG_PATH}/${JOB_BASE_NAME}.jar --spring.config.location=${TAG_PATH}/application.yml"
             }
 
         }
