@@ -11,6 +11,8 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -36,24 +38,24 @@ public class UserServiceImpl implements UserService {
      * @return 结果
      */
     @Override
-    public Result<String> checkUserPass(String user, String pass) {
+    public Result<UserModel> checkUserPass(String user, String pass) {
 
-        Result<String> result = new Result<>();
+        Result<UserModel> result = new Result<>();
         result.setStatus(false);
-        result.setData("未知错误");
         //获取用户实体
         UserModel userModel = userDao.getUserByName(user);
         if (null == userModel) {
-            result.setData("请确认用户名密码正确");
+            result.setData(null);
             return result;
         }
         //检查密码
         if (!MD5.GetMD5Code(MD5.GetMD5Code(pass) + userModel.getUserKey()).equals(userModel.getUserPass())) {
-            result.setData("请确认用户名密码正确");
+            result.setData(null);
             return result;
         }
+        userModel.setUserUUID(saveUserData(userModel));
         result.setStatus(true);
-        result.setData(saveUserData(userModel));
+        result.setData(userModel);
         return result;
     }
 
@@ -71,6 +73,27 @@ public class UserServiceImpl implements UserService {
             uuidMap.remove(userCook);
         }
         return new Result<>(true,"删除成功");
+    }
+
+    /**
+     * 设置用户头像,数据有制定格式
+     *
+     * @param parmBody 格式user={i}&filename={j}
+     * @return
+     */
+    @Override
+    public Result<String> setUserAvata(String parmBody) {
+        Pattern pattern = Pattern.compile("user=([^&]+)&filename=([^&]+)");
+        Matcher matcher = pattern.matcher(parmBody);
+        if(matcher.find()) {
+            //查找到匹
+            UserModel user = new UserModel();
+            user.setUserCode(Integer.valueOf(matcher.group(1)));
+            user.setUserAvatar(matcher.group(2));
+            return userDao.setUserAvataByCode(user)?new Result<>(true,"success"):new Result<>(false,"fialure");
+        } else {
+            return new Result<>(false,"parm error");
+        }
     }
 
     /**

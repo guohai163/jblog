@@ -2,6 +2,7 @@ package jblog.guohai.org.service;
 
 
 import jblog.guohai.org.model.Result;
+import jblog.guohai.org.model.UserModel;
 
 public interface UserService {
 
@@ -11,7 +12,7 @@ public interface UserService {
      * @param pass 密码
      * @return 结果
      */
-    Result<String> checkUserPass(String user, String pass);
+    Result<UserModel> checkUserPass(String user, String pass);
 
     /**
      * 通过COOKIES注销用户
@@ -19,4 +20,11 @@ public interface UserService {
      * @return
      */
     Result<String> logoutUser(String userCook);
+
+    /**
+     * 设置用户头像,数据有制定格式
+     * @param parmBody 格式user={i}&filename={j}
+     * @return
+     */
+    Result<String> setUserAvata(String parmBody);
 }

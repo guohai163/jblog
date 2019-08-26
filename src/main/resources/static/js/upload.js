@@ -17,7 +17,7 @@ function get_signature() {
     return false;
 };
 
-// 获得文件扩展名 
+// 获得文件扩展名
 function get_suffix(filename) {
     pos = filename.lastIndexOf('.')
     suffix = ''

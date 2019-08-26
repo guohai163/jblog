@@ -31,6 +31,8 @@ my-data:
   config:
     #blog名称
     blog-name: 海眼看世界
+    #blog域名
+    blog-domain: http://jblog.guohai.org
     #blog作者
     blog-author: H!Guo
     #twitter账号
@@ -42,3 +44,4 @@ my-data:
     accesskey: <yourAccessKeySecret>
     endpoint: oss-cn-beijing.aliyuncs.com
     bucket: guohaiblog
+    is-callback: true

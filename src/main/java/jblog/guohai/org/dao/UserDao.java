@@ -1,5 +1,6 @@
 package jblog.guohai.org.dao;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import jblog.guohai.org.model.UserModel;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -25,4 +26,12 @@ public interface UserDao {
      */
     @Update("UPDATE jblog_user SET user_pass=#{user.userPass},user_key=#{user.userKey} WHERE user_name=#{user.userName};")
     Boolean setUserByName(@Param("user") UserModel user);
+
+    /**
+     * 通过用户编号设置用户头像
+     * @param user
+     * @return
+     */
+    @Update("UPDATE jblog_user SET user_avata=#{user.userAvatar} WHERE user_code=#{user.userCode};")
+    Boolean setUserAvataByCode(@Param("user") UserModel user);
 }

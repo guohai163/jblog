@@ -2,6 +2,7 @@ package jblog.guohai.org.interceptor;
 
 import jblog.guohai.org.model.UserModel;
 import jblog.guohai.org.service.UserServiceImpl;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.Cookie;
@@ -9,7 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+@Configuration
 public class LoginInterceptor implements HandlerInterceptor {
+
 
     @Override
     public boolean preHandle(HttpServletRequest request,

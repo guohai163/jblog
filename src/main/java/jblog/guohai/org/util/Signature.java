@@ -179,6 +179,6 @@ public class Signature {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
+        return new Result<>(false, "unknown");
     }
 }

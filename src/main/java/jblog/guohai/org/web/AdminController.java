@@ -65,16 +65,17 @@ public class AdminController {
     @ResponseBody
     @RequestMapping(value = "/login")
     public Result<String> adminLogin(Model model,@RequestBody UserModel user) throws TemplateModelException {
-        Result<String> result = userService.checkUserPass(user.getUserName(), user.getUserPass());
+        Result<UserModel> result = userService.checkUserPass(user.getUserName(), user.getUserPass());
         if (result.isStatus()) {
-            Cookie userCook = new Cookie("user", result.getData());
+            Cookie userCook = new Cookie("user", result.getData().getUserUUID());
             //登录状态过期时间20分钟
             userCook.setMaxAge(1800);
             response.addCookie(userCook);
-            configuration.setSharedVariable("user_name", user.getUserName());
+            configuration.setSharedVariable("user_name", result.getData().getUserName());
+            configuration.setSharedVariable("user_avatar", result.getData().getUserAvatar());
             return new Result<String>(true, "登录成功");
         }else{
-            return new Result<String>(false, result.getData());
+            return new Result<String>(false, "登录失败");
         }
     }
 
@@ -301,7 +302,7 @@ public class AdminController {
         response.setHeader("Access-Control-Allow-Origin", "*");
         response.setHeader("Access-Control-Allow-Methods", "GET, POST");
         UserModel user = UserServiceImpl.getUserByCookie(request);
-        AliyunOssSignature aliSign = signature.AliOssSignature("avata",String.valueOf(user.getUserCode())).getData();
+        AliyunOssSignature aliSign = signature.AliOssSignature("avatar",String.valueOf(user.getUserCode())).getData();
         aliSign.setUser(String.valueOf(user.getUserCode()));
         return aliSign;
     }

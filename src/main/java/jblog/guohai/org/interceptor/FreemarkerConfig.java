@@ -55,11 +55,16 @@ public class FreemarkerConfig {
     @Value("${my-data.config.blog-qrcode}")
     private String blogQRCode;
 
+    @Value("https://${my-data.aliyunoss.bucket}.${my-data.aliyunoss.endpoint}/")
+    private String staticStorage;
+
     @PostConstruct
     public void setSharedVariable() throws TemplateModelException {
         configuration.setSharedVariable("blog_name", blogName);
         configuration.setSharedVariable("blog_author", blogAuthor);
         configuration.setSharedVariable("blog_twitter", blogTwitter);
         configuration.setSharedVariable("blog_qrcode", blogQRCode);
+
+        configuration.setSharedVariable("blog_storage", staticStorage);
     }
 }

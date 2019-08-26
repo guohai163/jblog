@@ -4,7 +4,7 @@
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     <span class="thumb-sm avatar pull-left">
-                            <img src="/images/avatar.jpg">
+                            <img src="${blog_storage}${user_avatar}">
                          </span>${user_name}<b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu animated fadeInRight">
