@@ -48,6 +48,8 @@ public class Signature {
     private String bucket;
     @Value("${my-data.config.blog-domain}")
     private String blogDomain;
+    @Value("${my-data.aliyunoss.is-callback}")
+    private Boolean isCallback;
 
 //    private static String AliOSSPublicKeyString="";
     //TODO:考虑是否需要增加过期时间?
@@ -124,15 +126,21 @@ public class Signature {
 
             byte[] binaryData = postPolicy.getBytes("utf-8");
             String encodedPolicy = BinaryUtil.toBase64String(binaryData);
-            String postSignature = client.calculatePostSignature(postPolicy);
-            JSONObject jasonCallback = new JSONObject();
-            jasonCallback.put("callbackUrl", "http://jblog.guohai.org/upload/alicallback/"+category);
-            jasonCallback.put("callbackBody",
-                    "user="+user+"&filename=${object}&size=${size}&mimeType=${mimeType}&height=${imageInfo.height}&width=${imageInfo.width}");
-            jasonCallback.put("callbackBodyType", "application/x-www-form-urlencoded");
-            String base64CallbackBody = BinaryUtil.toBase64String(jasonCallback.toString().getBytes());
-            AliyunOssSignature aliSign = new AliyunOssSignature(accessid,encodedPolicy,postSignature,
-                    category,"https://"+bucket+"."+endpoint,String.valueOf(expireEndTime/1000),base64CallbackBody,"0");
+            AliyunOssSignature aliSign;
+            if (isCallback) {
+                String postSignature = client.calculatePostSignature(postPolicy);
+                JSONObject jasonCallback = new JSONObject();
+                jasonCallback.put("callbackUrl", blogDomain+"/upload/alicallback/" + category);
+                jasonCallback.put("callbackBody",
+                        "user=" + user + "&filename=${object}&size=${size}");
+                jasonCallback.put("callbackBodyType", "application/x-www-form-urlencoded");
+                String base64CallbackBody = BinaryUtil.toBase64String(jasonCallback.toString().getBytes());
+                aliSign = new AliyunOssSignature(accessid, encodedPolicy, postSignature,
+                        category, "https://" + bucket + "." + endpoint, String.valueOf(expireEndTime / 1000), base64CallbackBody, user);
+            }else {
+                aliSign = new AliyunOssSignature(accessid,encodedPolicy,postPolicy,
+                        category,"https://" + bucket + "." + endpoint, String.valueOf(expireEndTime / 1000),"",user);
+            }
             return new Result<>(true,aliSign);
         } catch (UnsupportedEncodingException | JSONException e) {
             e.printStackTrace();

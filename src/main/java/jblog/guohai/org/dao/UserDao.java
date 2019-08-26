@@ -32,6 +32,6 @@ public interface UserDao {
      * @param user
      * @return
      */
-    @Update("UPDATE jblog_user SET user_avata=#{user.userAvatar} WHERE user_code=#{user.userCode};")
+    @Update("UPDATE jblog_user SET user_avatar=#{user.userAvatar} WHERE user_code=#{user.userCode};")
     Boolean setUserAvataByCode(@Param("user") UserModel user);
 }
