@@ -44,4 +44,5 @@ my-data:
     accesskey: <yourAccessKeySecret>
     endpoint: oss-cn-beijing.aliyuncs.com
     bucket: guohaiblog
+    #是否使用回调，建议使用回调更安全
     is-callback: true

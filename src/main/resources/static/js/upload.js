@@ -1,6 +1,7 @@
 var expire = 0;
 var now;
 var signatureData;
+var g_object_name;
 
 
 function get_signature() {
@@ -89,6 +90,9 @@ var uploader = new plupload.Uploader({
         },
         FileUploaded: function (up, file, info) {
             if (info.status == 200) {
+                $.ajaxPost("/admin/upload/avatar?avatar_name=" + g_object_name, null, function (data) {
+                    console.log(data);
+                });
                 alert('upload to oss success, object name:' + file.name + ' 回调服务器返回的内容是:' + info.response);
             }
             else if (info.status == 203) {

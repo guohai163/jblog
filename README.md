@@ -14,11 +14,13 @@
 5. 登录后会生成一个UUID，存储于cookies中。UUID对应的服务器缓存在一个静态变量中。重启站点所有用户下线。
 6. 评论功能目前使用的第三方。需要翻墙
 
-## Wiki索引
+## 更新
 
-* [安装说明](https://github.com/guohai163/jblog/wiki/How-To-Install)
-* [如何开发](https://github.com/guohai163/jblog/wiki/How-To-Develop)
+请查看 [CHANGELOG.md](/CHANGELOG.md)
 
+## 文档
+
+有关项目安装、开发说明请移步 [wiki](https://github.com/guohai163/jblog/wiki/)
 
 ## jblog背后的故事
 
@@ -31,7 +33,7 @@
 5. spring boot + mysql [2019年，这个BLOG已经停更5年了。这5年blog还在写，只是搬家到github上了。但想了想信年打算改版一次。纪念点什么]
 
 
-## 关于许可协议
+## 许可协议
 
 在项目初期为了保证项目的更新，使用比较严格的GPL许可，希望大家的更改都能开源并同步上来。当项目足够可以商业化后可能会更换成更加宽松的Apache许可。
 

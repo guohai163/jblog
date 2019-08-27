@@ -127,8 +127,9 @@ public class Signature {
             byte[] binaryData = postPolicy.getBytes("utf-8");
             String encodedPolicy = BinaryUtil.toBase64String(binaryData);
             AliyunOssSignature aliSign;
+            String postSignature = client.calculatePostSignature(postPolicy);
             if (isCallback) {
-                String postSignature = client.calculatePostSignature(postPolicy);
+
                 JSONObject jasonCallback = new JSONObject();
                 jasonCallback.put("callbackUrl", blogDomain+"/upload/alicallback/" + category);
                 jasonCallback.put("callbackBody",
@@ -138,7 +139,7 @@ public class Signature {
                 aliSign = new AliyunOssSignature(accessid, encodedPolicy, postSignature,
                         category, "https://" + bucket + "." + endpoint, String.valueOf(expireEndTime / 1000), base64CallbackBody, user);
             }else {
-                aliSign = new AliyunOssSignature(accessid,encodedPolicy,postPolicy,
+                aliSign = new AliyunOssSignature(accessid,encodedPolicy,postSignature,
                         category,"https://" + bucket + "." + endpoint, String.valueOf(expireEndTime / 1000),"",user);
             }
             return new Result<>(true,aliSign);

@@ -4,6 +4,8 @@ package jblog.guohai.org.web;
 import freemarker.template.TemplateModelException;
 import jblog.guohai.org.model.*;
 import jblog.guohai.org.util.Signature;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.util.StringUtils;
 import jblog.guohai.org.service.AdminService;
 import jblog.guohai.org.service.BlogService;
@@ -27,6 +29,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping(value = "/admin")
+@ConfigurationProperties
 public class AdminController {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -51,6 +54,12 @@ public class AdminController {
 
     @Autowired
     Signature signature;
+
+    /**
+     * 上传是否需要回调
+     */
+    @Value("${my-data.aliyunoss.is-callback}")
+    private Boolean isCallback;
 
     /**
      * 登录
@@ -189,6 +198,11 @@ public class AdminController {
         return adminService.delPostBlog(blog.getPostCode());
     }
 
+    /**
+     * 更新密码接口
+     * @param inUser
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = "/updatepass")
     public Result<String> updatePassword(@RequestBody UserModel inUser) {
@@ -278,13 +292,21 @@ public class AdminController {
         return blogService.addClass(className);
     }
 
-
+    /**
+     * 热词界面
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/hotkey")
     public String adminHotkey(Model model) {
         model.addAttribute("hotkey_list", blogService.getHotkeyList());
         return "admin/hotkey";
     }
 
+    /**
+     * 重新组建热词接口
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = "/hotkey/renew",method = RequestMethod.POST)
     public Result<String> renewHotkey(){
@@ -292,8 +314,8 @@ public class AdminController {
     }
 
     /**
-     *
      * 获得阿里云OSS服务签名
+     *
      * @return
      */
     @ResponseBody
@@ -305,5 +327,27 @@ public class AdminController {
         AliyunOssSignature aliSign = signature.AliOssSignature("avatar",String.valueOf(user.getUserCode())).getData();
         aliSign.setUser(String.valueOf(user.getUserCode()));
         return aliSign;
+    }
+
+    /**
+     * 更新头像，如果没有回调同时 更新DB
+     * @param avatarName
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/upload/avatar")
+    public Result<String> uploadAvatarSuccess(@RequestParam("avatar_name") String avatarName) {
+
+        try {
+            configuration.setSharedVariable("user_avatar", avatarName);
+        } catch (TemplateModelException e) {
+            e.printStackTrace();
+        }
+        if(!isCallback) {
+            String parm = "user="+UserServiceImpl.getUserByCookie(request).getUserCode()+"&filename="+avatarName;
+            return userService.setUserAvata(parm);
+        }
+        return new Result<>(true,"success");
+
     }
 }
