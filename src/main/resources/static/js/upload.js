@@ -75,6 +75,9 @@ var uploader = new plupload.Uploader({
         },
 
         FilesAdded: function (up, files) {
+            if (uploader.files.length > 1) {
+                uploader.removeFile(uploader.files[0]);
+            }
             plupload.each(files, function (file) {
                 previewImage(file, (function (imgsrc) {
                     $("#filelist").html('<li><img src="' + imgsrc + '" /></li>');
@@ -93,6 +96,20 @@ var uploader = new plupload.Uploader({
             }
             else {
                 alert(info.response);
+            }
+        },
+        Error: function (up, err) {
+            if (err.code == -600) {
+                $("#upload-console").html("选择的文件太大了,请不要超过1Mb");
+            }
+            else if (err.code == -601) {
+                $("#upload-console").html("选择的文件后缀不对,仅支持jpg,jpeg,gif,png");
+            }
+            else if (err.code == -602) {
+                $("#upload-console").html("这个文件已经上传过一遍了");
+            }
+            else {
+                $("#upload-console").html(err.response);
             }
         }
     }

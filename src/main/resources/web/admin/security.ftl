@@ -48,6 +48,7 @@
                             <ul id="filelist"></ul>
                         </div>
                         <div class="modal-footer">
+                            <span id="upload-console"></span>
                             <a id="browse" class="btn btn-info js_start" href="javascript:;">浏览文件</a>
                             <button type="submit" class="btn btn-info js_start" id="start-upload">上传头像</button>
                         </div>
