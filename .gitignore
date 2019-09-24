@@ -30,3 +30,7 @@ build/
 ### VS Code ###
 .vscode/
 classes/
+
+
+### macOS ###
+.DS_Store

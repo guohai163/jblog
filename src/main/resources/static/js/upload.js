@@ -34,21 +34,29 @@ function set_upload_param(up, filename, ret) {
         //当传参为false时向服务器请求签名
         ret = get_signature();
     }
-    console.log(filename);
     g_object_name = signatureData.dir;
     if (filename != '') {
         g_object_name = signatureData.dir + signatureData.user + get_suffix(filename);
-        console.log(g_object_name);
     }
-    new_multipart_params = {
-        'key': g_object_name,
-        'policy': signatureData.policy,
-        'OSSAccessKeyId': signatureData.accessid,
-        'success_action_status': '200', //让服务端返回200,不然，默认会返回204
-        'callback': signatureData.callback,
-        'signature': signatureData.signature
-    };
-
+    if (signatureData.callback != '') {
+        new_multipart_params = {
+            'key': g_object_name,
+            'policy': signatureData.policy,
+            'OSSAccessKeyId': signatureData.accessid,
+            'success_action_status': '200', //让服务端返回200,不然，默认会返回204
+            'callback': signatureData.callback,
+            'signature': signatureData.signature
+        };
+    } else {
+        new_multipart_params = {
+            'key': g_object_name,
+            'policy': signatureData.policy,
+            'OSSAccessKeyId': signatureData.accessid,
+            'success_action_status': '200', //让服务端返回200,不然，默认会返回204
+            'signature': signatureData.signature
+        };
+    }
+    console.log(typeof(new_multipart_params))
     up.setOption({
         'url': signatureData.host,
         'multipart_params': new_multipart_params

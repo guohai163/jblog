@@ -6,11 +6,9 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
-      url: jdbc:mysql://blog.db:3306/jblog?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
-      username: blog
-      password: S5dHFMor9XSs1o7MvAfXRzH3SbeTBJzNNv4YMkX9xa1BTe8blLMwCrIOfnQLbWUH9ni62ilrOzPN/kqnF5Lm/w==
-      filters: config
-      connection-properties: config.decrypt=true;config.decrypt.key=MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAIBPhQVdNkfef9JUWlDYkL1DMhlfEzOiYEMyLO8gIY1gqOtL4+sUk06679uu7wT4WfDMRvVX5hA330/nr2e5vm8CAwEAAQ==
+      url: jdbc:mysql://localhost:3306/jblog?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
+      username: root
+      password: password
   freemarker:
     template-loader-path: classpath:/web/
     cache: false
@@ -40,8 +38,8 @@ my-data:
     #blog二维码
     blog-qrcode: https://guohai.org/assets/wechat.jpg
   aliyunoss:
-    accessid: <yourAccessKeyId>
-    accesskey: <yourAccessKeySecret>
+    accessid: LTAIDcvZxsya2fCK
+    accesskey: qFvLVHp6UOiEq9NRZ66BPkGZPjQsQ7
     endpoint: oss-cn-beijing.aliyuncs.com
     bucket: guohaiblog
     #是否使用回调，建议使用回调更安全
