@@ -2,7 +2,9 @@ package jblog.guohai.org.web;
 
 
 import freemarker.template.TemplateModelException;
+import jblog.guohai.org.bll.agent.WechatAgent;
 import jblog.guohai.org.model.*;
+import jblog.guohai.org.util.JsonTool;
 import jblog.guohai.org.util.Signature;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -23,6 +25,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.List;
 
@@ -53,6 +56,9 @@ public class AdminController {
     private freemarker.template.Configuration configuration;
 
     @Autowired
+    private WechatAgent wechatAgent;
+
+    @Autowired
     Signature signature;
 
     /**
@@ -68,6 +74,8 @@ public class AdminController {
      */
     @RequestMapping(value = "/")
     public String login(Model model) {
+        model.addAttribute("wxAppId", wechatAgent.getAppId());
+        model.addAttribute("wxRedirect", wechatAgent.getRedirect());
         return "admin/login";
     }
 
@@ -79,9 +87,8 @@ public class AdminController {
             Cookie userCook = new Cookie("user", result.getData().getUserUUID());
             //登录状态过期时间20分钟
             userCook.setMaxAge(1800);
+            userCook.setPath("/");
             response.addCookie(userCook);
-            configuration.setSharedVariable("user_name", result.getData().getUserName());
-            configuration.setSharedVariable("user_avatar", result.getData().getUserAvatar());
             return new Result<String>(true, "登录成功");
         }else{
             return new Result<String>(false, "登录失败");
@@ -349,5 +356,42 @@ public class AdminController {
         }
         return new Result<>(true,"success");
 
+    }
+
+    /**
+     * 微信登陆
+     *
+     * @param code
+     * @return
+     */
+
+    @RequestMapping(value = "/wechat/login")
+    public String wechatLogin(Model model,String code) throws TemplateModelException, IOException {
+        logger.info("微信扫码登陆 ");
+        if(StringUtils.isEmpty(code)){
+            logger.info("非法访问 ");
+            return "admin/wxlogin";
+        }
+        //下面的代码应该到放到service层了
+        Result<String> ret = wechatAgent.getWechatAccessToken(code);
+        if(!ret.isStatus()){
+            logger.info("第三方授权信息出错");
+            return "admin/wxlogin";
+        }
+        //我们要维护一下 accessToken 不然每次登陆都会去取 accessToken 腾讯会block的
+        WxAccessTokenBean token = JsonTool.toBeanFormStr(ret.getData(), WxAccessTokenBean.class);
+        //通过openid反查用户 执行登陆
+        Result<UserModel> result = userService.checkUserOpenId(token.getOpenid());
+        if (result.isStatus()) {
+            logger.debug(String.format("登陆用户信息 %s", JsonTool.toStrFormBean(result.getData())));
+            Cookie userCook = new Cookie("user", result.getData().getUserUUID());
+            // 登录状态过期时间20分钟
+            userCook.setMaxAge(1800);
+            userCook.setPath("/");
+            response.addCookie(userCook);
+            return "admin/wxlogin";
+        } else {
+            return "admin/wxlogin";
+        }
     }
 }

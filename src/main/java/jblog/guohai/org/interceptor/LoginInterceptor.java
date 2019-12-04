@@ -1,5 +1,6 @@
 package jblog.guohai.org.interceptor;
 
+import freemarker.template.TemplateModelException;
 import jblog.guohai.org.model.UserModel;
 import jblog.guohai.org.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request,
-                             HttpServletResponse response, Object handler) throws IOException {
+                             HttpServletResponse response, Object handler) throws IOException, TemplateModelException {
         String uuid = null;
         if (null == request.getCookies()) {
             response.sendRedirect("/admin/");
