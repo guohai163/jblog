@@ -32,6 +32,7 @@ public class WechatAgent {
 	 * @return
 	 */
 	public String getAppId(){
+
 		return  appId;
 	}
 
@@ -40,6 +41,7 @@ public class WechatAgent {
 	 * @return
 	 */
 	public String getRedirect(){
-		return  redirect;
+
+	    return  redirect;
 	}
 }

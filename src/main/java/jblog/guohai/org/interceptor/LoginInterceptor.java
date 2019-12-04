@@ -29,6 +29,7 @@ public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request,
                              HttpServletResponse response, Object handler) throws IOException, TemplateModelException {
+        logger.info("登陆验证拦截开始");
         String uuid = null;
         if (null == request.getCookies()) {
             response.sendRedirect("/admin/");
@@ -52,8 +53,11 @@ public class LoginInterceptor implements HandlerInterceptor {
             return false;
         }
         logger.info("获取user："+ JsonTool.toStrFormBean(user));
+        logger.info("设置username");
         configuration.setSharedVariable("user_name", user.getUserName());
+        logger.info("设置user_avatar");
         configuration.setSharedVariable("user_avatar", user.getUserAvatar());
+        logger.info("登陆验证拦截结束");
         return true;
     }
 }
