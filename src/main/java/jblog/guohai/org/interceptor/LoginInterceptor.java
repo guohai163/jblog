@@ -2,6 +2,7 @@ package jblog.guohai.org.interceptor;
 
 import freemarker.template.TemplateModelException;
 import jblog.guohai.org.model.UserModel;
+import jblog.guohai.org.service.UserService;
 import jblog.guohai.org.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -17,6 +18,9 @@ public class LoginInterceptor implements HandlerInterceptor {
 
     @Autowired
     private freemarker.template.Configuration configuration;
+
+    @Autowired
+    UserService userService;
 
     @Override
     public boolean preHandle(HttpServletRequest request,
@@ -38,6 +42,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         }
         UserModel user = UserServiceImpl.getUserByUUID(uuid);
         if (null == user) {
+            userService.logoutUser(uuid);
             response.sendRedirect("/admin/");
             return false;
         }
