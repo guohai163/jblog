@@ -44,3 +44,8 @@ my-data:
     bucket: guohaiblog
     #是否使用回调，建议使用回调更安全
     is-callback: true
+  wechat:
+    secret: change_to_yours
+    appId: change_to_yours
+    #change to yours
+    redirect: https://i.zuime.com/admin/wechat/login

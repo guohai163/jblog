@@ -27,4 +27,11 @@ public interface UserService {
      * @return
      */
     Result<String> setUserAvata(String parmBody);
+
+    /**
+     * 检查第三方登陆
+     * @param openId openId
+     * @return 结果
+     */
+    Result<UserModel> checkUserOpenId(String openId);
 }

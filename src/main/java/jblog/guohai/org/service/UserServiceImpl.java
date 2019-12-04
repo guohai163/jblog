@@ -1,9 +1,14 @@
 package jblog.guohai.org.service;
 
+import jblog.guohai.org.dao.OAuthDao;
 import jblog.guohai.org.dao.UserDao;
+import jblog.guohai.org.model.OAuthModel;
 import jblog.guohai.org.model.Result;
 import jblog.guohai.org.model.UserModel;
+import jblog.guohai.org.util.JsonTool;
 import jblog.guohai.org.util.MD5;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +21,11 @@ import java.util.regex.Pattern;
 
 @Service
 public class UserServiceImpl implements UserService {
+
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    @Autowired
+    OAuthDao oAuthDao;
 
     @Autowired
     UserDao userDao;
@@ -148,5 +158,38 @@ public class UserServiceImpl implements UserService {
             return null;
         }
         return  user;
+    }
+
+    /**
+     * 检查第三方登陆
+     *
+     * @param openId
+     *            openId
+     * @return 结果
+     */
+    public Result<UserModel> checkUserOpenId(String openId){
+        logger.info("检查DB中的登陆数据");
+        Result<UserModel> result = new Result<>();
+        result.setStatus(false);
+        // 获取用户实体
+        OAuthModel oAuthModel = oAuthDao.getOAuthByOpenId(openId);
+        logger.debug(String.format("oAuthModel信息 %s", JsonTool.toStrFormBean(oAuthModel)));
+        if(null==oAuthModel){
+            result.setData(null);
+            return result;
+        }
+
+        UserModel userModel = userDao.getUserByCode(oAuthModel.getUserCode());
+        logger.debug(String.format("userModel信息 %s", JsonTool.toStrFormBean(userModel)));
+        if (null == userModel) {
+            logger.info("查不到用户信息");
+            result.setData(null);
+            return result;
+        }
+        userModel.setUserUUID(saveUserData(userModel));
+        result.setStatus(true);
+        result.setData(userModel);
+        logger.debug(String.format("验证成功 返回数据 %s", JsonTool.toStrFormBean(result)));
+        return result;
     }
 }

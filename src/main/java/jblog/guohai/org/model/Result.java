@@ -24,4 +24,9 @@ public class Result<T> {
     public Result() {
         this.status = false;
     }
+
+    public static Result<String> Fail(){
+
+        return new Result<>(false,null);
+    }
 }
