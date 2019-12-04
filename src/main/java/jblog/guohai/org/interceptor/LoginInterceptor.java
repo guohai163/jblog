@@ -2,6 +2,7 @@ package jblog.guohai.org.interceptor;
 
 import jblog.guohai.org.model.UserModel;
 import jblog.guohai.org.service.UserServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -13,6 +14,8 @@ import java.io.IOException;
 @Configuration
 public class LoginInterceptor implements HandlerInterceptor {
 
+    @Autowired
+    private freemarker.template.Configuration configuration;
 
     @Override
     public boolean preHandle(HttpServletRequest request,
@@ -37,6 +40,8 @@ public class LoginInterceptor implements HandlerInterceptor {
             response.sendRedirect("/admin/");
             return false;
         }
+        configuration.setSharedVariable("user_name", user.getUserName());
+        configuration.setSharedVariable("user_avatar", user.getUserAvatar());
         return true;
     }
 }
