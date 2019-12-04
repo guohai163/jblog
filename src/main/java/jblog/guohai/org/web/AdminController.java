@@ -89,6 +89,10 @@ public class AdminController {
             userCook.setMaxAge(1800);
             userCook.setPath("/");
             response.addCookie(userCook);
+            logger.info("设置username");
+            configuration.setSharedVariable("user_name", result.getData().getUserName());
+            logger.info("设置user_avatar");
+            configuration.setSharedVariable("user_avatar", result.getData().getUserAvatar());
             return new Result<String>(true, "登录成功");
         }else{
             return new Result<String>(false, "登录失败");
@@ -389,6 +393,10 @@ public class AdminController {
             userCook.setMaxAge(1800);
             userCook.setPath("/");
             response.addCookie(userCook);
+            logger.info("设置username");
+            configuration.setSharedVariable("user_name", result.getData().getUserName());
+            logger.info("设置user_avatar");
+            configuration.setSharedVariable("user_avatar", result.getData().getUserAvatar());
             return "admin/wxlogin";
         } else {
             return "admin/wxlogin";

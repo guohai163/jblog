@@ -46,17 +46,14 @@ public class LoginInterceptor implements HandlerInterceptor {
             return false;
         }
         UserModel user = UserServiceImpl.getUserByUUID(uuid);
+        logger.info("获取user："+ JsonTool.toStrFormBean(user));
         if (null == user) {
-            logger.info("获取user为null");
+            logger.info("获取user为null,登陆验证失败");
             userService.logoutUser(uuid);
             response.sendRedirect("/admin/");
             return false;
         }
-        logger.info("获取user："+ JsonTool.toStrFormBean(user));
-        logger.info("设置username");
-        configuration.setSharedVariable("user_name", user.getUserName());
-        logger.info("设置user_avatar");
-        configuration.setSharedVariable("user_avatar", user.getUserAvatar());
+        logger.info("登陆验证成功");
         logger.info("登陆验证拦截结束");
         return true;
     }
